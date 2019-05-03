@@ -9,6 +9,8 @@ var usersRouter = require('./routes/users');
 
 var app = express();
 
+// -------------TEST DE REQUEST FOURSQUARE ----------///
+
 const request = require('request');
 
 request({
@@ -17,7 +19,7 @@ request({
   qs: {
     client_id: 'L3BM2ANUAFAAD1A3Z0AAXW5BBRTRUHRW4IWYBM2NZBFVFL4E',
     client_secret: '05FJRU2RUTOGNBJOHLXCYTRFAZUJFLHF0S1RYWB2WHVD4BJD',
-    near:	'Chicago, IL',
+    near:	'Barcelona',
     query: 'beer',
     v: '20180323',
     limit: 1
@@ -26,7 +28,8 @@ request({
   if (err) {
     console.error(err);
   } else {
-    console.log(body);
+    var info = JSON.parse(body)
+    console.log(info.meta);
   }
 }); 
 
