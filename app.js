@@ -26,7 +26,8 @@ request({
   if (err) {
     console.error(err);
   } else {
-    console.log(body);
+    var info = JSON.parse(body)
+    console.log(info.meta);
   }
 }); 
 
