@@ -17,7 +17,7 @@ request({
   qs: {
     client_id: 'L3BM2ANUAFAAD1A3Z0AAXW5BBRTRUHRW4IWYBM2NZBFVFL4E',
     client_secret: '05FJRU2RUTOGNBJOHLXCYTRFAZUJFLHF0S1RYWB2WHVD4BJD',
-    near:	'Chicago, IL',
+    near:	'Barcelona',
     query: 'beer',
     v: '20180323',
     limit: 1
