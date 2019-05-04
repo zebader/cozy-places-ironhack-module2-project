@@ -3,33 +3,22 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const mongoose = require('mongoose');
+const config = require('./config/config')
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+// Session and Passport modules
+const session = require("express-session");
+const flash = require("connect-flash");
+const passport = require("./config/passport-config");  // passport module setup and initial load
+const passportStrategySetup = require('./config/passport-local-strategy');
 
-var app = express();
+const router = require('./routes/index');
 
-const request = require('request');
+mongoose.connect(`mongodb://localhost/${config.DB_NAME}`, { useNewUrlParser: true })
+  .then(() => console.log('Connected to Mongo!'))
+  .catch(err => console.error('Error connecting to mongo', err));
 
-request({
-  url: 'https://api.foursquare.com/v2/venues/explore',
-  method: 'GET',
-  qs: {
-    client_id: 'L3BM2ANUAFAAD1A3Z0AAXW5BBRTRUHRW4IWYBM2NZBFVFL4E',
-    client_secret: '05FJRU2RUTOGNBJOHLXCYTRFAZUJFLHF0S1RYWB2WHVD4BJD',
-    near:	'Barcelona',
-    query: 'beer',
-    v: '20180323',
-    limit: 1
-  }
-}, function(err, res, body) {
-  if (err) {
-    console.error(err);
-  } else {
-    var info = JSON.parse(body)
-    console.log(info.meta);
-  }
-}); 
+const app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -41,23 +30,51 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use(session({
+  secret: config.SESSION_KEY,
+  resave: false,
+  saveUninitialized: false
+}));
 
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  next(createError(404));
+
+// PASSPORT LINES MUST BE BELOW SESSION
+
+//	Auth Setup - how is the user being authenticated during login
+passport.use(passportStrategySetup);
+
+// Creates Passport's methods and properties on `req` for use in out routes
+app.use(passport.initialize());
+
+// Invokes / Sets Passport to manage user session
+app.use(passport.session());
+
+// allow our routes to use FLASH MESSAGES – feedback messages before redirects
+// (flash messages need sessions to work)
+app.use(flash());
+
+// Router
+app.use('/', router);
+
+// Error handling
+
+// -- 404 and error handler
+
+// NOTE: requires a views/not-found.ejs template
+app.use((req, res, next) => {
+  res.status(404);
+  res.render('not-found');
 });
 
-// error handler
-app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+// NOTE: requires a views/error.ejs template
+app.use((err, req, res, next) => {
+  // always log the error
+  console.error('ERROR', req.method, req.path, err);
 
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
+  // only render if the error ocurred before sending the response
+  if (!res.headersSent) {
+    res.status(500);
+    res.render('error');
+  }
 });
 
 module.exports = app;
