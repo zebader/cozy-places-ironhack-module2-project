@@ -15,6 +15,9 @@ body {
   padding: 0;
   font-family: 'Open Sans', sans-serif;
 }
+input:focus{
+  outline:none;
+}
 
 /*====MOBILE FIRST====*/
 
@@ -25,6 +28,9 @@ h1{
 }
 h1.floating{
   animation: floating 1s infinite;
+}
+h1.dark{
+  color:#32003E;
 }
 h2{
     font-size: 1.5em;
@@ -48,6 +54,15 @@ button{
 button:hover{
   transform: translateY(-5px);
 }
+main{
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 15% 0px;
+}
 main.splash-screen-main{
   background: rgba(50,0,62,1);
   background: -moz-linear-gradient(top, rgba(50,0,62,1) 0%, rgba(112,19,90,1) 100%);
@@ -57,13 +72,6 @@ main.splash-screen-main{
   background: -ms-linear-gradient(top, rgba(50,0,62,1) 0%, rgba(112,19,90,1) 100%);
   background: linear-gradient(to bottom, rgba(50,0,62,1) 0%, rgba(112,19,90,1) 100%);
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#32003e', endColorstr='#70135a', GradientType=0 );
-  width: 100%;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  padding: 15% 0px;
 }
 p.splash-scrren-catch{
   color:#f34970;
@@ -95,10 +103,27 @@ section.splash-screen-onboarding p{
 section.splash-screen-buttons{
   width: 80%;
 }
-section.splash-screen-buttons p{
-  color: white;
+p.account-message{
   text-align: center;
   font-size: 0.8em;
+}
+section.splash-screen-buttons p{
+  color: white;
+}
+section.signup-form{
+  width: 80%;
+  height: auto;
+}
+section.signup-form input[type="text"], section.signup-form input[type="password"]{
+  width: 100%;
+  display: block;
+  height: 80px;
+  border: none;
+  border-bottom: 1px solid #e4e4e4;
+  transition:all 300ms;
+}
+section.signup-form input[type="text"]:focus, section.signup-form input[type="password"]:focus{
+  border-bottom: 1px solid #f34970;
 }
 
 /*======ANIMATIONS=============*/
