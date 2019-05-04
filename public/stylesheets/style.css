@@ -25,6 +25,7 @@ h1{
   font-size: 2.5em;
   font-family: 'Gugi', cursive;
   color:white;
+  text-align: center;
 }
 h1.floating{
   animation: floating 1s infinite;
@@ -109,6 +110,10 @@ p.account-message{
 }
 section.splash-screen-buttons p{
   color: white;
+}
+section.signup-title{
+  width: 80%;
+  height: auto;
 }
 section.signup-form{
   width: 80%;
