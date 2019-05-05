@@ -40,7 +40,7 @@ router.get("/login", (req, res, next) => {
 
 // POST  '/login'
 router.post("/login", passport.authenticate("local", {
-  successRedirect: "/",
+  successRedirect: "./placefinder",
   failureRedirect: "/login",
   passReqToCallback: true
 }));
