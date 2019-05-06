@@ -24,4 +24,14 @@
     <a href="/"><button class="blue">Add</button></a>
     <a href="/"><button>Match</button></a>
   </section>
+  <section class="place-profile-similar">
+    <h3>Similar Cozyplaces</h3>
+    {{#if similar.similar}}
+        {{#each similar.similar}}
+          <p>{{this.name}}</p>
+        {{/each}}
+    {{/if}} 
+    <p>There are not similar places</p>
+
+  </section>
 </main>
