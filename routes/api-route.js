@@ -15,6 +15,7 @@ router.get("/apitest/search", (req, res, next) => {
       limit: 5
     }
   }).then( (response) => {
+    console.log(response.data.response)
     const venuesIDarray = response.data.response.venues;
     venuesIDarray.forEach((elem) => {
       elem.imgUrl = 'https://yt3.ggpht.com/a-/AAuE7mB5EQSMiXUOHnc4PZppYQQ0quToZJE7mKIocQ=s900-mo-c-c0xffffffff-rj-k-no';
