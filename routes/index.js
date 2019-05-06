@@ -7,7 +7,7 @@ router.use('/', authRouter);
 router.use('/', APIRouter);
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get('/', (req, res, next) => {
   res.render('index', { title: 'Cozy Places' });
 });
 
