@@ -7,6 +7,7 @@ router.post("/apitest", (req, res, next) => {
   const { location, placeName } = req.body;
   console.log('req.body', { location, placeName });
   let placeID = null;
+
   request({
     url: 'https://api.foursquare.com/v2/venues/search',
     method: 'GET',
@@ -43,6 +44,7 @@ router.post("/apitest", (req, res, next) => {
           console.error(err);
         } else {
           const info = JSON.parse(body)
+
           const prefixUrl = info.response.venue.photos.groups[1].items[0].prefix;
           const suffixUrl = info.response.venue.photos.groups[1].items[0].suffix;
           const widthUrl = info.response.venue.photos.groups[1].items[0].width;
@@ -50,7 +52,6 @@ router.post("/apitest", (req, res, next) => {
       
           const imgUrl = `${prefixUrl}${widthUrl}x${heightUrl}${suffixUrl}`
       
-          console.log('De aqui saco algo', imgUrl);
           response.render('apitest/apitest', {imgUrl})
         }
       });
