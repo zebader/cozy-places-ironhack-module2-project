@@ -1,0 +1,27 @@
+<!-- views/apitest/place-profile.hbs -->
+
+<main class="place-profile-main">
+  <section class="place-profile-title">
+
+    <h1>{{place.name}}</h1>
+
+  </section>
+  <section class="place-profile-card">
+
+      <article class="place-profile-card-img">
+        <img src={{place.img}} alt="{{place.name}}">
+      </article>
+
+      <article class="place-profile-text">
+        <h2>{{place.name}}</h2>
+        <h3>{{place.location}}</h3>
+        <p>{{place.tips}}</p>
+      </article>
+
+  </section>
+  <section class="place-profile-buttons">
+    
+    <a href="/"><button class="blue">Add</button></a>
+    <a href="/"><button>Match</button></a>
+  </section>
+</main>

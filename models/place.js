@@ -5,7 +5,8 @@ const placeSchema = new Schema({
   API_id: String,
   location: String,
   name: String,
-  img: String
+  img: String,
+  tips : String
 });
 
 const Place = mongoose.model("Place", placeSchema);
