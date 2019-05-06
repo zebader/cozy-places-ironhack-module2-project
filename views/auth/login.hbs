@@ -1,0 +1,31 @@
+<!-- views/auth/login.hbs -->
+<main>
+  <section class="signup-title">
+
+    <h1 class="dark">Log in</h1>
+
+  </section>
+  <section class="signup-form">
+
+    <form action="/login" method="POST">
+      <label for="username">Username</label>
+      <input id="username" type="text" name="username" placeholder="Your user name">
+      <br><br>
+      <label for="password">Password</label>
+      <input id="password" type="password" name="password" placeholder="Your password">
+        
+        {{#if message}}
+          <div class="error-message">{{ message }}</div>
+        {{/if}}
+      <br><br>
+
+      <button type="submit" value="Login">Log in!</button>
+
+      <p class="account-message">
+        Don't you have an account?
+        <a href="/signup">Sign up</a>
+      </p>
+    </form>
+
+  </section>
+</main>

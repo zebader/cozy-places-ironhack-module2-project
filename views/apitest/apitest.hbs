@@ -1,0 +1,26 @@
+<main>
+<h1 style="color:black">Api Test</h1>
+<section class="signup-form">
+
+    <form action="/apitest" method="POST" id="form-container">
+      <label for="location">Location</label>
+      <input id="location" type="text" name="location" placeholder="Where is it?">
+      <br><br>
+      <label for="placeName">Place name</label>
+      <input id="placeName" type="text" name="placeName" placeholder="What its name?">
+
+      {{#if message}}
+        <div class="error-message">{{ message }}</div>
+      {{/if}}
+      <br><br>
+
+      <button type="submit" value="singup">Search Place</button>
+    </form>
+    
+</section>
+
+</main>
+
+
+
+    
