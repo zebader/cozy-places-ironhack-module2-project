@@ -2,7 +2,10 @@ const mongoose = require("mongoose");
 const Schema   = mongoose.Schema;
 
 const placeSchema = new Schema({
-  place: String,
+  API_id: String,
+  location: String,
+  name: String,
+  img: String
 });
 
 const Place = mongoose.model("Place", placeSchema);
