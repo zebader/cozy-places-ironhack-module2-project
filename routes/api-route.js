@@ -2,6 +2,31 @@ const express = require("express");
 const router = express.Router();
 const axios = require('axios');
 const config = require('./../config/config')
+const Place = require('./../models/place')
+
+router.post('/apitest/new',(req,res,next) => {
+  const { id,name,location,city,imgUrl } = req.body;
+  console.log('newPlace',id)
+  console.log('newPlace',req.body.id)
+  console.log('newPlace',location)
+  console.log('newPlace',req.body.city)
+  console.log('newPlace',req.body.imgUrl)
+  
+  const newPlace = new Place({ id,name, location, city, imgUrl }); //instantiate the object
+  newPlace
+    .save() // save it into db, this format is a thenable.
+    .then(place =>{ res.redirect('/apitest');
+    console.log('newPlace',newPlace)
+    console.log('newPlace',newPlace.name)
+    console.log('newPlace',newPlace.location)
+    console.log('newPlace',newPlace.city)
+    console.log('newPlace',newPlace.imgUrl)
+  
+  })
+    .catch(err => console.log(err));
+});
+
+
 
 router.get("/apitest/search", (req, res, next) => {
   const { location, placeName } = req.query;
@@ -16,6 +41,7 @@ router.get("/apitest/search", (req, res, next) => {
     }
   }).then( (response) => {
     const venuesIDarray = response.data.response.venues;
+    console.log("venues: ", venuesIDarray);
     venuesIDarray.forEach((elem) => {
       elem.imgUrl = 'https://yt3.ggpht.com/a-/AAuE7mB5EQSMiXUOHnc4PZppYQQ0quToZJE7mKIocQ=s900-mo-c-c0xffffffff-rj-k-no';
     })
