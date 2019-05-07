@@ -181,20 +181,23 @@ section.signup-form input[type="text"]:focus, section.signup-form input[type="pa
 
 
 .card{
-
   border-bottom: 1px solid grey;
   display: flex;
   flex-direction: row;
+  justify-content: left;
 }
 
 .card img{
-  /* text-align: left; */
-  /* margin: 2px; */
   padding: 1px;
-  height: 14vh;
+  height: 10vh;
 }
 
 .card-info{
   padding: 4% 0 0 4%;
   text-align: left;
 }
+
+/* #button-card{
+  width: 100%;
+
+} */

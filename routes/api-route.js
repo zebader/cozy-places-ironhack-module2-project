@@ -4,15 +4,12 @@ const axios = require('axios');
 const config = require('./../config/config')
 const Place = require('./../models/place')
 
+
 router.post('/apitest/new',(req,res,next) => {
-  const { id,name,location,city,imgUrl } = req.body;
-  console.log('newPlace',id)
-  console.log('newPlace',req.body.id)
-  console.log('newPlace',location)
-  console.log('newPlace',req.body.city)
-  console.log('newPlace',req.body.imgUrl)
-  
-  const newPlace = new Place({ id,name, location, city, imgUrl }); //instantiate the object
+  const { name,address,city,imgUrl} = req.body;
+  const location = address
+  const img = imgUrl
+  const newPlace = new Place({ name, location, city, img }); //instantiate the object
   newPlace
     .save() // save it into db, this format is a thenable.
     .then(place =>{ res.redirect('/apitest');
@@ -20,7 +17,7 @@ router.post('/apitest/new',(req,res,next) => {
     console.log('newPlace',newPlace.name)
     console.log('newPlace',newPlace.location)
     console.log('newPlace',newPlace.city)
-    console.log('newPlace',newPlace.imgUrl)
+    console.log('newPlace',newPlace.img)
   
   })
     .catch(err => console.log(err));
