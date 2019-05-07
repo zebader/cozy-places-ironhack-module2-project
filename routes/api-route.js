@@ -37,6 +37,7 @@ router.get("/apitest/search", (req, res, next) => {
       limit: 5
     }
   }).then( (response) => {
+    console.log(response.data.response)
     const venuesIDarray = response.data.response.venues;
     console.log("venues: ", venuesIDarray);
     venuesIDarray.forEach((elem) => {

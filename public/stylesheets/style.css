@@ -131,6 +131,54 @@ section.signup-form input[type="text"]:focus, section.signup-form input[type="pa
   border-bottom: 1px solid #f34970;
 }
 
+/*===============PLACE PROFILE====================*/
+main.place-profile-main{
+  background: white;
+}
+section.place-profile-title{
+  width: 100%;
+  margin-bottom: 10%;
+}
+section.place-profile-title h1{
+  color:rgba(50,0,62,1);
+}
+article.place-profile-card-img img{
+  width:100%;
+}
+article.place-profile-text{
+  padding: 5%;
+}
+article.place-profile-text h2{
+  color:#f34970;
+}
+article.place-profile-text h3{
+  color: rgb(243, 73, 112);
+  font-weight: 100;
+}
+article.place-profile-text p{
+  color:rgba(50,0,62,1);
+}
+section.place-profile-buttons{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+section.place-profile-buttons a{
+  width: 100%;
+  margin: 3%;
+}
+section.place-profile-buttons button{
+  margin:0;
+}
+section.place-profile-buttons button.blue{
+  background:#00B7FF;
+}
+section.place-profile-similar{
+  text-align:center;
+  margin:5% 0;
+}
+
 /*======ANIMATIONS=============*/
 
 @keyframes carrusel {

@@ -1,12 +1,16 @@
-var express = require('express');
-var router = express.Router();
-var authRouter = require('./auth-routes');
-const APIRouter = require('./api-route.js');
+const express = require('express');
+const router = express.Router();
+const authRouter = require('./auth-routes');
+const APIRouter = require('./api-route');
+const placeRouter = require('./place-profile');
 const userRouter = require('./user.js');
+
 // *  '/'
 router.use('/', authRouter);
 router.use('/', APIRouter);
 router.use('/', userRouter);
+router.use('/', placeRouter);
+
 
 /* GET home page. */
 router.get('/', (req, res, next) => {

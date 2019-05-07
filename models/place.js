@@ -8,6 +8,7 @@ const placeSchema = new Schema({
   city: String,
   name: String,
   img: String,
+  tips : String
 });
 
 const Place = mongoose.model("Place", placeSchema);
