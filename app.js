@@ -4,7 +4,8 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const mongoose = require('mongoose');
-const config = require('./config/config')
+const config = require('./config/config');
+const hbs = require('hbs');
 
 // Session and Passport modules
 const session = require("express-session");
@@ -35,6 +36,9 @@ app.use(session({
   resave: false,
   saveUninitialized: false
 }));
+
+// REGISTER THE PARTIAL 
+hbs.registerPartials(__dirname + '/views/partials');
 
 
 // PASSPORT LINES MUST BE BELOW SESSION

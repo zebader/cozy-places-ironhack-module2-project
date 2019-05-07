@@ -57,7 +57,7 @@ button:hover{
 }
 main{
   width: 100%;
-  height: 100vh;
+  /* height: 100vh; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -168,4 +168,150 @@ section.signup-form input[type="text"]:focus, section.signup-form input[type="pa
     transform: translateY(0px);
   }
 
+}
+
+/*====User INFO====*/
+
+.user-header {
+  display: flex;
+  flex-direction: row;
+  padding: 25px 5% 15px;
+}
+
+.user-header img{
+  border-radius: 100%;
+  height: 120px;
+  padding-left: 10px; 
+}
+
+.user-header h3{
+  font-size: 1.3rem;
+  font-weight: bold;
+  padding-top: 30px;
+  padding-left: 15px;
+}
+
+.hr-divider-user {
+  height: 25px;
+  border-top: 1px solid #e4e4e4;
+  border-bottom: 1px solid #e4e4e4;
+  border-left:  0;
+  border-right: 0;
+  margin-bottom: 12px; 
+}
+
+/*====User Places====*/
+
+.users-favorite-div {
+  /* background-color: #888888; */
+  box-shadow: 1px 1px 4px #888888;
+  border-radius: 5px; 
+  display: flex;
+  justify-content: flex-start;
+  height: 85px;
+  margin: 5px 0;
+  width: 95%;
+}
+
+.place-img-user{
+  background: black url("https://www.imgworlds.com/wp-content/uploads/2015/12/ad-ib-dr-gourmet.jpg") no-repeat center;
+  border-radius: 5px; 
+  box-shadow: 1px 1px 4px #888888;
+  display: inline;
+  margin: 5px;
+  height: 75px;
+  width: 75px;
+}
+
+.place-description-user {
+  display: flex;
+  flex-direction: column;
+  margin: auto 3px auto 5px;
+  padding: 5px;
+  width: 65%;
+  text-align: left;
+}
+
+.place-description-user h4 {
+  font-size: 1.2rem;
+  margin-bottom: 2px; 
+}
+
+.place-description-user p {
+  font-size: 0.9rem;
+}
+
+.place-buttons-user {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 15px 10px 15px 0;
+}
+
+.place-buttons-user img{
+  width: 22px;
+}
+
+/*====Button add places====*/
+
+.div-add-place {
+  display: flex;
+  justify-content: center;
+  bottom: 50px;
+  margin-bottom: 40px;
+  position: fixed;
+  margin: 0 auto ;
+  width: 100%;
+}
+.button-add-place {
+  background-color: #f34970;
+  border: none;
+  border-radius: 20px;
+  height: 40px;
+  margin: 15px auto;
+  transition: all 300ms;
+  width: 40%;
+}
+
+a.plus-button{
+  color: white;
+  font-size: 2rem;
+  font-weight: bold;
+  margin: auto;
+}
+
+main.private-screen-main{
+  align-items: center;
+  display: flex;
+  padding: 0;
+  text-align: right;
+  width: 100%;
+}
+
+.p-add {
+  font-size: 0.8rem;
+}
+
+/*====Footer====*/
+
+footer {
+  background: white;
+  bottom: 0;
+  height: 45px;
+  padding: 0;
+  position: fixed;
+  width: 100%;
+}
+
+.footer-div-img {
+  display: flex;
+  justify-content: space-around;
+}
+
+.footer-div-img a{
+  margin: auto;
+}
+
+.footer-div-img img{
+  width: 30px;
 }

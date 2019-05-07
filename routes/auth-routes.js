@@ -5,13 +5,12 @@ const passport = require('passport');
 const ensureLogin = require("connect-ensure-login");
 
 // Custom middleware to check if user is logged in
-const checkIfAuthenticated = (req, res, next) => {
-  if(!req.user) res.redirect('/login'); // if not logged in / authenticated
-  else next();  // if logged in / authenticated
-};
+
 
 // User model
 const User = require("../models/user");
+// Place model
+const Place = require("../models/place");
 
 // Bcrypt to encrypt passwords
 const bcrypt = require("bcrypt");
@@ -27,10 +26,11 @@ router.get("/logout", (req, res) => {
   res.redirect("/");
 });
 
-// GET  '/private-page'
-router.get("/private-page", checkIfAuthenticated , (req, res, next) => {
-  res.render("auth/private", { user: req.user });
-});
+// // POST '/private-page'
+// router.post("/private", (req, res, next) => {
+
+//   const { name } = req.body;
+// })
 
 // GET  '/login'
 router.get("/login", (req, res, next) => {
@@ -40,7 +40,7 @@ router.get("/login", (req, res, next) => {
 
 // POST  '/login'
 router.post("/login", passport.authenticate("local", {
-  successRedirect: "./placefinder",
+  successRedirect: "/private",
   failureRedirect: "/login",
   passReqToCallback: true
 }));
@@ -73,9 +73,12 @@ router.post("/signup", (req, res, next) => {
 
     const newUser = new User({ username, password: hashPass });
 
-    newUser.save((err) => {
+    newUser.save((err, userDoc) => {
       if (err) res.render("auth/signup", { message: "Something went wrong" });
-      else res.redirect("/");
+      else {
+        console.log(userDoc);
+        // req.user = userDoc;
+        res.render("auth/private", { user: userDoc})};
     });
   })
   .catch(error => next(error))
