@@ -315,3 +315,34 @@ footer {
 .footer-div-img img{
   width: 30px;
 }
+
+/*-----------PLACES---------------------*/
+
+.places-title{
+  text-align: left;
+  padding: 10% 0 4% 10%;
+  border-bottom: 1px solid grey;
+}
+
+
+.card{
+  border-bottom: 1px solid grey;
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+}
+
+.card img{
+  padding: 1px;
+  height: 10vh;
+}
+
+.card-info{
+  padding: 4% 0 0 4%;
+  text-align: left;
+}
+
+/* #button-card{
+  width: 100%;
+
+} */
