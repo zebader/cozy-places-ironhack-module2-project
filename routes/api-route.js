@@ -17,12 +17,6 @@ router.post('/apitest/new',(req,res,next) => {
     .then(place =>{
       User.updateOne({_id: req.user._id}, {$push:{favoPlace: newPlace}})
       .then(() =>res.redirect('/private'))
-      
-    // console.log('newPlace',newPlace)
-    // console.log('newPlace',newPlace.name)
-    // console.log('newPlace',newPlace.location)
-    // console.log('newPlace',newPlace.city)
-    // console.log('newPlace',newPlace.img)
   
   })
     .catch(err => console.log(err));
