@@ -6,6 +6,21 @@ const Place = require('./../models/place')
 const User = require('./../models/user')
 
 
+
+
+router.post('/apitest/:id/delete'), (req, res, next) => {
+    const { id } = req.params;
+    console.log('id_fjalsjfñhfñkasdhf',id);
+    console.log('id params-añsdgfkahgkafdh',req.params);
+     Place.findByIdAndRemove(id)
+    .then(res =>{
+      User.updateOne({_id: req.user.id}, {$pull:{favoPlace:{_id: id}}})
+    })
+    .then(data => res.redirect('/private'))
+    .catch(err => console.log(err));
+  };
+
+ 
 router.post('/apitest/new',(req,res,next) => {
   const { name,address,city,imgUrl} = req.body;
   const location = address

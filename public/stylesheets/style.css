@@ -262,13 +262,21 @@ section.place-profile-similar{
 }
 
 .place-img-user{
-  background: black url("https://www.imgworlds.com/wp-content/uploads/2015/12/ad-ib-dr-gourmet.jpg") no-repeat center;
+  /* background: black url("https://www.imgworlds.com/wp-content/uploads/2015/12/ad-ib-dr-gourmet.jpg") no-repeat center; */
   border-radius: 5px; 
   box-shadow: 1px 1px 4px #888888;
   display: inline;
   margin: 5px;
   height: 75px;
   width: 75px;
+}
+
+.delete-button{
+  border:1px solid red;
+}
+
+.place-img-user img{
+  width: 100%;
 }
 
 .place-description-user {
