@@ -3,6 +3,7 @@ const router = express.Router();
 const axios = require('axios');
 const config = require('./../config/config')
 const Place = require('./../models/place')
+const User = require('./../models/user')
 
 
 router.post('/apitest/new',(req,res,next) => {
@@ -10,14 +11,18 @@ router.post('/apitest/new',(req,res,next) => {
   const location = address
   const img = imgUrl
   const newPlace = new Place({ name, location, city, img }); //instantiate the object
+  
   newPlace
     .save() // save it into db, this format is a thenable.
-    .then(place =>{ res.redirect('/apitest');
-    console.log('newPlace',newPlace)
-    console.log('newPlace',newPlace.name)
-    console.log('newPlace',newPlace.location)
-    console.log('newPlace',newPlace.city)
-    console.log('newPlace',newPlace.img)
+    .then(place =>{
+      User.updateOne({_id: req.user._id}, {$push:{favoPlace: newPlace}})
+      .then(() =>res.redirect('/private'))
+      
+    // console.log('newPlace',newPlace)
+    // console.log('newPlace',newPlace.name)
+    // console.log('newPlace',newPlace.location)
+    // console.log('newPlace',newPlace.city)
+    // console.log('newPlace',newPlace.img)
   
   })
     .catch(err => console.log(err));

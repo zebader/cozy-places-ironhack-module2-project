@@ -3,10 +3,10 @@
       <h2 class='places-title'>PLACES LIST</h2>
       {{#each venuesIDarray}}
       <form action="/apitest/new" method="POST">
-            <input type="text" value={{this.imgUrl}} hidden name='imgUrl'>
-            <input type="text" value={{this.name}} hidden name='name'>
-            <input type="text" value={{this.location.address}} hidden name='address'>
-            <input type="text" value={{this.location.city}} hidden name='city'>
+            <input type="hidden" value={{this.imgUrl}} name='imgUrl'>
+            <input type="hidden" value={{this.name}} name='name'>
+            <input type="hidden" value={{this.location.address}} name='address'>
+            <input type="hidden" value={{this.location.city}} name='city'>
             <button type="submit">
                   <div class='card'>
                         <img src={{this.imgUrl}}>

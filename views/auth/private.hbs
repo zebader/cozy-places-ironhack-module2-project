@@ -3,7 +3,7 @@
   <button class="button-add-place">
     <a href="/apitest" class="plus-button">
       {{!-- + --}}
-    <p class="p-add">add a place</p>
+      <p class="p-add">add a place</p>
     </a>
   </button>
 </div>
@@ -20,46 +20,21 @@
 {{!-- {{{main}}} --}}
 <main class="private-screen-main">
 
-
-{{#each user.favPlace}}
-<div class="users-favorite-div" onclick="location.href='https://handlebarsjs.com/partials.html'">
+  {{#each user.favoPlace}}
+  <div class="users-favorite-div" onclick="location.href='https://handlebarsjs.com/partials.html'">
     <div class="place-img-user">
     </div>
     <div class="place-description-user">
-      <h4>Name 1</h4>
-      <p>location</p>
+    <h4>{{this.name}}</h4>
+      <p>{{ this.location}}</p>
     </div>
     <div class="place-buttons-user">
       <img src="https://static.thenounproject.com/png/141961-200.png" alt="">
       <img src="https://cdn4.iconfinder.com/data/icons/linecon/512/delete-512.png" alt="">
     </div>
-</div>
+  </div>
+  {{/each}}
 
-<div class="users-favorite-div">
-  <div class="place-img-user">
-  </div>
-  <div class="place-description-user">
-    <h4>Name 2</h4>
-    <p>location 2</p>
-  </div>
-  <div class="place-buttons-user">
-    <img src="https://static.thenounproject.com/png/141961-200.png" alt="">
-    <img src="https://cdn4.iconfinder.com/data/icons/linecon/512/delete-512.png" alt="">
-  </div>
-</div>
-
-<div class="users-favorite-div">
-  <div class="place-img-user">
-  </div>
-  <div class="place-description-user">
-    <h4>Name 3</h4>
-    <p>location 3</p>
-  </div>
-  <div class="place-buttons-user">
-    <img src="https://static.thenounproject.com/png/141961-200.png" alt="">
-    <img src="https://cdn4.iconfinder.com/data/icons/linecon/512/delete-512.png" alt="">
-  </div>
-</div>
 
 </main>
 
