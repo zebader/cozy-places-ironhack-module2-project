@@ -1,72 +1,71 @@
 const express = require("express");
 const router = express.Router();
-const request = require('request');
+const axios = require('axios');
+const config = require('./../config/config')
 
-router.post("/apitest", (req, res, next) => {
-  const response = res;
-  const { location, placeName } = req.body;
-  console.log('req.body', { location, placeName });
-  let placeID = null;
-
-  request({
-    url: 'https://api.foursquare.com/v2/venues/search',
-    method: 'GET',
-    qs: {
-      client_id: 'L3BM2ANUAFAAD1A3Z0AAXW5BBRTRUHRW4IWYBM2NZBFVFL4E',
-      client_secret: '05FJRU2RUTOGNBJOHLXCYTRFAZUJFLHF0S1RYWB2WHVD4BJD',
+router.get("/apitest/search", (req, res, next) => {
+  const { location, placeName } = req.query;
+  return axios.get('https://api.foursquare.com/v2/venues/search',{
+    params: {
+      client_id: config.client_id,
+      client_secret: config.client_secret,
       near: location,
       query: placeName,
       v: '20180323',
-      limit: 1
+      limit: 5
     }
-  }, (err, res, body) => {
-    if (err) {
-      console.error(err);
-    } else {
-      const info = JSON.parse(body)
-      placeID = info.response.venues[0].id;
-      console.log('PlaceID', placeID);
-       // get photo ------------------------------------------
-    
-      request({
-        url: `https://api.foursquare.com/v2/venues/${placeID}`,
-        method: 'GET',
-        qs: {
-          client_id: 'L3BM2ANUAFAAD1A3Z0AAXW5BBRTRUHRW4IWYBM2NZBFVFL4E',
-          client_secret: '05FJRU2RUTOGNBJOHLXCYTRFAZUJFLHF0S1RYWB2WHVD4BJD',
-          near: '',
-          name: '',
-          v: '20180323',
-          limit: 1
-        }
-      }, (err, res, body) => {
-        if (err) {
-          console.error(err);
-        } else {
-          const info = JSON.parse(body)
-
-          const prefixUrl = info.response.venue.photos.groups[1].items[0].prefix;
-          const suffixUrl = info.response.venue.photos.groups[1].items[0].suffix;
-          const widthUrl = info.response.venue.photos.groups[1].items[0].width;
-          const heightUrl = info.response.venue.photos.groups[1].items[0].height;
-      
-          const imgUrl = `${prefixUrl}${widthUrl}x${heightUrl}${suffixUrl}`
-      
-          response.render('apitest/apitest', {imgUrl})
-        }
-      });
-    }
+  }).then( (response) => {
+    const venuesIDarray = response.data.response.venues;
+    venuesIDarray.forEach((elem) => {
+      elem.imgUrl = 'https://yt3.ggpht.com/a-/AAuE7mB5EQSMiXUOHnc4PZppYQQ0quToZJE7mKIocQ=s900-mo-c-c0xffffffff-rj-k-no';
+    })
+    res.render('apitest/placesList', {venuesIDarray})
   })
-   
+  .catch((error) => {
+    next(error)
+  })
 })
   
-
-// get place ID ------------------------------------------
-
-
-
 router.get("/apitest", (req, res, next) => {
   res.render("apitest/apitest");
   });
 
 module.exports = router;
+
+
+
+
+
+
+
+
+
+
+// return Promise.all(venuesIDarray.map(async (elem, index) =>{
+//   return await axios.get(`https://api.foursquare.com/v2/venues/${elem.id}`,{
+//     params: {
+//       client_id: config.client_id,
+//       client_secret: config.client_secret,
+//       near: '',
+//       name: '',
+//       v: '20180323',
+//       limit: 1
+//     }
+//   }).then(() => {
+//     venuesIDarray[index].imgUrl = 'https://yt3.ggpht.com/a-/AAuE7mB5EQSMiXUOHnc4PZppYQQ0quToZJE7mKIocQ=s900-mo-c-c0xffffffff-rj-k-no';
+//   })
+  /*  (err, res, body) => {
+    
+    if (err) {
+      console.error(err);
+    } else { */
+      /* const info = JSON.parse(body)
+      console.log(info)
+      const prefixUrl = info.response.venue.photos.groups[1].items[0].prefix;
+      const suffixUrl = info.response.venue.photos.groups[1].items[0].suffix;
+      const widthUrl = info.response.venue.photos.groups[1].items[0].width;
+      const heightUrl = info.response.venue.photos.groups[1].items[0].height;
+  
+      const imgUrl = `${prefixUrl}${widthUrl}x${heightUrl}${suffixUrl}`;
+      
+      elem.imgUrl = imgUrl */
