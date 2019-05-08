@@ -7,11 +7,22 @@ router.post('/matchtest/relations',(req,res,next) => {
 
 const {venuesIDarrayCity_RA,venuesIDarrayId_RA,venuesIDarrayCity_RB,venuesIDarrayId_RB} = req.body
 
-const placeAId = venuesIDarrayCity_RA;
-const cityA = venuesIDarrayId_RA;
-const placeBId = venuesIDarrayCity_RB;
-const cityB = venuesIDarrayId_RB;
+const placeAId = venuesIDarrayId_RA;
+const cityA = venuesIDarrayCity_RA;
+const placeBId = venuesIDarrayId_RB;
+const cityB = venuesIDarrayCity_RB;
 const users = req.user._id;
+
+// Relation.find({
+//   $or: [
+//     { 'placeAId': placeAId },
+//     { 'placeBId': placeBId }
+//   ]
+// }, function(err, docs) {
+//    if(!err) res.send(docs);
+// })
+// .then(users => { /*logic here*/ })
+//     .catch(error => { /*error logic here*/ })
 
 const newRelation = new Relation({ placeAId,cityA, placeBId,cityB, users });
 
@@ -19,13 +30,6 @@ newRelation.save()
 .then( (relation) => res.redirect('/private'))
 .catch( (err) => console.log(err));
 });
-
-/* .then( () => {
-  Relation.update({ _id: ObjectId },{ $push: { users: users } }
-);
-})
-.catch( (err) => console.log(err));
-}); */
 
 router.get('/matchtest/new',(req,res,next) => {
 

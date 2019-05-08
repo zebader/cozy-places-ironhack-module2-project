@@ -25,10 +25,19 @@ router.get("/place-profile/:id", (req, res, next) => {
       height: response.data.response.venue.photos.groups[1].items[0].height,
       suffix: response.data.response.venue.photos.groups[1].items[0].suffix
     }
+    const description = {
+      description: response.data.response.venue.description
+    }
+
+    const tip = {
+      tip: response.data.response.venue.tips.groups[0].items[0].text
+    }
     const urlPhoto = `${photo.prefix}${photo.width}x${photo.height}${photo.suffix}`
     const dataAndImage = {
       data,
-      urlPhoto
+      urlPhoto,
+      tip,
+      description
     }
 
     res.render('apitest/place-profile',  dataAndImage )
