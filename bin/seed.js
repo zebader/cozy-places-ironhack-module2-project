@@ -6,7 +6,7 @@ require('dotenv').config();
 
 mongoose.connect(process.env.MONGODB_URI);
 
-//relation.collection.drop();
+Relation.collection.drop();
 
 const relation = [
   {
@@ -36,7 +36,14 @@ const relation = [
     placeBId: '522989e7498e94135f658c5c',
     cityB: 'Nairobi',
     users:[]
-  }
+  },
+  {
+  placeAId: '00005',
+  cityA: 'Lisbon',
+  placeBId: '0001',
+  cityB: 'Barcelona',
+  users:[]
+}
   ]
 
 Relation.create(relation, (err) => {

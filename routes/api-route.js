@@ -6,14 +6,6 @@ const User = require('./../models/user')
 
 
 
-
-
-
-
-
-
-
-
 router.post('/apitest/delete/:id', (req, res, next) => {
     const { id } = req.params;
     // console.log ('user', favoPlace[0]);
