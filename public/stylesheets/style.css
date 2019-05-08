@@ -270,11 +270,6 @@ section.place-profile-similar{
   height: 75px;
   width: 75px;
 }
-
-.delete-button{
-  border:1px solid red;
-}
-
 .place-img-user img{
   width: 100%;
 }
@@ -319,6 +314,11 @@ section.place-profile-similar{
   margin: 0 auto ;
   width: 100%;
 }
+
+.button-delete{
+  border: 1px solid blue;
+}
+
 .button-add-place {
   background-color: #f34970;
   border: none;

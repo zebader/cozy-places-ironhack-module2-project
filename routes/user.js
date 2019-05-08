@@ -11,7 +11,6 @@ router.get('/private', authMiddlewares.checkIfAuthenticated, (req, res, next) =>
   // User.create()
   User.findOne({_id: req.user._id})
   .then(userObj => { 
-    console.log('hellowoeowwoeoe',userObj); 
     res.render("auth/private", { user: userObj })
   })
 });

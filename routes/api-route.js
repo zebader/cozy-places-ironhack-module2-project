@@ -5,20 +5,28 @@ const config = require('./../config/config')
 const Place = require('./../models/place')
 const User = require('./../models/user')
 
-
-
-
-router.post('/apitest/:id/delete'), (req, res, next) => {
+router.post('/apitest/delete/:id', (req, res, next) => {
     const { id } = req.params;
-    console.log('id_fjalsjfñhfñkasdhf',id);
-    console.log('id params-añsdgfkahgkafdh',req.params);
-     Place.findByIdAndRemove(id)
-    .then(res =>{
-      User.updateOne({_id: req.user.id}, {$pull:{favoPlace:{_id: id}}})
+    // console.log ('user', favoPlace[0]);
+    const { favoPlace } =  req.user;
+    console.log('This is the id: ',id);
+    console.log('fav ', req.user.id);
+
+     User.findOneAndUpdate({_id: req.user.id}, {$pull:{"favoPlace":{id: id}}},{ 'new': true })
+    // User.findByIdAndDelete()
+    .then(response =>{
+      console.log('respons: ',response)
+     
+      // res.json({}).status(200)
+      res.redirect('/private');
     })
-    .then(data => res.redirect('/private'))
     .catch(err => console.log(err));
-  };
+
+// User.find(req.user.id)
+
+
+
+  }) ;
 
  
 router.post('/apitest/new',(req,res,next) => {
@@ -32,13 +40,7 @@ router.post('/apitest/new',(req,res,next) => {
     .then(place =>{
       User.updateOne({_id: req.user._id}, {$push:{favoPlace: newPlace}})
       .then(() =>res.redirect('/private'))
-      
-    // console.log('newPlace',newPlace)
-    // console.log('newPlace',newPlace.name)
-    // console.log('newPlace',newPlace.location)
-    // console.log('newPlace',newPlace.city)
-    // console.log('newPlace',newPlace.img)
-  
+
   })
     .catch(err => console.log(err));
 });
