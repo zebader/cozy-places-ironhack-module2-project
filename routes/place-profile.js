@@ -26,8 +26,6 @@ router.get("/place-profile/:id", (req, res, next) => {
       suffix: response.data.response.venue.photos.groups[1].items[0].suffix
     }
     const urlPhoto = `${photo.prefix}${photo.width}x${photo.height}${photo.suffix}`
-
-    console.log('photos' , urlPhoto)
     const dataAndImage = {
       data,
       urlPhoto

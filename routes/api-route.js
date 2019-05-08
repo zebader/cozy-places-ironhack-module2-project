@@ -4,13 +4,8 @@ const axios = require('axios');
 const Place = require('./../models/place')
 const User = require('./../models/user')
 
-
-
-
 router.post('/apitest/:id/delete'), (req, res, next) => {
     const { id } = req.params;
-    console.log('id_fjalsjfñhfñkasdhf',id);
-    console.log('id params-añsdgfkahgkafdh',req.params);
      Place.findByIdAndRemove(id)
     .then(res =>{
       User.updateOne({_id: req.user.id}, {$pull:{favoPlace:{_id: id}}})
@@ -25,7 +20,6 @@ router.post('/apitest/new',(req,res,next) => {
   const location = address
   const img = imgUrl
   const newPlace = new Place({ name, location, city, img }); //instantiate the object
-  
   newPlace
     .save() // save it into db, this format is a thenable.
     .then(place =>{
@@ -33,7 +27,7 @@ router.post('/apitest/new',(req,res,next) => {
       .then(() =>res.redirect('/private'))
   
   })
-    .catch(err => console.log(err));
+    .catch(next);
 });
 
 
@@ -50,9 +44,7 @@ router.get("/apitest/search", (req, res, next) => {
       limit: 5
     }
   }).then( (response) => {
-    console.log(response.data.response)
     const venuesIDarray = response.data.response.venues;
-    console.log("venues: ", venuesIDarray);
     venuesIDarray.forEach((elem) => {
       elem.imgUrl = 'https://yt3.ggpht.com/a-/AAuE7mB5EQSMiXUOHnc4PZppYQQ0quToZJE7mKIocQ=s900-mo-c-c0xffffffff-rj-k-no';
     })
