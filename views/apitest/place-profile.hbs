@@ -3,27 +3,72 @@
 <main class="place-profile-main">
   <section class="place-profile-title">
 
-    <h1>{{place.name}}</h1>
+    <h1>{{data.data.name}}</h1>
 
   </section>
   <section class="place-profile-card">
 
       <article class="place-profile-card-img">
-        <img src={{place.img}} alt="{{place.name}}">
+        <img src={{urlPhoto}} alt="{{data.name}}">
       </article>
 
       <article class="place-profile-text">
-        <h2>{{place.name}}</h2>
-        <h3>{{place.location}}</h3>
-        <p>{{place.tips}}</p>
+        <h2>{{data.data.name}}</h2>
+        <h3>{{data.data.location.city}}</h3>
+        <p>{{data.data.location.address}}</p>
       </article>
 
   </section>
   <section class="place-profile-buttons">
     
-    <a href="/"><button class="blue">Add</button></a>
-    <a href="/"><button>Match</button></a>
+
+      <form action="/apitest/new" method="POST">
+            <input type="hidden" value='{{urlPhoto}}' name='id'>
+            <input type="hidden" value='{{data.data.id}}' name='id'>
+            <input type="hidden" value='{{data.data.name}}' name='name'>
+            <input type="hidden" value='{{data.data.location.address}}' name='address'>
+            <input type="hidden" value='{{data.data.location.city}}' name='city'>
+
+            <button type="submit" class="button blue">Add</button>
+      </form>
+
+            <form action="/apitest/new" method="POST">
+            <input type="hidden" value='{{data.data.id}}' name='id'>
+            <input type="hidden" value='{{data.data.name}}' name='name'>
+            <input type="hidden" value='{{data.data.location.address}}' name='address'>
+            <input type="hidden" value='{{data.data.location.city}}' name='city'>
+
+            <button id="match-places" class="button">Match</button>
+      </form>
+
+
+    
+ 
   </section>
+
+
+
+
+
+
+{{!--     <div class="matched_places">
+      <form action="/apitest/search" method="GET" id="form-container">
+        <label for="location">Location</label>
+        <input id="location" type="text" name="location" placeholder="Where is it?">
+        <br><br>
+        <label for="placeName">Place name</label>
+        <input id="placeName" type="text" name="placeName" placeholder="What its name?">
+
+        {{#if message}}
+          <div class="error-message">{{ message }}</div>
+        {{/if}}
+        <br><br>
+
+        <button type="submit" value="singup" class="button">Search Place</button>
+    </form>
+    </div> --}}
+
+
   <section class="place-profile-similar">
     <h3>Similar Cozyplaces</h3>
     {{#if similar.similar}}
@@ -34,4 +79,20 @@
     <p>There are not similar places</p>
 
   </section>
+
+
+
+      <script>
+let matched = document.querySelector('.matched_places');
+ matched.style.display = 'none';
+
+ let buttonMatched = document.querySelector('#match-places');
+ 
+
+buttonMatched.addEventListener('click', () =>{
+   matched.style.display = 'block';
+ } )
+
+  </script>
+
 </main>

@@ -2,7 +2,6 @@
 const express = require("express");
 const router = express.Router();
 const passport = require('passport');
-const ensureLogin = require("connect-ensure-login");
 
 // Custom middleware to check if user is logged in
 
@@ -76,9 +75,8 @@ router.post("/signup", (req, res, next) => {
     newUser.save((err, userDoc) => {
       if (err) res.render("auth/signup", { message: "Something went wrong" });
       else {
-        console.log(userDoc);
         // req.user = userDoc;
-        res.render("auth/private", { user: userDoc})};
+        res.render("auth/login", { user: userDoc})};
     });
   })
   .catch(error => next(error))

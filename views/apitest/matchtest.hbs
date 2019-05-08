@@ -1,0 +1,87 @@
+<main>
+   <section class="signup-title">
+     <h1 class="dark">Create a match</h1>
+   </section>
+
+<section class="signup-form">
+{{#if finalVenues.venuesIDarrayA}}
+<h3>My place</h3>
+             <div class="card-wrapper">
+                  <div class='card'>
+                    
+                        <img src={{finalVenues.venuesIDarrayA.img}}>
+                        <div class="card-info">
+                              <h4>{{finalVenues.venuesIDarrayA.name}}</h4>
+                              <p>{{finalVenues.venuesIDarrayA.location}}</p>
+                              <p>{{finalVenues.venuesIDarrayA.city}}</p>
+                        </div>
+                  </div>
+                </div>  
+{{else}}
+<h3>My place</h3>
+    <form action="/matchtest/search" method="GET" id="form-container">
+      <label for="location">Location</label>
+      <input id="location" type="text" name="location" placeholder="Where is it?">
+      <br><br>
+      <label for="placeName">Place name</label>
+      <input id="placeName" type="text" name="placeName" placeholder="What its name?">
+
+      <input type="hidden" value='{{finalVenues.venuesIDarrayB.imgUrl}}' name='venuesIDarrayImg'>
+      <input type="hidden" value='{{finalVenues.venuesIDarrayB.name}}' name='venuesIDarrayName'>
+      <input type="hidden" value='{{finalVenues.venuesIDarrayB.location}}' name='venuesIDarrayAddress'>
+      <input type="hidden" value='{{finalVenues.venuesIDarrayB.city}}' name='venuesIDarrayCity'>
+
+      {{#if message}}
+        <div class="error-message">{{ message }}</div>
+      {{/if}}
+      <br><br>
+
+      <button type="submit" value="singup" class="button">Search Place</button>
+    </form>
+{{/if}}
+
+
+</section>
+<section class="signup-form">
+{{#if finalVenues.venuesIDarrayB}}
+<h3>Match new place</h3>
+             <div class="card-wrapper">
+                  <div class='card'>
+                    
+                        <img src={{finalVenues.venuesIDarrayB.img}}>
+                        <div class="card-info">
+                              <h4>{{finalVenues.venuesIDarrayB.name}}</h4>
+                              <p>{{finalVenues.venuesIDarrayB.location}}</p>
+                              <p>{{finalVenues.venuesIDarrayB.city}}</p>
+                        </div>
+                  </div>
+                </div>  
+{{else}}
+<h3>Match new place</h3>
+    <form action="/matchtest/searchB" method="GET" id="form-container">
+      <label for="location">Location</label>
+      <input id="location" type="text" name="location" placeholder="Where is it?">
+      <br><br>
+      <label for="placeName">Place name</label>
+      <input id="placeName" type="text" name="placeName" placeholder="What its name?">
+      
+            <input type="hidden" value='{{finalVenues.venuesIDarrayA.img}}' name='venuesIDarrayImg'>
+            <input type="hidden" value='{{finalVenues.venuesIDarrayA.name}}' name='venuesIDarrayName'>
+            <input type="hidden" value='{{finalVenues.venuesIDarrayA.location}}' name='venuesIDarrayAddress'>
+            <input type="hidden" value='{{finalVenues.venuesIDarrayA.city}}' name='venuesIDarrayCity'>
+
+      {{#if message}}
+        <div class="error-message">{{ message }}</div>
+      {{/if}}
+      <br><br>
+
+      <button type="submit" value="singup" class="button">Search Place</button>
+    </form>
+{{/if}}
+</section>
+
+</main>
+
+
+
+    

@@ -1,21 +1,23 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+'use strict';
+
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
 const mongoose = require('mongoose');
-const config = require('./config/config');
 const hbs = require('hbs');
+require('dotenv').config();
 
 // Session and Passport modules
 const session = require("express-session");
+const MongoStore = require('connect-mongo')(session);
 const flash = require("connect-flash");
 const passport = require("./config/passport-config");  // passport module setup and initial load
 const passportStrategySetup = require('./config/passport-local-strategy');
 
 const router = require('./routes/index');
 
-mongoose.connect(`mongodb://localhost/${config.DB_NAME}`, { useNewUrlParser: true })
+mongoose.connect(process.env.MONGODB_URI , { useNewUrlParser: true })
   .then(() => console.log('Connected to Mongo!'))
   .catch(err => console.error('Error connecting to mongo', err));
 
@@ -32,9 +34,16 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(session({
-  secret: config.SESSION_KEY,
+  store: new MongoStore({
+    mongooseConnection: mongoose.connection,
+    ttl: 24 * 60 * 60 // 1 day
+  }),
+  secret: 'hello',
   resave: false,
-  saveUninitialized: false
+  saveUninitialized: false,
+  cookie: {
+    maxAge: 24 * 60 * 60 * 1000
+  }
 }));
 
 // REGISTER THE PARTIAL 

@@ -1,10 +1,10 @@
 const express = require("express");
 const router = express.Router();
 const axios = require('axios');
-const config = require('./../config/config')
 const Place = require('./../models/place')
 const User = require('./../models/user')
 
+<<<<<<< HEAD
 router.post('/apitest/delete/:id', (req, res, next) => {
     const { id } = req.params;
     // console.log ('user', favoPlace[0]);
@@ -19,6 +19,13 @@ router.post('/apitest/delete/:id', (req, res, next) => {
      
       // res.json({}).status(200)
       res.redirect('/private');
+=======
+router.post('/apitest/:id/delete'), (req, res, next) => {
+    const { id } = req.params;
+     Place.findByIdAndRemove(id)
+    .then(res =>{
+      User.updateOne({_id: req.user.id}, {$pull:{favoPlace:{_id: id}}})
+>>>>>>> 0ffd75ff143c4648d813b57e850fdef6559405dd
     })
     .catch(err => console.log(err));
 
@@ -34,15 +41,18 @@ router.post('/apitest/new',(req,res,next) => {
   const location = address
   const img = imgUrl
   const newPlace = new Place({ name, location, city, img }); //instantiate the object
-  
   newPlace
     .save() // save it into db, this format is a thenable.
     .then(place =>{
       User.updateOne({_id: req.user._id}, {$push:{favoPlace: newPlace}})
       .then(() =>res.redirect('/private'))
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> 0ffd75ff143c4648d813b57e850fdef6559405dd
   })
-    .catch(err => console.log(err));
+    .catch(next);
 });
 
 
@@ -51,17 +61,15 @@ router.get("/apitest/search", (req, res, next) => {
   const { location, placeName } = req.query;
   return axios.get('https://api.foursquare.com/v2/venues/search',{
     params: {
-      client_id: config.client_id,
-      client_secret: config.client_secret,
+      client_id: process.env.CLIENT_ID,
+      client_secret: process.env.CLIENT_SECRET,
       near: location,
       query: placeName,
       v: '20180323',
       limit: 5
     }
   }).then( (response) => {
-    console.log(response.data.response)
     const venuesIDarray = response.data.response.venues;
-    console.log("venues: ", venuesIDarray);
     venuesIDarray.forEach((elem) => {
       elem.imgUrl = 'https://yt3.ggpht.com/a-/AAuE7mB5EQSMiXUOHnc4PZppYQQ0quToZJE7mKIocQ=s900-mo-c-c0xffffffff-rj-k-no';
     })

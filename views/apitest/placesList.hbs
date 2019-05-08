@@ -2,22 +2,31 @@
 <div class='list-container'>
       <h2 class='places-title'>PLACES LIST</h2>
       {{#each venuesIDarray}}
-      <form action="/apitest/new" method="POST">
-            <input type="hidden" value={{this.imgUrl}} name='imgUrl'>
-            <input type="hidden" value={{this.name}} name='name'>
-            <input type="hidden" value={{this.location.address}} name='address'>
-            <input type="hidden" value={{this.location.city}} name='city'>
+      <div class="card-wrapper">
+
+            <a href="/place-profile/{{this.id}}">
             <button type="submit">
                   <div class='card'>
                         <img src={{this.imgUrl}}>
                         <div class="card-info">
-                              <p>{{this.name}}</p>
+                              <h4>{{this.name}}</h4>
                               <p>{{this.location.address}}</p>
                               <p>{{this.location.city}}</p>
                         </div>
                   </div>
             </button>
+            </a>
 
+      <form action="/apitest/new" method="POST">
+            <input type="hidden" value='{{this.imgUrl}}' name='imgUrl'>
+            <input type="hidden" value='{{this.name}}' name='name'>
+            <input type="hidden" value='{{this.location.address}}' name='address'>
+            <input type="hidden" value='{{this.location.city}}' name='city'>
+
+            <button type="submit" class="button add-place-button">ADD</button>
       </form>
+
+      </div>
+
       {{/each}}
 </div>
