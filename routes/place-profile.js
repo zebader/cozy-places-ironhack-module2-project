@@ -22,7 +22,8 @@ router.get("/place-profile/:id", (req, res, next) => {
     const data = {
       data: response.data.response.venue
     }
-    console.log('AQUIIIII', response.data.response.venue);
+    console.log('photos' , response.data.response.venue.photos.groups[1].items)
+
     res.render('apitest/place-profile',  data  )
   })
   .catch((error) => {

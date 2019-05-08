@@ -6,8 +6,14 @@ const userSchema = new Schema({
   username: String,
   password: String,
   favoPlace: [
-    
-    // {type: Schema.Types.API_Id, ref:'Place'}
+    {
+      API_id: { type: String, unique: true },
+      location: String,
+      city: String,
+      name: String,
+      img: String,
+      tips : String
+    }
   ]
 }, {
   timestamps: { 
