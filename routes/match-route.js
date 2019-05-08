@@ -30,7 +30,6 @@ router.get('/matchtest/newB',(req,res,next) => {
     venuesIDarrayA
   }
 
-
     res.render('apitest/matchtest', {finalVenues})
 });
 
