@@ -3,19 +3,19 @@
 <main class="place-profile-main">
   <section class="place-profile-title">
 
-    <h1>{{data.name}}</h1>
+    <h1>{{data.data.name}}</h1>
 
   </section>
   <section class="place-profile-card">
 
       <article class="place-profile-card-img">
-        <img src={{data.photos}} alt="{{data.name}}">
+        <img src={{urlPhoto}} alt="{{data.name}}">
       </article>
 
       <article class="place-profile-text">
-        <h2>{{data.name}}</h2>
-        <h3>{{data.location.city}}</h3>
-        <p>{{data.location.address}}</p>
+        <h2>{{data.data.name}}</h2>
+        <h3>{{data.data.location.city}}</h3>
+        <p>{{data.data.location.address}}</p>
       </article>
 
   </section>
@@ -23,19 +23,19 @@
     
 
       <form action="/apitest/new" method="POST">
-            <input type="hidden" value={{data.id}} name='id'>
-            <input type="hidden" value={{data.name}} name='name'>
-            <input type="hidden" value={{data.location.address}} name='address'>
-            <input type="hidden" value={{data.location.city}} name='city'>
+            <input type="hidden" value={{data.data.id}} name='id'>
+            <input type="hidden" value={{data.data.name}} name='name'>
+            <input type="hidden" value={{data.data.location.address}} name='address'>
+            <input type="hidden" value={{data.data.location.city}} name='city'>
 
             <button type="submit" class="button blue">Add</button>
       </form>
 
             <form action="/apitest/new" method="POST">
-            <input type="hidden" value={{data.id}} name='id'>
-            <input type="hidden" value={{data.name}} name='name'>
-            <input type="hidden" value={{data.location.address}} name='address'>
-            <input type="hidden" value={{data.location.city}} name='city'>
+            <input type="hidden" value={{data.data.id}} name='id'>
+            <input type="hidden" value={{data.data.name}} name='name'>
+            <input type="hidden" value={{data.data.location.address}} name='address'>
+            <input type="hidden" value={{data.data.location.city}} name='city'>
 
             <button id="match-places" class="button">Match</button>
       </form>

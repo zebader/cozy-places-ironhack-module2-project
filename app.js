@@ -1,11 +1,12 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+'use strict';
+
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
 const mongoose = require('mongoose');
-const config = require('./config/config');
 const hbs = require('hbs');
+require('dotenv').config();
 
 // Session and Passport modules
 const session = require("express-session");
@@ -15,7 +16,7 @@ const passportStrategySetup = require('./config/passport-local-strategy');
 
 const router = require('./routes/index');
 
-mongoose.connect(`mongodb://localhost/${config.DB_NAME}`, { useNewUrlParser: true })
+mongoose.connect(process.env.MONGODB_URI , { useNewUrlParser: true })
   .then(() => console.log('Connected to Mongo!'))
   .catch(err => console.error('Error connecting to mongo', err));
 
@@ -32,7 +33,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(session({
-  secret: config.SESSION_KEY,
+  secret: process.env.SESSION_KEY,
   resave: false,
   saveUninitialized: false
 }));

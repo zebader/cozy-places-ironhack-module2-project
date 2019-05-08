@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const axios = require('axios');
-const config = require('./../config/config')
 const Place = require('./../models/place')
 const User = require('./../models/user')
 
@@ -28,8 +27,8 @@ router.get("/apitest/search", (req, res, next) => {
   const { location, placeName } = req.query;
   return axios.get('https://api.foursquare.com/v2/venues/search',{
     params: {
-      client_id: config.client_id,
-      client_secret: config.client_secret,
+      client_id: process.env.CLIENT_ID,
+      client_secret: process.env.CLIENT_SECRET,
       near: location,
       query: placeName,
       v: '20180323',

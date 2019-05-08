@@ -1,6 +1,5 @@
 var express = require('express');
 var router = express.Router();
-const Place = require('./../models/place');
 const User = require('./../models/user');
 
 const authMiddlewares = require('../middlewares/auth.middelware');
