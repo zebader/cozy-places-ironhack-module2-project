@@ -38,7 +38,7 @@ app.use(session({
     mongooseConnection: mongoose.connection,
     ttl: 24 * 60 * 60 // 1 day
   }),
-  secret: process.env.SESSION_KEY,
+  secret: 'hello',
   resave: false,
   saveUninitialized: false,
   cookie: {

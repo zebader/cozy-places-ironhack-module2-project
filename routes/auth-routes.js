@@ -73,8 +73,10 @@ router.post("/signup", (req, res, next) => {
     const newUser = new User({ username, password: hashPass });
 
     newUser.save((err, userDoc) => {
-      if (err) res.render("auth/signup", { message: "Something went wrong" });
-      else {
+      if (err) {
+        console.log(err)
+        res.render("auth/signup", { message: "Something went wrong" });
+      } else {
         console.log(userDoc);
         // req.user = userDoc;
         res.render("auth/private", { user: userDoc})};

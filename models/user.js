@@ -7,7 +7,7 @@ const userSchema = new Schema({
   password: String,
   favoPlace: [
     {
-      API_id: { type: String, unique: true },
+      API_id: { type: String },
       location: String,
       city: String,
       name: String,
