@@ -13,22 +13,34 @@ const placeBId = venuesIDarrayId_RB;
 const cityB = venuesIDarrayCity_RB;
 const users = req.user._id;
 
-// Relation.find({
-//   $or: [
-//     { 'placeAId': placeAId },
-//     { 'placeBId': placeBId }
-//   ]
-// }, function(err, docs) {
-//    if(!err) res.send(docs);
-// })
-// .then(users => { /*logic here*/ })
-//     .catch(error => { /*error logic here*/ })
+Relation.find({
+  $and: [
+    { 'placeAId': placeAId },
+    { 'placeBId': placeBId }
+  ]
+}/* , function(err, docs) {
+  if(!err) console.log('DOCSSSS',docs);
+} */)
+.then( placeRelation => {
 
-const newRelation = new Relation({ placeAId,cityA, placeBId,cityB, users });
+// console.log('placeRelation', placeRelation[0].id)
 
-newRelation.save()
-.then( (relation) => res.redirect('/private'))
-.catch( (err) => console.log(err));
+  if(placeRelation === null){
+
+   const newRelation = new Relation({ placeAId,cityA, placeBId,cityB, users });
+
+   newRelation.save()
+   .then( (relation) => res.redirect('/private'))
+   .catch( (err) => console.log(err));
+  } else{
+
+   Relation.findByIdAndUpdate(placeRelation[0].id, {
+     $push: { users: req.user._id }
+   }, { 'new': true});
+  }
+  
+  })
+    .catch(error => { console.log(error) })
 });
 
 router.get('/matchtest/new',(req,res,next) => {
@@ -40,7 +52,7 @@ router.get('/matchtest/new',(req,res,next) => {
   const finalVenues = {
     venuesIDarrayA
   }
-  console.log(venuesIDarrayA)
+
     res.render('apitest/matchtest', {finalVenues})
 });
 
@@ -59,7 +71,7 @@ router.get('/matchtest/newB',(req,res,next) => {
     venuesIDarrayB,
     venuesIDarrayA
   }
-  console.log(finalVenues)
+
     res.render('apitest/matchtest', {finalVenues})
 });
 
