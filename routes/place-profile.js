@@ -37,25 +37,6 @@ router.get("/place-profile/:id", (req, res, next) => {
     next(error)
   })
 
-/*   axios.get(`https://api.foursquare.com/v2/venues/${API_id.API_id}/similar`,{
-    params: {
-      client_id: config.client_id,
-      client_secret: config.client_secret,
-      v: '20180323'
-    }
-  }).then( (response) => {
-    const similar = {
-      similar:response.data.response.similarVenues.items
-    }
-
-    Place.findOne(API_id)
-    .then( (place) => res.render('apitest/place-profile', { place,similar } ))
-    .catch( (err) => console.log(err));
-  })
-  .catch((error) => {
-    next(error)
-  })  */
-
   });
 
 module.exports = router;

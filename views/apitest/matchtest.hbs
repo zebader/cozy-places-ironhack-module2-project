@@ -29,7 +29,7 @@
       <label for="placeName">Place name</label>
       <input id="placeName" type="text" name="placeName" placeholder="What its name?">
 
-      <input type="hidden" value='{{finalVenues.venuesIDarrayB.imgUrl}}' name='venuesIDarrayImg'>
+      <input type="hidden" value='{{finalVenues.venuesIDarrayB.img}}' name='venuesIDarrayImg'>
       <input type="hidden" value='{{finalVenues.venuesIDarrayB.name}}' name='venuesIDarrayName'>
       <input type="hidden" value='{{finalVenues.venuesIDarrayB.location}}' name='venuesIDarrayAddress'>
       <input type="hidden" value='{{finalVenues.venuesIDarrayB.city}}' name='venuesIDarrayCity'>
@@ -82,13 +82,25 @@
     </form>
 {{/if}}
 
-<form action="/matchtest" method="post">
+<form action="/matchtest/relations" method="POST">
     <button class=" button matched-match-button" disabled>CREATE MATCH</button>
+
+      <input type="hidden" value='{{finalVenues.venuesIDarrayB.img}}' name='venuesIDarrayImg_RA'>
+      <input type="hidden" value='{{finalVenues.venuesIDarrayB.name}}' name='venuesIDarrayName_RA'>
+      <input type="hidden" value='{{finalVenues.venuesIDarrayB.location}}' name='venuesIDarrayAddress_RA'>
+      <input type="hidden" value='{{finalVenues.venuesIDarrayB.city}}' name='venuesIDarrayCity_RA'>
+
+      <input type="hidden" value='{{finalVenues.venuesIDarrayA.img}}' name='venuesIDarrayImg_RB'>
+      <input type="hidden" value='{{finalVenues.venuesIDarrayA.name}}' name='venuesIDarrayName_RB'>
+      <input type="hidden" value='{{finalVenues.venuesIDarrayA.location}}' name='venuesIDarrayAddress_RB'>
+      <input type="hidden" value='{{finalVenues.venuesIDarrayA.city}}' name='venuesIDarrayCity_RB'>
+
 </form>
 </section>
 
 
 <script>
+
   const buttonMatched = document.querySelector('.matched-match-button');
   buttonMatched.disabled = true;
   const divCard = document.querySelectorAll('.card-wrapper');

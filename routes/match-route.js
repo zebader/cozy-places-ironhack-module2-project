@@ -1,8 +1,22 @@
 const express = require("express");
 const router = express.Router();
 const axios = require('axios');
-const Place = require('./../models/place')
-const User = require('./../models/user')
+const Relation = require('./../models/relation')
+
+router.post('/matchtest/relations',(req,res,next) => {
+
+const {venuesIDarrayCity_RA,venuesIDarrayAddress_RA,venuesIDarrayName_RA,venuesIDarrayImg_RA,venuesIDarrayCity_RB,venuesIDarrayAddress_RB,venuesIDarrayName_RB,venuesIDarrayImg_RB,} = req.body
+
+const placeAId = venuesIDarrayCity_RA;
+const placeBId = venuesIDarrayCity_RB;
+const users = venuesIDarrayName_RA;
+
+const newRelation = new Relation({ placeAId, placeBId, users });
+
+newRelation.save()
+.then( (book) => res.redirect('/private'))
+.catch( (err) => console.log(err));
+});
 
 router.get('/matchtest/new',(req,res,next) => {
   const { name,address,city,imgUrl} = req.query;
