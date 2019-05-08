@@ -357,6 +357,7 @@ footer {
   padding: 0;
   position: fixed;
   width: 100%;
+  z-index: 999;
 }
 
 .footer-div-img {

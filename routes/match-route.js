@@ -5,35 +5,47 @@ const Relation = require('./../models/relation')
 
 router.post('/matchtest/relations',(req,res,next) => {
 
-const {venuesIDarrayCity_RA,venuesIDarrayAddress_RA,venuesIDarrayName_RA,venuesIDarrayImg_RA,venuesIDarrayCity_RB,venuesIDarrayAddress_RB,venuesIDarrayName_RB,venuesIDarrayImg_RB,} = req.body
+const {venuesIDarrayCity_RA,venuesIDarrayId_RA,venuesIDarrayCity_RB,venuesIDarrayId_RB} = req.body
 
 const placeAId = venuesIDarrayCity_RA;
+const cityA = venuesIDarrayId_RA;
 const placeBId = venuesIDarrayCity_RB;
-const users = venuesIDarrayName_RA;
+const cityB = venuesIDarrayId_RB;
+const users = req.user._id;
 
-const newRelation = new Relation({ placeAId, placeBId, users });
+const newRelation = new Relation({ placeAId,cityA, placeBId,cityB, users });
 
 newRelation.save()
-.then( (book) => res.redirect('/private'))
+.then( (relation) => res.redirect('/private'))
 .catch( (err) => console.log(err));
 });
 
+/* .then( () => {
+  Relation.update({ _id: ObjectId },{ $push: { users: users } }
+);
+})
+.catch( (err) => console.log(err));
+}); */
+
 router.get('/matchtest/new',(req,res,next) => {
-  const { name,address,city,imgUrl} = req.query;
+
+  const { id,name,address,city,imgUrl} = req.query;
   const location = address
   const img = imgUrl
-  const venuesIDarrayA = { name,location,city,img};
+  const venuesIDarrayA = { id,name,location,city,img};
   const finalVenues = {
     venuesIDarrayA
   }
+  console.log(venuesIDarrayA)
     res.render('apitest/matchtest', {finalVenues})
 });
 
 router.get('/matchtest/newB',(req,res,next) => {
-  const { name,address,city,imgUrl, venuesIDarrayCity,venuesIDarrayAddress,venuesIDarrayName,venuesIDarrayImg} = req.query;
-  const venuesIDarrayB = { name,location: address,city,img: imgUrl};
+  const { id,name,address,city,imgUrl,venuesIDarrayId, venuesIDarrayCity,venuesIDarrayAddress,venuesIDarrayName,venuesIDarrayImg} = req.query;
+  const venuesIDarrayB = { id,name,location: address,city,img: imgUrl};
 
   const venuesIDarrayA =  {
+    id:venuesIDarrayId,
     city: venuesIDarrayCity,
     location: venuesIDarrayAddress,
     name: venuesIDarrayName,
@@ -43,12 +55,12 @@ router.get('/matchtest/newB',(req,res,next) => {
     venuesIDarrayB,
     venuesIDarrayA
   }
-
+  console.log(finalVenues)
     res.render('apitest/matchtest', {finalVenues})
 });
 
 router.get('/matchtest/search',(req,res,next) => {
-  const { location, placeName, venuesIDarrayCityB,venuesIDarrayAddressB,venuesIDarrayNameB,venuesIDarrayImgB } = req.query;
+  const { location, placeName, venuesIDarrayId,venuesIDarrayCity,venuesIDarrayAddress,venuesIDarrayName,venuesIDarrayImg } = req.query;
   return axios.get('https://api.foursquare.com/v2/venues/search',{
     params: {
       client_id: process.env.CLIENT_ID,
@@ -67,10 +79,11 @@ router.get('/matchtest/search',(req,res,next) => {
     })
 
     const venuesIDarrayB =  {
-      city: venuesIDarrayCityB,
-      location: venuesIDarrayAddressB,
-      name: venuesIDarrayNameB,
-      img: venuesIDarrayImgB
+      id:venuesIDarrayId,
+      city: venuesIDarrayCity,
+      location: venuesIDarrayAddress,
+      name: venuesIDarrayName,
+      img: venuesIDarrayImg
     };
     const finalVenues = {
       venuesIDarrayA,
@@ -86,7 +99,7 @@ router.get('/matchtest/search',(req,res,next) => {
 });
 
 router.get('/matchtest/searchB',(req,res,next) => {
-  const { location, placeName, venuesIDarrayCity,venuesIDarrayAddress,venuesIDarrayName,venuesIDarrayImg } = req.query;
+  const { location, placeName, venuesIDarrayId,venuesIDarrayCity,venuesIDarrayAddress,venuesIDarrayName,venuesIDarrayImg } = req.query;
   return axios.get('https://api.foursquare.com/v2/venues/search',{
     params: {
       client_id: process.env.CLIENT_ID,
@@ -104,6 +117,7 @@ router.get('/matchtest/searchB',(req,res,next) => {
     })
 
     const venuesIDarrayA =  {
+      id:venuesIDarrayId,
       city: venuesIDarrayCity,
       location: venuesIDarrayAddress,
       name: venuesIDarrayName,
