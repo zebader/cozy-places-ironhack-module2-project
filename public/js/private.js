@@ -1,12 +1,12 @@
-let buttons = document.querySelectorAll(".delete-button");
+let buttons = document.querySelectorAll(".button-delete");
 
 buttons.forEach((btn) => {
   btn.addEventListener('click', (e) => {
   e.preventDefault();
-  console.log('--------------------', e.target.dataset);
+  console.log('--------------------', btn.dataset);
   
   const placeId =  btn.dataset.placeid;
-  axios.put(`/apitest/${placeId}/delete)`)
+  axios.post(`http://localhost:3000/apitest/delete/${placeId}`,{})
   .then((res) => console.log(res));
   })
 })

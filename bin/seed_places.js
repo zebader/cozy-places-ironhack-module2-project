@@ -1,41 +1,79 @@
 // bin/seed.js
 const mongoose = require('mongoose');
-const Place = require('../models/place');
-const config = require('./../config/config');
+const Relation = require('../models/relation');
+require('dotenv').config();
 
-mongoose.connect(`mongodb://localhost/${config.DB_NAME}`);
 
-Place.collection.drop();
+mongoose.connect(process.env.MONGODB_URI);
 
-const places = [
+//relation.collection.drop();
+
+const relation = [
   {
-    API_id: '54246235498ec95dc8bc9dde',
-    location: 'Barcelona',
-    city: 'Barcelona',
-    name: 'al pot petit',
-    img: 'https://media-cdn.tripadvisor.com/media/photo-s/08/84/f6/c2/tuna-sandwich-on-wholemeal.jpg',
-    tips:'Rooftop boozy brunch in Lower East Side. Cant drink all day unless you start in the morning!'
+    placeAId: '55c2745f498ecf54b4ef887c',
+    cityA: 'Barcelona',
+    placeBId: '577d0b45498e5bb6af60498c',
+    cityB: 'Nairobi',
+    users:[]
   },
   {
-    API_id: '5882810014f8f4494f93fa21',
-    location: 'Barcelona',
-    city: 'Barcelona',
-    name: 'Bodega 1886 El Pot Petit',
-    img: 'https://media-cdn.tripadvisor.com/media/photo-s/0b/8d/0c/35/perfectopara-hacer-unos.jpg',
-    tips:'Rooftop boozy brunch in Lower East Side. Cant drink all day unless you start in the morning!'
+    placeAId: '4ba55564f964a520e1fb38e3',
+    cityA: 'Barcelona',
+    placeBId: '577d0b45498e5bb6af60498c',
+    cityB: 'Nairobi',
+    users:[]
   },
   {
-    API_id: '4b9164f1f964a520d9b833e3',
-    location: 'Barcelona',
-    city: 'Barcelona',
-    name: 'Petit Comitè',
-    img: 'https://petitcomite.cat/wp-content/uploads/2015/10/restaurant-petit-comite.jpg',
-    tips:'Rooftop boozy brunch in Lower East Side. Cant drink all day unless you start in the morning!'
+    placeAId: '50bdbd58e4b0b38c6924c0cb',
+    cityA: 'Zurich',
+    placeBId: '4e92aed02c5b7223b9979744',
+    cityB: 'Nairobi',
+    users:[]
+  },
+  {
+    placeAId: '50bdbd58e4b0b38c6924c0cb',
+    cityA: 'Zurich',
+    placeBId: '522989e7498e94135f658c5c',
+    cityB: 'Nairobi',
+    users:[]
   }
-]
+  ]
 
-Place.create(places, (err) => {
+Relation.create(relation, (err) => {
   if (err) { throw(err) }
-  console.log(`Created ${places.length} places`)
+  console.log(`Created ${relation.length} relation`)
   mongoose.connection.close();
 });
+
+
+
+// const relation = [
+//   {
+//     PlaceAId: '55c2745f498ecf54b4ef887c',
+//     cityA: 'Barcelona',
+//     PlaceBId: '577d0b45498e5bb6af60498c',
+//     cityB: 'Nairobi',
+//     users:['5cd1ba3f00dbce3a65cb688e']
+//   },
+//   {
+//     PlaceAId: '4ba55564f964a520e1fb38e3',
+//     cityA: 'Barcelona',
+//     PlaceBId: '577d0b45498e5bb6af60498c',
+//     cityB: 'Nairobi',
+//     users:['5cd1ba3f00dbce3a65cb688e', '5cd304abd45874676d6c3e53']
+//   },
+//   {
+//     PlaceAId: '50bdbd58e4b0b38c6924c0cb',
+//     cityA: 'Zurich',
+//     PlaceBId: '4e92aed02c5b7223b9979744',
+//     cityB: 'Nairobi',
+//     users:['5cd1ba3f00dbce3a65cb688e','5cd304778ed52666d9bee2ce']
+//   },
+//   {
+//     PlaceAId: '50bdbd58e4b0b38c6924c0cb',
+//     cityA: 'Zurich',
+//     PlaceBId: '522989e7498e94135f658c5c',
+//     cityB: 'Nairobi',
+//     users:['5cd1ba3f00dbce3a65cb688e', '5cd304778ed52666d9bee2ce']
+//   }
+//   ]
