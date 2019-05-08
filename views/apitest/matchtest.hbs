@@ -18,7 +18,10 @@
                   </div>
                 </div>  
 {{else}}
-<h3>My place</h3>
+<div class="">
+  <h3>My place</h3>
+</div>
+
     <form action="/matchtest/search" method="GET" id="form-container">
       <label for="location">Location</label>
       <input id="location" type="text" name="location" placeholder="Where is it?">
@@ -78,9 +81,28 @@
       <button type="submit" value="singup" class="button">Search Place</button>
     </form>
 {{/if}}
+
+<form action="/matchtest" method="post">
+    <button class=" button matched-match-button" disabled>CREATE MATCH</button>
+</form>
 </section>
 
+
+<script>
+  const buttonMatched = document.querySelector('.matched-match-button');
+  buttonMatched.disabled = true;
+  const divCard = document.querySelectorAll('.card-wrapper');
+  console.log(divCard.length);
+
+  if(divCard.length === 2){
+      buttonMatched.disabled = false;
+  }
+
+</script>
+
 </main>
+
+{{> footer}}
 
 
 

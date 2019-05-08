@@ -445,3 +445,10 @@ footer {
   width: 100%;
 
 } */
+
+
+/*============================= MATCH PLACES SCREEN ===============================*/
+
+button.matched-match-button:disabled{
+  background:grey;
+}
