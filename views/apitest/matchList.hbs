@@ -17,11 +17,13 @@
                   </button>
 
             <form action="/matchtest/new" method="GET">
+                  <input type="hidden" value='{{this.id}}'name='id'>
                   <input type="hidden" value='{{this.imgUrl}}' name='imgUrl'>
                   <input type="hidden" value='{{this.name}}' name='name'>
                   <input type="hidden" value='{{this.location.address}}' name='address'>
                   <input type="hidden" value='{{this.location.city}}' name='city'>
 
+                  <input type="hidden" value='{{../finalVenues.venuesIDarrayB.id}}' name='venuesIDarrayId'>
                   <input type="hidden" value='{{../finalVenues.venuesIDarrayB.img}}' name='venuesIDarrayImg'>
                   <input type="hidden" value='{{../finalVenues.venuesIDarrayB.venuesIDarray.name}}' name='venuesIDarrayName'>
                   <input type="hidden" value='{{../finalVenues.venuesIDarrayB.venuesIDarray.location}}' name='venuesIDarrayAddress'>
@@ -50,11 +52,13 @@
             </button>
 
       <form action="/matchtest/newB" method="GET">
+            <input type="hidden" value='{{this.id}}' name='id'>
             <input type="hidden" value='{{this.imgUrl}}' name='imgUrl'>
             <input type="hidden" value='{{this.name}}' name='name'>
             <input type="hidden" value='{{this.location.address}}' name='address'>
             <input type="hidden" value='{{this.location.city}}' name='city'>
 
+            <input type="hidden" value='{{../finalVenues.venuesIDarrayA.id}}' name='venuesIDarrayId'>
             <input type="hidden" value='{{../finalVenues.venuesIDarrayA.img}}' name='venuesIDarrayImg'>
             <input type="hidden" value='{{../finalVenues.venuesIDarrayA.name}}' name='venuesIDarrayName'>
             <input type="hidden" value='{{../finalVenues.venuesIDarrayA.location}}' name='venuesIDarrayAddress'>
@@ -68,3 +72,4 @@
       {{/each}}
       {{/if}}
 </div>
+{{> footer}}
