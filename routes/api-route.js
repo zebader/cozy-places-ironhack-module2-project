@@ -4,7 +4,16 @@ const axios = require('axios');
 const Place = require('./../models/place')
 const User = require('./../models/user')
 
-<<<<<<< HEAD
+
+
+
+
+
+
+
+
+
+
 router.post('/apitest/delete/:id', (req, res, next) => {
     const { id } = req.params;
     // console.log ('user', favoPlace[0]);
@@ -19,20 +28,9 @@ router.post('/apitest/delete/:id', (req, res, next) => {
      
       // res.json({}).status(200)
       res.redirect('/private');
-=======
-router.post('/apitest/:id/delete'), (req, res, next) => {
-    const { id } = req.params;
-     Place.findByIdAndRemove(id)
-    .then(res =>{
-      User.updateOne({_id: req.user.id}, {$pull:{favoPlace:{_id: id}}})
->>>>>>> 0ffd75ff143c4648d813b57e850fdef6559405dd
     })
     .catch(err => console.log(err));
-
 // User.find(req.user.id)
-
-
-
   }) ;
 
  
@@ -46,11 +44,7 @@ router.post('/apitest/new',(req,res,next) => {
     .then(place =>{
       User.updateOne({_id: req.user._id}, {$push:{favoPlace: newPlace}})
       .then(() =>res.redirect('/private'))
-<<<<<<< HEAD
-
-=======
   
->>>>>>> 0ffd75ff143c4648d813b57e850fdef6559405dd
   })
     .catch(next);
 });

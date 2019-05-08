@@ -1,39 +1,79 @@
 // bin/seed.js
 const mongoose = require('mongoose');
 const Relation = require('../models/relation');
-const config = require('./../config/config');
+require('dotenv').config();
 
-mongoose.connect(`mongodb://localhost/${config.DB_NAME}`);
 
-relations.collection.drop();
+mongoose.connect(process.env.MONGODB_URI);
 
-const relations = [
+//relation.collection.drop();
+
+const relation = [
   {
-    PlaceAId: '55c2745f498ecf54b4ef887c',
-    PlaceBId: '577d0b45498e5bb6af60498c',
-    users:['5cd1ba3f00dbce3a65cb688e']
+    placeAId: '55c2745f498ecf54b4ef887c',
+    cityA: 'Barcelona',
+    placeBId: '577d0b45498e5bb6af60498c',
+    cityB: 'Nairobi',
+    users:[]
   },
   {
-    PlaceAId: '4ba55564f964a520e1fb38e3',
-    PlaceBId: '577d0b45498e5bb6af60498c',
-    users:['5cd1ba3f00dbce3a65cb688e', '5cd304abd45874676d6c3e53']
+    placeAId: '4ba55564f964a520e1fb38e3',
+    cityA: 'Barcelona',
+    placeBId: '577d0b45498e5bb6af60498c',
+    cityB: 'Nairobi',
+    users:[]
   },
   {
-    PlaceAId: '50bdbd58e4b0b38c6924c0cb',
-    PlaceBId: '4e92aed02c5b7223b9979744',
-    users:['5cd1ba3f00dbce3a65cb688e','5cd304778ed52666d9bee2ce']
+    placeAId: '50bdbd58e4b0b38c6924c0cb',
+    cityA: 'Zurich',
+    placeBId: '4e92aed02c5b7223b9979744',
+    cityB: 'Nairobi',
+    users:[]
   },
   {
-    PlaceAId: '50bdbd58e4b0b38c6924c0cb',
-    PlaceBId: '522989e7498e94135f658c5c',
-    users:['5cd1ba3f00dbce3a65cb688e', '5cd304778ed52666d9bee2ce']
+    placeAId: '50bdbd58e4b0b38c6924c0cb',
+    cityA: 'Zurich',
+    placeBId: '522989e7498e94135f658c5c',
+    cityB: 'Nairobi',
+    users:[]
   }
-  
+  ]
 
-]
-
-Relation.create(relations, (err) => {
+Relation.create(relation, (err) => {
   if (err) { throw(err) }
-  console.log(`Created ${relations.length} relations`)
+  console.log(`Created ${relation.length} relation`)
   mongoose.connection.close();
 });
+
+
+
+// const relation = [
+//   {
+//     PlaceAId: '55c2745f498ecf54b4ef887c',
+//     cityA: 'Barcelona',
+//     PlaceBId: '577d0b45498e5bb6af60498c',
+//     cityB: 'Nairobi',
+//     users:['5cd1ba3f00dbce3a65cb688e']
+//   },
+//   {
+//     PlaceAId: '4ba55564f964a520e1fb38e3',
+//     cityA: 'Barcelona',
+//     PlaceBId: '577d0b45498e5bb6af60498c',
+//     cityB: 'Nairobi',
+//     users:['5cd1ba3f00dbce3a65cb688e', '5cd304abd45874676d6c3e53']
+//   },
+//   {
+//     PlaceAId: '50bdbd58e4b0b38c6924c0cb',
+//     cityA: 'Zurich',
+//     PlaceBId: '4e92aed02c5b7223b9979744',
+//     cityB: 'Nairobi',
+//     users:['5cd1ba3f00dbce3a65cb688e','5cd304778ed52666d9bee2ce']
+//   },
+//   {
+//     PlaceAId: '50bdbd58e4b0b38c6924c0cb',
+//     cityA: 'Zurich',
+//     PlaceBId: '522989e7498e94135f658c5c',
+//     cityB: 'Nairobi',
+//     users:['5cd1ba3f00dbce3a65cb688e', '5cd304778ed52666d9bee2ce']
+//   }
+//   ]

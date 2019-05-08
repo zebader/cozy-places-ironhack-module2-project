@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 const Schema   = mongoose.Schema;
-const Place    = require('./place');
 
 const userSchema = new Schema({
   username: String,
