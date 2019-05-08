@@ -76,7 +76,7 @@ router.post("/signup", (req, res, next) => {
       if (err) res.render("auth/signup", { message: "Something went wrong" });
       else {
         // req.user = userDoc;
-        res.render("auth/private", { user: userDoc})};
+        res.render("auth/login", { user: userDoc})};
     });
   })
   .catch(error => next(error))
