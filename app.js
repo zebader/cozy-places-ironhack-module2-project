@@ -6,11 +6,11 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const mongoose = require('mongoose');
 const hbs = require('hbs');
-const MongoStore = require('connect-mongo')(session);
 require('dotenv').config();
 
 // Session and Passport modules
 const session = require("express-session");
+const MongoStore = require('connect-mongo')(session);
 const flash = require("connect-flash");
 const passport = require("./config/passport-config");  // passport module setup and initial load
 const passportStrategySetup = require('./config/passport-local-strategy');
