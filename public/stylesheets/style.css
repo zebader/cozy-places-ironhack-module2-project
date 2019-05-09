@@ -42,6 +42,9 @@ a {
   color: #00B7FF;
   text-decoration: none;
 }
+button{
+  outline:none;
+}
 .button{
   width: 100%;
   height: 80px;
@@ -57,16 +60,8 @@ a {
 .button:hover{
   transform: translateY(-5px);
 }
-main {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  padding: 15% 0px;
-}
-main.splash-screen-main{
-  height: 100vh;
+
+body.splash-screen-main{
   background: rgba(50,0,62,1);
   background: -moz-linear-gradient(top, rgba(50,0,62,1) 0%, rgba(112,19,90,1) 100%);
   background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(50,0,62,1)), color-stop(100%, rgba(112,19,90,1)));
@@ -75,6 +70,17 @@ main.splash-screen-main{
   background: -ms-linear-gradient(top, rgba(50,0,62,1) 0%, rgba(112,19,90,1) 100%);
   background: linear-gradient(to bottom, rgba(50,0,62,1) 0%, rgba(112,19,90,1) 100%);
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#32003e', endColorstr='#70135a', GradientType=0 );
+  height: 100vh;
+  background-attachment: fixed;
+}
+
+main {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 15% 0px;
 }
 p.splash-scrren-catch{
   color:#f34970;
@@ -116,7 +122,7 @@ section.splash-screen-buttons p{
 section.signup-title{
   width: 80%;
   height: auto;
-  margin: 15% 0;
+  margin: 10% 0 15%;
 }
 section.signup-form{
   width: 80%;
@@ -182,45 +188,6 @@ section.place-profile-buttons button.blue{
 section.place-profile-similar{
   text-align:center;
   margin:5% 0;
-}
-
-/*======ANIMATIONS=============*/
-
-@keyframes carrusel {
-  0% {
-    left:0%;
-  }
-  30% {
-    left:0%;
-  }
-  33% {
-    left:-100%;
-  }
-  63% {
-    left:-100%;
-  }
-  66% {
-    left:-200%;
-  }
-  96% {
-    left:-200%;
-  }
-  100% {
-    left:0%;
-  }
-
-}
-@keyframes floating {
-  0% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(3px);
-  }
-  100% {
-    transform: translateY(0px);
-  }
-
 }
 
 /*====User INFO====*/
@@ -349,6 +316,28 @@ main.private-screen-main{
   margin-bottom: 80px;
 }
 
+main.private-screen-main div.list-container{
+  width: 100%;
+}
+main.private-screen-main div.list-container div.card-wrapper a{
+
+  margin: 0 auto;
+}
+main.private-screen-main div.list-container div.card-wrapper a button{
+  width: 100%;
+
+}
+
+main.private-screen-main div.list-container div.card-wrapper a button div.card {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+main.private-screen-main div.list-container div.card-wrapper a button div.card img{
+  margin: 0 5% 0 0;
+}
+
 .p-add {
   font-size: 0.8rem;
 }
@@ -406,13 +395,16 @@ footer {
 }
 .card-wrapper{
   display: flex;
-  justify-content: center;
+  justify-content:space-between;
   border-radius: 10px;
   background: white;
   color:rgba(50,0,62,1);
   border: 1px solid #e4e4e4;
   margin: 5%;
   padding: 5% 0;
+}
+.card-wrapper a{
+  width: 70%;
 }
 .card-wrapper:hover{
   border: 1px solid #f34970;
@@ -457,4 +449,44 @@ footer {
 
 button.matched-match-button:disabled{
   background:grey;
+}
+
+
+/*======ANIMATIONS=============*/
+
+@keyframes carrusel {
+  0% {
+    left:0%;
+  }
+  30% {
+    left:0%;
+  }
+  33% {
+    left:-100%;
+  }
+  63% {
+    left:-100%;
+  }
+  66% {
+    left:-200%;
+  }
+  96% {
+    left:-200%;
+  }
+  100% {
+    left:0%;
+  }
+
+}
+@keyframes floating {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(3px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+
 }

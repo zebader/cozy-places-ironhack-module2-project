@@ -18,6 +18,7 @@
             </a>
 
       <form action="/apitest/new" method="POST">
+            <input type="hidden" value='{{this.id}}' name='id'>
             <input type="hidden" value='{{this.imgUrl}}' name='imgUrl'>
             <input type="hidden" value='{{this.name}}' name='name'>
             <input type="hidden" value='{{this.location.address}}' name='address'>

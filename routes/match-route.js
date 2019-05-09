@@ -18,29 +18,22 @@ Relation.find({
     { 'placeAId': placeAId },
     { 'placeBId': placeBId }
   ]
-}/* , function(err, docs) {
-  if(!err) console.log('DOCSSSS',docs);
-} */)
+})
 .then( placeRelation => {
-
-// console.log('placeRelation', placeRelation[0].id)
-
-  if(placeRelation === null){
-
+  if(placeRelation.length === 0) {
    const newRelation = new Relation({ placeAId,cityA, placeBId,cityB, users });
-
-   newRelation.save()
+    newRelation.save()
    .then( (relation) => res.redirect('/private'))
    .catch( (err) => console.log(err));
-  } else{
-
-   Relation.findByIdAndUpdate(placeRelation[0].id, {
-     $push: { users: req.user._id }
-   }, { 'new': true});
-  }
-  
+    }else {
+    Relation.findByIdAndUpdate(placeRelation[0]._id, {
+      $push: { users: req.user._id }
+    }, { 'new': true})
+    .then( (relation) => res.redirect('/private'))
+    .catch( (err) => console.log(err));
+    }
   })
-    .catch(error => { console.log(error) })
+   .catch(error => { console.log(error) })
 });
 
 router.get('/matchtest/new',(req,res,next) => {

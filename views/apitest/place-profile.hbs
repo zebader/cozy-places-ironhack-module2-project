@@ -23,7 +23,7 @@
   <section class="place-profile-buttons">
     
       <form action="/apitest/new" method="POST">
-            <input type="hidden" value='{{urlPhoto}}' name='id'>
+
             <input type="hidden" value='{{data.data.id}}' name='id'>
             <input type="hidden" value='{{data.data.name}}' name='name'>
             <input type="hidden" value='{{data.data.location.address}}' name='address'>
@@ -49,7 +49,6 @@
       <p>{{tip.tip}}</p>
       </article>
   </section>
-
 
 {{!--   <section class="place-profile-similar">
     <h3>Similar Cozyplaces</h3>

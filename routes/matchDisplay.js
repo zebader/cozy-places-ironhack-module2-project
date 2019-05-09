@@ -15,14 +15,52 @@ router.get("/apitest/searchByCity", (req, res, next) => {
   let { location } = req.query;
   
   location = firstLetter(location);
-
+  //Find Relations that have location from the search and are in favorite places from the user
 Relation.find({$or:[
   {cityA:location},
-  {cityB:location}]
+  {cityB:location}
+]
+})
+.then(allPlacesMatchedCityFromDb =>{
+  console.log(allPlacesMatchedCityFromDb)
+  User.find({$and: [{$or:
+    [
+      {"favoPlace.API_id": allPlacesMatchedCityFromDb.placeAId},
+      {"favoPlace.API_id": allPlacesMatchedCityFromDb.placeBId}
+    ]
+}, {_id: req.user._id} ]} )
+.then((user) => {
+  if (user) {
+    Place.find({$or:[
+      {API_id:allPlacesMatchedCityFromDb.placeAId},
+      {API_id:allPlacesMatchedCityFromDb.placeBId}
+    ]})
+    .then((placesArray) => {
+
+      console.log(placesArray)
+      const data = placesArray
+      res.render('apitest/search-place',{data, location})
+    })
+  }
+  else {
+    res.render('apitest/search-place',{ errorMessage : "Coudn¡'t find any match!"})
+  }
+})
+.catch(err => console.log(err));
+})
 })
 
 
 
+
+// Place.find({$or:[
+//   {API_id:allPlacesMatchedCityFromDb.placeAId},
+//   {API_id:allPlacesMatchedCityFromDb.placeBId}
+// ]})
+
+
+
+<<<<<<< HEAD
   Place.find({$or:[
     {API_id:allPlacesMatchedCityFromDb.placeAId},
     {API_id:allPlacesMatchedCityFromDb.placeBId}
@@ -49,6 +87,9 @@ module.exports = router;
 
 
 // .then(allPlacesMatchedCityFromDb => {
+=======
+.then(allPlacesMatchedCityFromDb => {
+>>>>>>> 4da4afdb017995bb18c8f435b68b65e8de43b376
 //     allPlacesMatchedCityFromDb.forEach((e)=>{
 //       User.favoPlace.forEach((u) =>{
 //         if (e.PlaceAId === u.API_Id){
@@ -59,8 +100,7 @@ module.exports = router;
 //       // .then(dataA => console.log('data A',dataA))
       
 //       // User.find({favoPlace:{API_id:e.PlaceBId}})
-    
-
+  
 //   })
   
 //   allPlacesMatchedCityFromDb.forEach((e)=>{
@@ -87,6 +127,12 @@ module.exports = router;
 //   ]
 // })
 
+<<<<<<< HEAD
+=======
+
+// .catch(err => console.log(err));
+
+>>>>>>> 4da4afdb017995bb18c8f435b68b65e8de43b376
 // User.find({favoPlace:{location}})
 // .then(data => console.log('data',data.))
 // .catch(err => console.log(err));
@@ -115,4 +161,18 @@ module.exports = router;
   // })
   // .catch((error) => {
     // next(error)
+<<<<<<< HEAD
   // })
+=======
+  // })
+// })
+  
+router.get("/citySearch", (req, res, next) => {
+  console.log('user',User.username);
+  
+  res.render("apitest/search-place"); 
+  });
+
+
+module.exports = router;
+>>>>>>> 4da4afdb017995bb18c8f435b68b65e8de43b376
