@@ -11,8 +11,8 @@
       {{!-- <label for="placeName">Place name</label>
       <input id="placeName" type="text" name="placeName" placeholder="What its name?"> --}}
 
-      {{#if message}}
-        <div class="error-message">{{ message }}</div>
+      {{#if errorMessage}}
+        <div class="error-message">{{ errorMessage }}</div>
       {{/if}}
       <br><br>
 
@@ -20,7 +20,8 @@
     </form>
 </section>
 <section>
-{{#if data}}
+{{#if data }}
+<p>{{location}} </p>
 {{#each data}}
 <div class="card-wrapper">
 
@@ -30,7 +31,8 @@
                               <div class="card-info">
                                     <h4>{{this.name}}</h4>
                                     <p>{{this.location}}</p>
-                                    <p>{{this.city}}</p>
+                                    <p>{{this.cityA}}</p>
+                                    <p>{{this.cityB}}</p>
                               </div>
                         </div>
                   </button>

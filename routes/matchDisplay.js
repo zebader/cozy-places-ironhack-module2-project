@@ -15,11 +15,50 @@ router.get("/apitest/searchByCity", (req, res, next) => {
   let { location } = req.query;
   
   location = firstLetter(location);
-
+  //Find Relations that have location from the search and are in favorite places from the user
 Relation.find({$or:[
   {cityA:location},
-  {cityB:location}]
+  {cityB:location}
+]
 })
+.then(allPlacesMatchedCityFromDb =>{
+  console.log(allPlacesMatchedCityFromDb)
+  User.find({$and: [{$or:
+    [
+      {"favoPlace.API_id": allPlacesMatchedCityFromDb.placeAId},
+      {"favoPlace.API_id": allPlacesMatchedCityFromDb.placeBId}
+    ]
+}, {_id: req.user._id} ]} )
+.then((user) => {
+  if (user) {
+    Place.find({$or:[
+      {API_id:allPlacesMatchedCityFromDb.placeAId},
+      {API_id:allPlacesMatchedCityFromDb.placeBId}
+    ]})
+    .then((placesArray) => {
+
+      console.log(placesArray)
+      const data = placesArray
+      res.render('apitest/search-place',{data, location})
+    })
+  }
+  else {
+    res.render('apitest/search-place',{ errorMessage : "Coudn¡'t find any match!"})
+  }
+})
+.catch(err => console.log(err));
+})
+})
+
+
+
+
+// Place.find({$or:[
+//   {API_id:allPlacesMatchedCityFromDb.placeAId},
+//   {API_id:allPlacesMatchedCityFromDb.placeBId}
+// ]})
+
+
 
 // .then(allPlacesMatchedCityFromDb => {
 //     allPlacesMatchedCityFromDb.forEach((e)=>{
@@ -32,8 +71,7 @@ Relation.find({$or:[
 //       // .then(dataA => console.log('data A',dataA))
       
 //       // User.find({favoPlace:{API_id:e.PlaceBId}})
-    
-
+  
 //   })
   
 //   allPlacesMatchedCityFromDb.forEach((e)=>{
@@ -60,17 +98,8 @@ Relation.find({$or:[
 //   ]
 // })
 
-  Place.find({$or:[
-    {API_id:allPlacesMatchedCityFromDb.placeAId},
-    {API_id:allPlacesMatchedCityFromDb.placeBId}
-  ]})
-  .then(data =>{
-   console.log('this are the places',data)
-   res.render('apitest/search-place',{data})
-  })
-  .catch(err => console.log(err));
-})
-.catch(err => console.log(err));
+
+// .catch(err => console.log(err));
 
 // User.find({favoPlace:{location}})
 // .then(data => console.log('data',data.))
@@ -103,7 +132,7 @@ Relation.find({$or:[
   // .catch((error) => {
     // next(error)
   // })
-})
+// })
   
 router.get("/citySearch", (req, res, next) => {
   console.log('user',User.username);
