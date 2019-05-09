@@ -84,7 +84,7 @@ router.get('/matchtest/search',(req,res,next) => {
     const venuesIDarrayA = response.data.response.venues;
 
     venuesIDarrayA.forEach((elem) => {
-      elem.imgUrl = 'https://yt3.ggpht.com/a-/AAuE7mB5EQSMiXUOHnc4PZppYQQ0quToZJE7mKIocQ=s900-mo-c-c0xffffffff-rj-k-no';
+      elem.imgUrl = './../images/barista.jpg';
     })
 
     const venuesIDarrayB =  {
@@ -122,7 +122,7 @@ router.get('/matchtest/searchB',(req,res,next) => {
     const venuesIDarrayB = response.data.response.venues;
 
     venuesIDarrayB.forEach((elem) => {
-      elem.imgUrl = 'https://yt3.ggpht.com/a-/AAuE7mB5EQSMiXUOHnc4PZppYQQ0quToZJE7mKIocQ=s900-mo-c-c0xffffffff-rj-k-no';
+      elem.imgUrl = './../images/barista.jpg';
     })
 
     const venuesIDarrayA =  {
