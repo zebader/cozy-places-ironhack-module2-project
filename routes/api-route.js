@@ -55,11 +55,47 @@ router.get("/apitest/search", (req, res, next) => {
       limit: 5
     }
   }).then( (response) => {
+    
     const venuesIDarray = response.data.response.venues;
     venuesIDarray.forEach((elem) => {
-      elem.imgUrl = 'https://yt3.ggpht.com/a-/AAuE7mB5EQSMiXUOHnc4PZppYQQ0quToZJE7mKIocQ=s900-mo-c-c0xffffffff-rj-k-no';
+      elem.imgUrl = './../images/barista.jpg';
     })
     res.render('apitest/placesList', {venuesIDarray})
+
+
+/*     
+    const venuesIDarray = response.data.response.venues;
+
+      venuesIDarray.forEach((elem) => {
+
+    axios.get(`https://api.foursquare.com/v2/venues/${venuesIDarray.id}`,{
+      params: {
+        client_id: process.env.CLIENT_ID,
+        client_secret: process.env.CLIENT_SECRET,
+        v: '20180323'
+      }
+    }).then( (response) => {
+
+      const photo = {
+        prefix: response.data.response.venue.photos.groups[1].items[0].prefix,
+        width: response.data.response.venue.photos.groups[1].items[0].width,
+        height: response.data.response.venue.photos.groups[1].items[0].height,
+        suffix: response.data.response.venue.photos.groups[1].items[0].suffix
+      }
+      const urlPhoto = `${photo.prefix}${photo.width}x${photo.height}${photo.suffix}`
+
+      elem.imgUrl = urlPhoto;
+
+    })
+
+    res.render('apitest/placesList', {venuesIDarray})
+    
+    })
+    .catch((error) => {
+      next(error)
+    }) */
+
+
   })
   .catch((error) => {
     next(error)

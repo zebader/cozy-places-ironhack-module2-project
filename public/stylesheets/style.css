@@ -152,6 +152,13 @@ section.place-profile-title{
 section.place-profile-title h1{
   color:rgba(50,0,62,1);
 }
+section.place-profile-card{
+  width:100%;
+}
+
+article.place-profile-card-img{
+  width:100%;
+}
 article.place-profile-card-img img{
   width:100%;
 }
