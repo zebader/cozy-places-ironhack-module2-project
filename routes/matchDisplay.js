@@ -22,7 +22,7 @@ Relation.find({$or:[
 ]
 })
 .then(allPlacesMatchedCityFromDb =>{
-  console.log(allPlacesMatchedCityFromDb)
+   console.log('---------places in relation from the search---------',allPlacesMatchedCityFromDb)
   User.find({$and: [{$or:
     [
       {"favoPlace.API_id": allPlacesMatchedCityFromDb.placeAId},
@@ -31,13 +31,15 @@ Relation.find({$or:[
 }, {_id: req.user._id} ]} )
 .then((user) => {
   if (user) {
+    console.log('---------user---------', user);
+    
     Place.find({$or:[
       {API_id:allPlacesMatchedCityFromDb.placeAId},
       {API_id:allPlacesMatchedCityFromDb.placeBId}
     ]})
     .then((placesArray) => {
 
-      console.log(placesArray)
+      // console.log(placesArray)
       const data = placesArray
       res.render('apitest/search-place',{data, location})
     })
@@ -60,7 +62,7 @@ Relation.find({$or:[
 
 
 
-.then(allPlacesMatchedCityFromDb => {
+// .then(allPlacesMatchedCityFromDb => {
 //     allPlacesMatchedCityFromDb.forEach((e)=>{
 //       User.favoPlace.forEach((u) =>{
 //         if (e.PlaceAId === u.API_Id){
