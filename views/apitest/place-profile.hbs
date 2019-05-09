@@ -29,6 +29,7 @@
     
       <form action="/apitest/new" method="POST">
 
+            <input type="hidden" value='{{urlPhoto}}' name='imgUrl'>
             <input type="hidden" value='{{data.data.id}}' name='id'>
             <input type="hidden" value='{{data.data.name}}' name='name'>
             <input type="hidden" value='{{data.data.location.address}}' name='address'>
