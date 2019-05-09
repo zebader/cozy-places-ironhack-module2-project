@@ -22,7 +22,7 @@ Relation.find({$or:[
 ]
 })
 .then(allPlacesMatchedCityFromDb =>{
-  console.log(allPlacesMatchedCityFromDb)
+   console.log('---------places in relation from the search---------',allPlacesMatchedCityFromDb)
   User.find({$and: [{$or:
     [
       {"favoPlace.API_id": allPlacesMatchedCityFromDb.placeAId},
@@ -31,13 +31,15 @@ Relation.find({$or:[
 }, {_id: req.user._id} ]} )
 .then((user) => {
   if (user) {
+    console.log('---------user---------', user);
+    
     Place.find({$or:[
       {API_id:allPlacesMatchedCityFromDb.placeAId},
       {API_id:allPlacesMatchedCityFromDb.placeBId}
     ]})
     .then((placesArray) => {
 
-      console.log(placesArray)
+      // console.log(placesArray)
       const data = placesArray
       res.render('apitest/search-place',{data, location})
     })
@@ -60,36 +62,7 @@ Relation.find({$or:[
 
 
 
-<<<<<<< HEAD
-  Place.find({$or:[
-    {API_id:allPlacesMatchedCityFromDb.placeAId},
-    {API_id:allPlacesMatchedCityFromDb.placeBId}
-  ]})
-  .then(data =>{
-   console.log('this are the places',data)
-   res.render('apitest/search-place',{data})
-  })
-  .catch(err => console.log(err));
-})
-.catch(err => console.log(err));
-
-  
-router.get("/citySearch", (req, res, next) => {
-  console.log('user',User.username);
-  
-  res.render("apitest/search-place"); 
-  });
-
-
-module.exports = router;
-
-
-
-
 // .then(allPlacesMatchedCityFromDb => {
-=======
-.then(allPlacesMatchedCityFromDb => {
->>>>>>> 4da4afdb017995bb18c8f435b68b65e8de43b376
 //     allPlacesMatchedCityFromDb.forEach((e)=>{
 //       User.favoPlace.forEach((u) =>{
 //         if (e.PlaceAId === u.API_Id){
@@ -127,15 +100,14 @@ module.exports = router;
 //   ]
 // })
 
-<<<<<<< HEAD
-=======
 
 // .catch(err => console.log(err));
 
->>>>>>> 4da4afdb017995bb18c8f435b68b65e8de43b376
 // User.find({favoPlace:{location}})
 // .then(data => console.log('data',data.))
 // .catch(err => console.log(err));
+
+
 // Celebrity.find({})
 // .then(allTheCelebritiesFromDB => {
 //   res.render('celebrities', { allTheCelebritiesFromDB });
@@ -161,9 +133,6 @@ module.exports = router;
   // })
   // .catch((error) => {
     // next(error)
-<<<<<<< HEAD
-  // })
-=======
   // })
 // })
   
@@ -175,4 +144,3 @@ router.get("/citySearch", (req, res, next) => {
 
 
 module.exports = router;
->>>>>>> 4da4afdb017995bb18c8f435b68b65e8de43b376
