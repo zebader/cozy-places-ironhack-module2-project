@@ -8,7 +8,6 @@
   </button>
 </div>
 
-
 <header class="user-header">
   <img src="https://static.thenounproject.com/png/17241-200.png" alt="">
   <h3>{{user.username}}</h3>
@@ -21,27 +20,33 @@
 <main class="private-screen-main">
 
   {{#each user.favoPlace}}
-  <div class="users-favorite-div">
-    <div class="place-img-user">
-            <img src='{{this.img}}' alt="">
-    </div>
-    <div class="place-description-user">
-      <h4>{{this.name}}</h4>
-      <p>{{this.city}}</p>
 
-    </div>
-    <div class="place-buttons-user">
-      <img src="https://static.thenounproject.com/png/141961-200.png" alt="">
-      <img src="https://cdn4.iconfinder.com/data/icons/linecon/512/delete-512.png" alt="">
-            <form action="/apitest/{{this._id}}/delete" method="POST">
-            
-      <button type="submit">
-            {{!-- <input type="hidden" value={{this}} name='place'> --}}
-      </button>
-    </div>
-  </div>
+<div class="list-container">
+        <div class="card-wrapper">
+
+            <a href="/place-profile/{{this.API_id}}">
+            <button type="submit">
+                  <div class='card'>
+                        <div class='card-img-wrapper'>
+                              <div class='card-img-wrapper-in'>
+                                    <img src={{this.img}}>
+                              </div>
+                        </div>
+                        <div class="card-info">
+                              <h4>{{this.name}}</h4>
+                              <p>{{this.location}}</p>
+                              <p>{{this.city}}</p>
+                        </div>
+                  </div>
+            </button>
+        </a>
+
+
+      </div>
+</div>
+
+
   {{/each}}
-
 
 </main>
 

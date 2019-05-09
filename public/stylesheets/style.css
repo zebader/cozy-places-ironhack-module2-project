@@ -42,12 +42,15 @@ a {
   color: #00B7FF;
   text-decoration: none;
 }
+button{
+  outline:none;
+}
 .button{
   width: 100%;
   height: 80px;
   border-radius: 10px;
   border: none;
-  margin: 30px 0px;
+  margin: 5% 0px;
   font-family: 'Gugi', cursive;
   font-size: 1.2em;
   background-color: #f34970;
@@ -57,15 +60,8 @@ a {
 .button:hover{
   transform: translateY(-5px);
 }
-main {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  padding: 15% 0px;
-}
-main.splash-screen-main{
+
+body.splash-screen-main{
   background: rgba(50,0,62,1);
   background: -moz-linear-gradient(top, rgba(50,0,62,1) 0%, rgba(112,19,90,1) 100%);
   background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(50,0,62,1)), color-stop(100%, rgba(112,19,90,1)));
@@ -74,6 +70,17 @@ main.splash-screen-main{
   background: -ms-linear-gradient(top, rgba(50,0,62,1) 0%, rgba(112,19,90,1) 100%);
   background: linear-gradient(to bottom, rgba(50,0,62,1) 0%, rgba(112,19,90,1) 100%);
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#32003e', endColorstr='#70135a', GradientType=0 );
+  height: 100vh;
+  background-attachment: fixed;
+}
+
+main {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 15% 0px;
 }
 p.splash-scrren-catch{
   color:#f34970;
@@ -115,7 +122,7 @@ section.splash-screen-buttons p{
 section.signup-title{
   width: 80%;
   height: auto;
-  margin: 15% 0;
+  margin: 10% 0 15%;
 }
 section.signup-form{
   width: 80%;
@@ -136,6 +143,7 @@ section.signup-form input[type="text"]:focus, section.signup-form input[type="pa
 /*===============PLACE PROFILE====================*/
 main.place-profile-main{
   background: white;
+  padding: 10% 0px;
 }
 section.place-profile-title{
   width: 100%;
@@ -143,6 +151,13 @@ section.place-profile-title{
 }
 section.place-profile-title h1{
   color:rgba(50,0,62,1);
+}
+section.place-profile-card{
+  width:100%;
+}
+
+article.place-profile-card-img{
+  width:100%;
 }
 article.place-profile-card-img img{
   width:100%;
@@ -152,6 +167,9 @@ article.place-profile-text{
 }
 article.place-profile-text h2{
   color:#f34970;
+  padding: 2% 0px;
+  border-bottom: #f34970 1px solid;
+  border-top: #f34970 1px solid;
 }
 article.place-profile-text h3{
   color: rgb(243, 73, 112);
@@ -177,45 +195,6 @@ section.place-profile-buttons button.blue{
 section.place-profile-similar{
   text-align:center;
   margin:5% 0;
-}
-
-/*======ANIMATIONS=============*/
-
-@keyframes carrusel {
-  0% {
-    left:0%;
-  }
-  30% {
-    left:0%;
-  }
-  33% {
-    left:-100%;
-  }
-  63% {
-    left:-100%;
-  }
-  66% {
-    left:-200%;
-  }
-  96% {
-    left:-200%;
-  }
-  100% {
-    left:0%;
-  }
-
-}
-@keyframes floating {
-  0% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(3px);
-  }
-  100% {
-    transform: translateY(0px);
-  }
-
 }
 
 /*====User INFO====*/
@@ -269,11 +248,6 @@ section.place-profile-similar{
   height: 75px;
   width: 75px;
 }
-
-.delete-button{
-  border:1px solid red;
-}
-
 .place-img-user img{
   width: 100%;
 }
@@ -317,7 +291,13 @@ section.place-profile-similar{
   position: fixed;
   margin: 0 auto ;
   width: 100%;
+  z-index: 999;
 }
+
+.button-delete{
+  border: 1px solid blue;
+}
+
 .button-add-place {
   background-color: #f34970;
   border: none;
@@ -333,6 +313,7 @@ a.plus-button{
   font-size: 2rem;
   font-weight: bold;
   margin: auto;
+
 }
 
 main.private-screen-main{
@@ -344,12 +325,31 @@ main.private-screen-main{
   margin-bottom: 80px;
 }
 
+main.private-screen-main div.list-container{
+  width: 100%;
+}
+main.private-screen-main div.list-container div.card-wrapper a{
+  width: 80%;
+  margin: 0 5%;
+}
+main.private-screen-main div.list-container div.card-wrapper a button{
+  width: 100%;
+
+}
+
+main.private-screen-main div.list-container div.card-wrapper a button div.card {
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+}
+
+main.private-screen-main div.list-container div.card-wrapper a button div.card img{
+  margin: 0 5% 0 0;
+}
 .p-add {
   font-size: 0.8rem;
 }
-
 /*====Footer====*/
-
 footer {
   background: white;
   bottom: 0;
@@ -357,6 +357,7 @@ footer {
   padding: 0;
   position: fixed;
   width: 100%;
+  z-index: 999;
 }
 
 .footer-div-img {
@@ -384,7 +385,8 @@ footer {
 .card{
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: left;
+  align-items: center;
 }
 
 .card img{
@@ -400,13 +402,18 @@ footer {
 }
 .card-wrapper{
   display: flex;
-  justify-content: center;
+  justify-content:space-between;
   border-radius: 10px;
   background: white;
   color:rgba(50,0,62,1);
   border: 1px solid #e4e4e4;
   margin: 5%;
   padding: 5% 0;
+  align-items: center;
+    position: relative;
+}
+.card-wrapper a{
+  width: 70%;
 }
 .card-wrapper:hover{
   border: 1px solid #f34970;
@@ -427,6 +434,9 @@ footer {
   font-family: 'Open Sans', sans-serif;
   font-size: 1em;
   border:none;
+  width: 100%;
+  position: relative;
+
 }
 
 .card-wrapper button.add-place-button{
@@ -438,6 +448,24 @@ footer {
   text-align: center;
   margin: 5%;
 }
+
+.card-img-wrapper{
+  height: 70px;
+  overflow: hidden;
+ position: relative;
+  margin: 0 7% 0 0;
+  border-radius: 5px;
+  width: 100%;
+  max-width: 70px;
+}
+.card-img-wrapper-in img{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  width: 200%;
+  height: auto;
+}
 .add-place-button:hover{
   transform:scale(1.1);
 }
@@ -445,3 +473,57 @@ footer {
   width: 100%;
 
 } */
+
+
+/*============================= MATCH PLACES SCREEN ===============================*/
+
+button.matched-match-button:disabled{
+  background:grey;
+}
+
+
+/*======ANIMATIONS=============*/
+
+@keyframes carrusel {
+  0% {
+    left:0%;
+  }
+  30% {
+    left:0%;
+  }
+  33% {
+    left:-100%;
+  }
+  63% {
+    left:-100%;
+  }
+  66% {
+    left:-200%;
+  }
+  96% {
+    left:-200%;
+  }
+  100% {
+    left:0%;
+  }
+
+}
+@keyframes floating {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(3px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+
+}
+
+
+
+
+
+
+/* \\\\\\\\\\\RODRIGO CHANGES ///////////*/

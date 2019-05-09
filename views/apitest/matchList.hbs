@@ -4,30 +4,40 @@
       {{#if finalVenues.isSearchA}}
       {{#each finalVenues.venuesIDarrayA}}
             <div class="card-wrapper">
-
-                  <button type="submit">
-                        <div class='card'>
-                              <img src={{this.imgUrl}}>
-                              <div class="card-info">
-                                    <h4>{{this.name}}</h4>
-                                    <p>{{this.location.address}}</p>
-                                    <p>{{this.location.city}}</p>
+            
+            <a href="/place-profile/{{this.id}}">
+            <button type="submit">
+                  <div class='card'>
+                        <div class='card-img-wrapper'>
+                              <div class='card-img-wrapper-in'>
+                                    <img src={{this.imgUrl}}>
                               </div>
                         </div>
-                  </button>
+                        
+                        <div class="card-info">
+                              <h4>{{this.name}}</h4>
+                              <p>{{this.location.address}}</p>
+                              <p>{{this.location.city}}</p>
+                        </div>
+                  </div>
+            </button>
+            </a>
+
 
             <form action="/matchtest/new" method="GET">
+                  <input type="hidden" value='{{this.id}}'name='id'>
                   <input type="hidden" value='{{this.imgUrl}}' name='imgUrl'>
                   <input type="hidden" value='{{this.name}}' name='name'>
                   <input type="hidden" value='{{this.location.address}}' name='address'>
                   <input type="hidden" value='{{this.location.city}}' name='city'>
 
+                  <input type="hidden" value='{{../finalVenues.venuesIDarrayB.id}}' name='venuesIDarrayId'>
                   <input type="hidden" value='{{../finalVenues.venuesIDarrayB.img}}' name='venuesIDarrayImg'>
                   <input type="hidden" value='{{../finalVenues.venuesIDarrayB.venuesIDarray.name}}' name='venuesIDarrayName'>
                   <input type="hidden" value='{{../finalVenues.venuesIDarrayB.venuesIDarray.location}}' name='venuesIDarrayAddress'>
                   <input type="hidden" value='{{../finalVenues.venuesIDarrayB.venuesIDarray.city}}' name='venuesIDarrayCity'>
 
-                  <button type="submit" class="button add-place-button">MATCH</button>
+                  <button type="submit" class="button add-place-button" style="background-color:#f34970">MATCH</button>
             </form>
 
             </div>
@@ -38,9 +48,15 @@
       {{#each finalVenues.venuesIDarrayB}}
       <div class="card-wrapper">
 
+            <a href="/place-profile/{{this.id}}">
             <button type="submit">
                   <div class='card'>
-                        <img src={{this.imgUrl}}>
+                        <div class='card-img-wrapper'>
+                              <div class='card-img-wrapper-in'>
+                                    <img src={{this.imgUrl}}>
+                              </div>
+                        </div>
+                        
                         <div class="card-info">
                               <h4>{{this.name}}</h4>
                               <p>{{this.location.address}}</p>
@@ -48,19 +64,22 @@
                         </div>
                   </div>
             </button>
+            </a>
 
       <form action="/matchtest/newB" method="GET">
+            <input type="hidden" value='{{this.id}}' name='id'>
             <input type="hidden" value='{{this.imgUrl}}' name='imgUrl'>
             <input type="hidden" value='{{this.name}}' name='name'>
             <input type="hidden" value='{{this.location.address}}' name='address'>
             <input type="hidden" value='{{this.location.city}}' name='city'>
 
+            <input type="hidden" value='{{../finalVenues.venuesIDarrayA.id}}' name='venuesIDarrayId'>
             <input type="hidden" value='{{../finalVenues.venuesIDarrayA.img}}' name='venuesIDarrayImg'>
             <input type="hidden" value='{{../finalVenues.venuesIDarrayA.name}}' name='venuesIDarrayName'>
             <input type="hidden" value='{{../finalVenues.venuesIDarrayA.location}}' name='venuesIDarrayAddress'>
             <input type="hidden" value='{{../finalVenues.venuesIDarrayA.city}}' name='venuesIDarrayCity'>
 
-            <button type="submit" class="button add-place-button">MATCH</button>
+            <button type="submit" class="button add-place-button" style="background-color:#f34970">MATCH</button>
       </form>
 
       </div>
@@ -68,3 +87,4 @@
       {{/each}}
       {{/if}}
 </div>
+{{> footer}}

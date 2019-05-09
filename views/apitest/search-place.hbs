@@ -1,0 +1,61 @@
+<main>
+   <section class="signup-title">
+     <h1 class="dark">Search by city</h1>
+   </section>
+
+<section class="signup-form">
+    <form action="/apitest/searchByCity" method="GET" id="form-container">
+      <label for="location">Location</label>
+      <input id="location" type="text" name="location" placeholder="Where is it?">
+      <br><br>
+      {{!-- <label for="placeName">Place name</label>
+      <input id="placeName" type="text" name="placeName" placeholder="What its name?"> --}}
+
+      {{#if errorMessage}}
+        <p class="error-message">{{ errorMessage }}</p>
+      {{/if}}
+      <br><br>
+
+      <button type="submit" value="singup" class="button">Search a City</button>
+    </form>
+</section>
+<section>
+{{#if data }}
+<p>{{location}} </p>
+{{#each data}}
+<div class="card-wrapper">
+                  <button type="submit">
+                        <div class='card'>
+                              <img src={{this.img}}>
+                              <div class="card-info">
+                                    <h4>{{this.name}}</h4>
+                                    <p>{{this.location}}</p>
+                                    <p>{{this.cityA}}</p>
+                                    <p>{{this.cityB}}</p>
+                              </div>
+                        </div>
+                  </button>
+
+            {{!-- <form action="/matchtest/new" method="GET">
+                  <input type="hidden" value='{{this.imgUrl}}' name='imgUrl'>
+                  <input type="hidden" value='{{this.name}}' name='name'>
+                  <input type="hidden" value='{{this.location.address}}' name='address'>
+                  <input type="hidden" value='{{this.location.city}}' name='city'>
+
+                  <input type="hidden" value='{{../finalVenues.venuesIDarrayB.img}}' name='venuesIDarrayImg'>
+                  <input type="hidden" value='{{../finalVenues.venuesIDarrayB.venuesIDarray.name}}' name='venuesIDarrayName'>
+                  <input type="hidden" value='{{../finalVenues.venuesIDarrayB.venuesIDarray.location}}' name='venuesIDarrayAddress'>
+                  <input type="hidden" value='{{../finalVenues.venuesIDarrayB.venuesIDarray.city}}' name='venuesIDarrayCity'>
+
+                  <button type="submit" class="button add-place-button">MATCH</button>
+            </form> --}}
+
+            </div>
+            {{/each }}
+
+{{/if}}
+
+</section>
+</main>
+
+{{> footer}}

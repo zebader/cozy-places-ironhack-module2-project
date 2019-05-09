@@ -7,7 +7,12 @@
             <a href="/place-profile/{{this.id}}">
             <button type="submit">
                   <div class='card'>
-                        <img src={{this.imgUrl}}>
+                        <div class='card-img-wrapper'>
+                              <div class='card-img-wrapper-in'>
+                                    <img src={{this.imgUrl}}>
+                              </div>
+                        </div>
+                        
                         <div class="card-info">
                               <h4>{{this.name}}</h4>
                               <p>{{this.location.address}}</p>
@@ -16,8 +21,9 @@
                   </div>
             </button>
             </a>
-
+            
       <form action="/apitest/new" method="POST">
+            <input type="hidden" value='{{this.id}}' name='id'>
             <input type="hidden" value='{{this.imgUrl}}' name='imgUrl'>
             <input type="hidden" value='{{this.name}}' name='name'>
             <input type="hidden" value='{{this.location.address}}' name='address'>
@@ -30,3 +36,5 @@
 
       {{/each}}
 </div>
+
+{{> footer}}
