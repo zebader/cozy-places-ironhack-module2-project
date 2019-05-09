@@ -291,6 +291,7 @@ section.place-profile-similar{
   position: fixed;
   margin: 0 auto ;
   width: 100%;
+  z-index: 999;
 }
 
 .button-delete{
@@ -312,6 +313,7 @@ a.plus-button{
   font-size: 2rem;
   font-weight: bold;
   margin: auto;
+
 }
 
 main.private-screen-main{
@@ -327,8 +329,8 @@ main.private-screen-main div.list-container{
   width: 100%;
 }
 main.private-screen-main div.list-container div.card-wrapper a{
-
-  margin: 0 auto;
+  width: 80%;
+  margin: 0 5%;
 }
 main.private-screen-main div.list-container div.card-wrapper a button{
   width: 100%;
@@ -338,7 +340,7 @@ main.private-screen-main div.list-container div.card-wrapper a button{
 main.private-screen-main div.list-container div.card-wrapper a button div.card {
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: left;
 }
 
 main.private-screen-main div.list-container div.card-wrapper a button div.card img{
@@ -386,7 +388,8 @@ footer {
 .card{
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: left;
+  align-items: center;
 }
 
 .card img{
@@ -409,6 +412,8 @@ footer {
   border: 1px solid #e4e4e4;
   margin: 5%;
   padding: 5% 0;
+  align-items: center;
+    position: relative;
 }
 .card-wrapper a{
   width: 70%;
@@ -432,6 +437,9 @@ footer {
   font-family: 'Open Sans', sans-serif;
   font-size: 1em;
   border:none;
+  width: 100%;
+  position: relative;
+
 }
 
 .card-wrapper button.add-place-button{
@@ -442,6 +450,24 @@ footer {
   color:white;
   text-align: center;
   margin: 5%;
+}
+
+.card-img-wrapper{
+  height: 70px;
+  overflow: hidden;
+ position: relative;
+  margin: 0 7% 0 0;
+  border-radius: 5px;
+  width: 100%;
+  max-width: 70px;
+}
+.card-img-wrapper-in img{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  width: 200%;
+  height: auto;
 }
 .add-place-button:hover{
   transform:scale(1.1);
