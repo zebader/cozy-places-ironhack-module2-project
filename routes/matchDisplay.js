@@ -21,7 +21,7 @@ Relation.find({$or:[
   {cityB:location}]
 })
 
-// .then(allPlacesMatchedCityFromDb => {
+.then(allPlacesMatchedCityFromDb => {
 //     allPlacesMatchedCityFromDb.forEach((e)=>{
 //       User.favoPlace.forEach((u) =>{
 //         if (e.PlaceAId === u.API_Id){
