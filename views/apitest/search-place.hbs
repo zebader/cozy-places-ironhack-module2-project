@@ -12,11 +12,11 @@
       <input id="placeName" type="text" name="placeName" placeholder="What its name?"> --}}
 
       {{#if errorMessage}}
-        <div class="error-message">{{ errorMessage }}</div>
+        <p class="error-message">{{ errorMessage }}</p>
       {{/if}}
       <br><br>
 
-      <button type="submit" value="singup" class="button">Search Place</button>
+      <button type="submit" value="singup" class="button">Search a City</button>
     </form>
 </section>
 <section>
@@ -53,9 +53,6 @@
             </div>
             {{/each }}
 
-{{else}}
-<p>There are no results</p>
-<p>matching your fave places...</p>
 {{/if}}
 
 </section>

@@ -13,44 +13,46 @@ function firstLetter(s) {
 
 router.get("/apitest/searchByCity", (req, res, next) => {
   let { location } = req.query;
-  
   location = firstLetter(location);
   //Find Relations that have location from the search and are in favorite places from the user
-Relation.find({$or:[
-  {cityA:location},
-  {cityB:location}
-]
-})
-.then(allPlacesMatchedCityFromDb =>{
-   console.log('---------places in relation from the search: ',allPlacesMatchedCityFromDb)
-  User.find({$and: [{$or:
-    [
-      {"favoPlace.API_id": allPlacesMatchedCityFromDb[0].placeAId},
-      {"favoPlace.API_id": allPlacesMatchedCityFromDb[0].placeBId}
+  Relation.find({$or:[
+    {cityA:location},
+    {cityB:location}
     ]
-}, {_id: req.user._id} ]} )
-.then((user) => {
-  if (user) {
+  })
+  .then(allPlacesMatchedCityFromDb =>{
+    if (allPlacesMatchedCityFromDb.length === 0){
+      res.render('apitest/search-place',{ errorMessage : "Coudn¡'t find any match!"}) 
+      return
+    }
+    let idsArray = [];
 
-    Place.find({$or:[
-      {API_id:allPlacesMatchedCityFromDb[0].placeAId},
-      {API_id:allPlacesMatchedCityFromDb[0].placeBId}
-    ]})
-    .then((placesArray) => {
-       console.log('--------Places for display: ',placesArray[0].API_id)
-       const data = placesArray;
-       
-       console.log('--------data for display: ', data)
-      res.render('apitest/search-place',{data, location})
+    allPlacesMatchedCityFromDb.forEach((relation) => {
+      if (relation.cityA === location) {
+        idsArray.push(relation.placeAId);
+      } else {
+        idsArray.push(relation.placeBId);
+      }
     })
-  }
-  else {
-    res.render('apitest/search-place',{ errorMessage : "Coudn¡'t find any match!"})
-  }
-})
-.catch(err => console.log(err));
-})
-})
+    User.find({$and: [{"favoPlace.API_id": { $in: idsArray }}, {_id: req.user._id} ]} )
+    .then((user) => {
+      if (user) {
+        console.log(idsArray)
+        Place.find({API_id: {$in: idsArray }})
+        .then((placesArray) => {
+          console.log(placesArray)
+          const data = placesArray;
+          res.render('apitest/search-place',{data})
+        })
+      }
+      else {
+        res.render('apitest/search-place',{ errorMessage : "Coudn¡'t find any match!"})
+      }
+    })
+      .catch(err => console.log(err));
+      })
+    .catch(err => console.log(err))
+    })
 
 
 
