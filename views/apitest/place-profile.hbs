@@ -13,15 +13,15 @@
       </article>
 
       <article class="place-profile-text">
-        <h2>{{data.data.name}}</h2>
         <h3>{{data.data.location.city}}</h3>
-        <p>{{data.data.location.address}}</p>
+        <h4>{{data.data.location.address}}</h4>
+        <br>
+        <p>{{description.description}}</p>
       </article>
 
   </section>
   <section class="place-profile-buttons">
     
-
       <form action="/apitest/new" method="POST">
             <input type="hidden" value='{{urlPhoto}}' name='id'>
             <input type="hidden" value='{{data.data.id}}' name='id'>
@@ -40,36 +40,18 @@
 
             <button id="match-places" class="button">Match</button>
       </form>
-
-
-    
  
+  </section>
+  <section>
+      <article class="place-profile-text">
+
+      <h4>User tip:</h4>
+      <p>{{tip.tip}}</p>
+      </article>
   </section>
 
 
-
-
-
-
-{{!--     <div class="matched_places">
-      <form action="/apitest/search" method="GET" id="form-container">
-        <label for="location">Location</label>
-        <input id="location" type="text" name="location" placeholder="Where is it?">
-        <br><br>
-        <label for="placeName">Place name</label>
-        <input id="placeName" type="text" name="placeName" placeholder="What its name?">
-
-        {{#if message}}
-          <div class="error-message">{{ message }}</div>
-        {{/if}}
-        <br><br>
-
-        <button type="submit" value="singup" class="button">Search Place</button>
-    </form>
-    </div> --}}
-
-
-  <section class="place-profile-similar">
+{{!--   <section class="place-profile-similar">
     <h3>Similar Cozyplaces</h3>
     {{#if similar.similar}}
         {{#each similar.similar}}
@@ -78,22 +60,7 @@
     {{/if}} 
     <p>There are not similar places</p>
 
-  </section>
-
-
-
-      <script>
-let matched = document.querySelector('.matched_places');
- matched.style.display = 'none';
-
- let buttonMatched = document.querySelector('#match-places');
- 
-
-buttonMatched.addEventListener('click', () =>{
-   matched.style.display = 'block';
- } )
-
-  </script>
+  </section> --}}
 
 </main>
 

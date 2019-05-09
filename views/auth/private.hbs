@@ -22,28 +22,34 @@
 
   {{#each user.favoPlace}}
   <div class="users-favorite-div">
-    {{!-- <a href="/place-profile/{{this.API_id}}"> --}}
-      <div class="place-img-user">
-                <img src='{{this.img}}' alt="">
-        </div>
-    {{!-- </a> --}}
-        <div class="place-description-user">
-          <h4>{{this.name}}</h4>
-          <p>{{this.city}}</p>
-      </div>
+    <div class="place-img-user">
+      <img src='{{this.img}}' alt="">
+    </div>
+    <div class="place-description-user">
+      <h4>{{this.name}}</h4>
+      <p>{{this.city}}</p>
+
+    </div>
     <div class="place-buttons-user">
       <img src="https://static.thenounproject.com/png/141961-200.png" alt="">
-      <img src="https://cdn4.iconfinder.com/data/icons/linecon/512/delete-512.png" alt="">
-            <form action="/apitest/{{this._id}}/delete" method="POST">
-            
-      <button type="submit">
-            {{!-- <input type="hidden" value={{this}} name='place'> --}}
-      </button>
+
+      {{!-- <button class="button-delete" data-placeid="{{this._id}}" type="submit"> --}}
+
+
+      <form action="/apitest/delete/{{this._id}}" method="POST" id="deleteForm">
+        <button type="submit" form="deleteForm"> <img
+            src="https://cdn4.iconfinder.com/data/icons/linecon/512/delete-512.png">
+        </button>
+      </form>
+      {{!-- <input type="hidden" value={{this}} name='place'> --}}
     </div>
   </div>
   {{/each}}
 
 
 </main>
+
+{{!-- <script src='https://unpkg.com/axios/dist/axios.min.js'></script>
+<script src='/js/private.js'> </script> --}}
 
 {{> footer}}

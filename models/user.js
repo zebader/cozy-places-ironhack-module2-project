@@ -1,13 +1,12 @@
 const mongoose = require("mongoose");
 const Schema   = mongoose.Schema;
-const Place    = require('./place');
 
 const userSchema = new Schema({
   username: String,
   password: String,
   favoPlace: [
     {
-      API_id: { type: String },
+      API_id: String,
       location: String,
       city: String,
       name: String,
