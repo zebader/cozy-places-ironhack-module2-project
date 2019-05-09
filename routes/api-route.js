@@ -42,7 +42,6 @@ router.post('/apitest/new',(req,res,next) => {
 });
 
 
-
 router.get("/apitest/search", (req, res, next) => {
   const { location, placeName } = req.query;
   return axios.get('https://api.foursquare.com/v2/venues/search',{
