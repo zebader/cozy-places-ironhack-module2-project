@@ -346,13 +346,10 @@ main.private-screen-main div.list-container div.card-wrapper a button div.card {
 main.private-screen-main div.list-container div.card-wrapper a button div.card img{
   margin: 0 5% 0 0;
 }
-
 .p-add {
   font-size: 0.8rem;
 }
-
 /*====Footer====*/
-
 footer {
   background: white;
   bottom: 0;

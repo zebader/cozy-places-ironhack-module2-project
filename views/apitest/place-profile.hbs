@@ -37,7 +37,9 @@
             <button type="submit" class="button blue">Add</button>
       </form>
 
-            <form action="/apitest/new" method="POST">
+            <form action="/matchtest/new" method="GET">
+
+            <input type="hidden" value='{{urlPhoto}}' name='imgUrl'>
             <input type="hidden" value='{{data.data.id}}' name='id'>
             <input type="hidden" value='{{data.data.name}}' name='name'>
             <input type="hidden" value='{{data.data.location.address}}' name='address'>
