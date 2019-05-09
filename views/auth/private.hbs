@@ -22,14 +22,15 @@
 
   {{#each user.favoPlace}}
   <div class="users-favorite-div">
-    <div class="place-img-user">
-            <img src='{{this.img}}' alt="">
-    </div>
-    <div class="place-description-user">
-      <h4>{{this.name}}</h4>
-      <p>{{this.city}}</p>
-
-    </div>
+    {{!-- <a href="/place-profile/{{this.API_id}}"> --}}
+      <div class="place-img-user">
+                <img src='{{this.img}}' alt="">
+        </div>
+    {{!-- </a> --}}
+        <div class="place-description-user">
+          <h4>{{this.name}}</h4>
+          <p>{{this.city}}</p>
+      </div>
     <div class="place-buttons-user">
       <img src="https://static.thenounproject.com/png/141961-200.png" alt="">
       <img src="https://cdn4.iconfinder.com/data/icons/linecon/512/delete-512.png" alt="">

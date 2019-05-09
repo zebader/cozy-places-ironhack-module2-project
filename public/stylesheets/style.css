@@ -66,6 +66,7 @@ main {
   padding: 15% 0px;
 }
 main.splash-screen-main{
+  height: 100vh;
   background: rgba(50,0,62,1);
   background: -moz-linear-gradient(top, rgba(50,0,62,1) 0%, rgba(112,19,90,1) 100%);
   background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(50,0,62,1)), color-stop(100%, rgba(112,19,90,1)));
