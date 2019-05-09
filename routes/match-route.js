@@ -83,29 +83,54 @@ router.get('/matchtest/search',(req,res,next) => {
 
     const venuesIDarrayA = response.data.response.venues;
 
-    venuesIDarrayA.forEach((elem) => {
-      elem.imgUrl = './../images/barista.jpg';
+    Promise.all(venuesIDarrayA.map((elem) => {
+      return axios.get(`https://api.foursquare.com/v2/venues/${elem.id}`,{
+        params: {
+          client_id: process.env.CLIENT_ID,
+          client_secret: process.env.CLIENT_SECRET,
+          v: '20180323'
+        }
+      }).then( (response) => {
+        let urlPhoto = null;
+    
+        if(response.data.response.venue.photos.count !== 0){
+          let photo = {
+            prefix: response.data.response.venue.photos.groups[1].items[0].prefix,
+            width: response.data.response.venue.photos.groups[1].items[0].width,
+            height: response.data.response.venue.photos.groups[1].items[0].height,
+            suffix: response.data.response.venue.photos.groups[1].items[0].suffix
+          }
+          urlPhoto = `${photo.prefix}${photo.width}x${photo.height}${photo.suffix}`
+        }
+        else{
+          urlPhoto = "./../images/barista.jpg";
+        }
+        elem.imgUrl = urlPhoto;
+      })
+    }))
+    .then(() => {
+      
+      const venuesIDarrayB =  {
+        id:venuesIDarrayId,
+        city: venuesIDarrayCity,
+        location: venuesIDarrayAddress,
+        name: venuesIDarrayName,
+        img: venuesIDarrayImg
+      };
+      const finalVenues = {
+        venuesIDarrayA,
+        venuesIDarrayB,
+        isSearchA: true
+      }
+  
+      res.render("apitest/matchList", {finalVenues})
+  
     })
-
-    const venuesIDarrayB =  {
-      id:venuesIDarrayId,
-      city: venuesIDarrayCity,
-      location: venuesIDarrayAddress,
-      name: venuesIDarrayName,
-      img: venuesIDarrayImg
-    };
-    const finalVenues = {
-      venuesIDarrayA,
-      venuesIDarrayB,
-      isSearchA: true
-    }
-
-    res.render("apitest/matchList", {finalVenues})
-  })
-  .catch((error) => {
-    next(error)
-  })
-});
+      .catch((error) => {
+        next(error)
+      })
+    })
+  });
 
 router.get('/matchtest/searchB',(req,res,next) => {
   const { location, placeName, venuesIDarrayId,venuesIDarrayCity,venuesIDarrayAddress,venuesIDarrayName,venuesIDarrayImg } = req.query;
@@ -121,27 +146,52 @@ router.get('/matchtest/searchB',(req,res,next) => {
   }).then( (response) => {  
     const venuesIDarrayB = response.data.response.venues;
 
-    venuesIDarrayB.forEach((elem) => {
-      elem.imgUrl = './../images/barista.jpg';
+    Promise.all(venuesIDarrayB.map((elem) => {
+      return axios.get(`https://api.foursquare.com/v2/venues/${elem.id}`,{
+        params: {
+          client_id: process.env.CLIENT_ID,
+          client_secret: process.env.CLIENT_SECRET,
+          v: '20180323'
+        }
+      }).then( (response) => {
+        let urlPhoto = null;
+    
+        if(response.data.response.venue.photos.count !== 0){
+          let photo = {
+            prefix: response.data.response.venue.photos.groups[1].items[0].prefix,
+            width: response.data.response.venue.photos.groups[1].items[0].width,
+            height: response.data.response.venue.photos.groups[1].items[0].height,
+            suffix: response.data.response.venue.photos.groups[1].items[0].suffix
+          }
+          urlPhoto = `${photo.prefix}${photo.width}x${photo.height}${photo.suffix}`
+        }
+        else{
+          urlPhoto = "./../images/barista.jpg";
+        }
+        elem.imgUrl = urlPhoto;
+      })
+    }))
+    .then(() => {
+      
+      const venuesIDarrayA =  {
+        id:venuesIDarrayId,
+        city: venuesIDarrayCity,
+        location: venuesIDarrayAddress,
+        name: venuesIDarrayName,
+        img: venuesIDarrayImg
+      };
+      const finalVenues = {
+        venuesIDarrayB,
+        venuesIDarrayA,
+        isSearchB: true
+      }
+  
+      res.render("apitest/matchList", {finalVenues})
+  
     })
-
-    const venuesIDarrayA =  {
-      id:venuesIDarrayId,
-      city: venuesIDarrayCity,
-      location: venuesIDarrayAddress,
-      name: venuesIDarrayName,
-      img: venuesIDarrayImg
-    };
-    const finalVenues = {
-      venuesIDarrayB,
-      venuesIDarrayA,
-      isSearchB: true
-    }
-
-    res.render("apitest/matchList", {finalVenues})
-  })
-  .catch((error) => {
-    next(error)
+      .catch((error) => {
+        next(error)
+      })
   })
 });
 

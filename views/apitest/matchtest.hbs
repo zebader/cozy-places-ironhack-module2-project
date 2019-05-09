@@ -7,15 +7,23 @@
 {{#if finalVenues.venuesIDarrayA}}
 <h3>My place</h3>
              <div class="card-wrapper">
+
+            <button type="submit">
                   <div class='card'>
-                    
-                        <img src={{finalVenues.venuesIDarrayA.img}}>
+                        <div class='card-img-wrapper'>
+                              <div class='card-img-wrapper-in'>
+                                    <img src={{finalVenues.venuesIDarrayA.img}}>
+                              </div>
+                        </div>
+                        
                         <div class="card-info">
                               <h4>{{finalVenues.venuesIDarrayA.name}}</h4>
                               <p>{{finalVenues.venuesIDarrayA.location}}</p>
                               <p>{{finalVenues.venuesIDarrayA.city}}</p>
                         </div>
                   </div>
+            </button>
+
                 </div>  
 {{else}}
 <div class="">
@@ -50,15 +58,22 @@
 {{#if finalVenues.venuesIDarrayB}}
 <h3>Match new place</h3>
              <div class="card-wrapper">
+
+            <button type="submit">
                   <div class='card'>
-                    
-                        <img src={{finalVenues.venuesIDarrayB.img}}>
+                        <div class='card-img-wrapper'>
+                              <div class='card-img-wrapper-in'>
+                                    <img src={{finalVenues.venuesIDarrayB.img}}>
+                              </div>
+                        </div>
+                        
                         <div class="card-info">
                               <h4>{{finalVenues.venuesIDarrayB.name}}</h4>
                               <p>{{finalVenues.venuesIDarrayB.location}}</p>
                               <p>{{finalVenues.venuesIDarrayB.city}}</p>
                         </div>
                   </div>
+            </button>
                 </div>  
 {{else}}
 <h3>Match new place</h3>
