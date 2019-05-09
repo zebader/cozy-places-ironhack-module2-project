@@ -38,6 +38,8 @@ Relation.find({
 
 router.get('/matchtest/new',(req,res,next) => {
 
+  console.log('REQ QUERY', req.query)
+
   const { id,name,address,city,imgUrl} = req.query;
   const location = address
   const img = imgUrl
