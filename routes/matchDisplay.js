@@ -16,31 +16,39 @@ router.get("/apitest/searchByCity", (req, res, next) => {
   
   location = firstLetter(location);
   //Find Relations that have location from the search and are in favorite places from the user
+
+
 Relation.find({$or:[
   {cityA:location},
   {cityB:location}
 ]
 })
 .then(allPlacesMatchedCityFromDb =>{
-   console.log('---------places in relation from the search---------',allPlacesMatchedCityFromDb)
+
+  if (allPlacesMatchedCityFromDb === []){
+  res.render('apitest/search-place',{ errorMessage : "Coudn¡'t find any match!"})
+
+  }
+  else {
+   console.log('------------------------>', allPlacesMatchedCityFromDb[0]);
   User.find({$and: [{$or:
     [
-      {"favoPlace.API_id": allPlacesMatchedCityFromDb.placeAId},
-      {"favoPlace.API_id": allPlacesMatchedCityFromDb.placeBId}
+      {"favoPlace.API_id": allPlacesMatchedCityFromDb[0].placeBId},
+      {"favoPlace.API_id": allPlacesMatchedCityFromDb[0].placeAId}
     ]
 }, {_id: req.user._id} ]} )
 .then((user) => {
   if (user) {
-    console.log('---------user---------', user);
-    
+      
     Place.find({$or:[
-      {API_id:allPlacesMatchedCityFromDb.placeAId},
-      {API_id:allPlacesMatchedCityFromDb.placeBId}
+      {API_id:allPlacesMatchedCityFromDb[0].placeAId},
+      {API_id:allPlacesMatchedCityFromDb[0].placeBId}
     ]})
     .then((placesArray) => {
-
-      // console.log(placesArray)
-      const data = placesArray
+       console.log('--------Places for display: ',placesArray[0].API_id)
+       const data = placesArray[0];
+       
+       console.log('--------data for display: ', data)
       res.render('apitest/search-place',{data, location})
     })
   }
@@ -49,7 +57,8 @@ Relation.find({$or:[
   }
 })
 .catch(err => console.log(err));
-})
+}})
+.catch(err => console.log(err))
 })
 
 

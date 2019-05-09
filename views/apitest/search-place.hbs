@@ -12,11 +12,11 @@
       <input id="placeName" type="text" name="placeName" placeholder="What its name?"> --}}
 
       {{#if errorMessage}}
-        <div class="error-message">{{ errorMessage }}</div>
+        <p class="error-message">{{ errorMessage }}</p>
       {{/if}}
       <br><br>
 
-      <button type="submit" value="singup" class="button">Search Place</button>
+      <button type="submit" value="singup" class="button">Search a City</button>
     </form>
 </section>
 <section>
@@ -24,7 +24,6 @@
 <p>{{location}} </p>
 {{#each data}}
 <div class="card-wrapper">
-
                   <button type="submit">
                         <div class='card'>
                               <img src={{this.img}}>
@@ -54,8 +53,6 @@
             </div>
             {{/each }}
 
-{{else}}
-<p>Choose City </p>
 {{/if}}
 
 </section>

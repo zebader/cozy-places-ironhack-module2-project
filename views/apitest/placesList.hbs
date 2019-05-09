@@ -7,7 +7,12 @@
             <a href="/place-profile/{{this.id}}">
             <button type="submit">
                   <div class='card'>
-                        <img src={{this.imgUrl}}>
+                        <div class='card-img-wrapper'>
+                              <div class='card-img-wrapper-in'>
+                                    <img src={{this.imgUrl}}>
+                              </div>
+                        </div>
+                        
                         <div class="card-info">
                               <h4>{{this.name}}</h4>
                               <p>{{this.location.address}}</p>
