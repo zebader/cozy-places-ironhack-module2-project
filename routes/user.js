@@ -1,17 +1,16 @@
-var express = require('express');
-var router = express.Router();
-const User = require('./../models/user');
+var express = require('express')
+var router = express.Router()
+const User = require('./../models/user')
 
-const authMiddlewares = require('../middlewares/auth.middelware');
+const { isLoggedIn, isNotLoggedIn, isFormFilled } = require('../middlewares/authMiddelwares')
 
 /* GET users listing. */
-router.get('/private', authMiddlewares.checkIfAuthenticated, (req, res, next) => {
-
+router.get('/private', isNotLoggedIn, (req, res, next) => {
   // User.create()
-  User.findOne({_id: req.user._id})
-  .then(userObj => { 
-    res.render("auth/private", { user: userObj })
-  })
-});
+  User.findOne({ _id: req.session.currentUser._id })
+    .then(userObj => {
+      res.render('auth/private', { user: userObj })
+    })
+})
 
-module.exports = router;
+module.exports = router

@@ -2,6 +2,8 @@ const express = require('express')
 const router = express.Router()
 const axios = require('axios')
 
+const { isLoggedIn, isNotLoggedIn, isFormFilled } = require('../middlewares/authMiddelwares')
+
 router.get('/place-profile/:id', (req, res, next) => {
   const API_id = req.params.id
 
