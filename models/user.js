@@ -5,6 +5,7 @@ const Place = require('../models/place')
 const userSchema = new Schema({
   username: String,
   password: String,
+  img: { type: String, default: '../images/man.svg' },
   favoPlace: [{ type: Schema.Types.ObjectId, ref: 'Place' }]
 }, {
   timestamps: {

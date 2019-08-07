@@ -12,7 +12,7 @@ const { isLoggedIn, isNotLoggedIn, isFormFilled } = require('../middlewares/auth
 // *  '/'
 router.use('/auth', authRouter)
 router.use('/places', searchPlaceRouter)
-router.use('/', userRouter)
+router.use('/profile', userRouter)
 router.use('/', placeRouter)
 router.use('/', matchRouter)
 router.use('/', matchDisplayRouter)
