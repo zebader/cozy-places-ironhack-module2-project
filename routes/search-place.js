@@ -1,30 +1,32 @@
 const express = require('express')
 const router = express.Router()
 const axios = require('axios')
-const Place = require('./../models/place')
-const User = require('./../models/user')
+const Place = require('../models/place')
+const User = require('../models/user')
 const { isLoggedIn, isNotLoggedIn, isFormFilled } = require('../middlewares/authMiddelwares')
 
-router.post('/delete/:id', isNotLoggedIn, async (req, res, next) => {
-  const { id } = req.params
-  const { favoPlace } = req.user
-  try {
-    await User.findOneAndUpdate({ _id: req.user.id }, { $pull: { favoPlace: { id: id } } }, { new: true })
-    res.redirect('/private')
-  } catch (error) {
-    next(error)
-  }
-})
+// router.post('/delete/:id', isNotLoggedIn, async (req, res, next) => {
+//   const { id } = req.params
+//   const { favoPlace } = req.user
+//   try {
+//     await User.findOneAndUpdate({ _id: req.user.id }, { $pull: { favoPlace: { id: id } } }, { new: true })
+//     res.redirect('/private')
+//   } catch (error) {
+//     next(error)
+//   }
+// })
 
-router.post('/new', isNotLoggedIn, isFormFilled, async (req, res, next) => {
-  const { id, name, address, city, imgUrl } = req.body
-  const location = address
-  const img = imgUrl
+router.post('/new', isNotLoggedIn, async (req, res, next) => {
   try {
+    const { id, name, address, city, imgUrl } = req.body
+    const { _id } = req.session.currentUser
+    const location = address
+    const img = imgUrl
     const newPlace = await new Place({ API_id: id, name, location, city, img })
     await newPlace.save()
-    await User.updateOne({ _id: req.user._id }, { $push: { favoPlace: newPlace } })
-    res.redirect('/private')
+
+    await User.findByIdAndUpdate(_id, { $push: { favoPlace: newPlace._id } })
+    res.redirect('/profile')
   } catch (error) {
     next(error)
   }
