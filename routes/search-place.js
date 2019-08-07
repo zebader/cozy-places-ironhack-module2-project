@@ -3,7 +3,7 @@ const router = express.Router()
 const axios = require('axios')
 const Place = require('../models/place')
 const User = require('../models/user')
-const { isLoggedIn, isNotLoggedIn, isFormFilled } = require('../middlewares/authMiddelwares')
+const { isLoggedIn, isNotLoggedIn, isFormFilled, isSearchQuery } = require('../middlewares/authMiddelwares')
 
 // router.post('/delete/:id', isNotLoggedIn, async (req, res, next) => {
 //   const { id } = req.params
@@ -32,7 +32,7 @@ router.post('/new', isNotLoggedIn, async (req, res, next) => {
   }
 })
 
-router.get('/search', isNotLoggedIn, async (req, res, next) => {
+router.get('/search', isNotLoggedIn, isSearchQuery, async (req, res, next) => {
   const { location, placeName } = req.query
   try {
     const venues = await axios.get('https://api.foursquare.com/v2/venues/search', {

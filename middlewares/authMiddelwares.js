@@ -24,9 +24,19 @@ const isFormFilled = (req, res, next) => {
   }
   next()
 }
+const isSearchQuery = (req, res, next) => {
+  const { location, placeName } = req.query
+
+  if (!location || !placeName) {
+    req.flash('errorFormNotFilled', 'All fields are required')
+    return res.redirect(req.originalUrl)
+  }
+  next()
+}
 
 module.exports = {
   isLoggedIn,
   isNotLoggedIn,
-  isFormFilled
+  isFormFilled,
+  isSearchQuery
 }
