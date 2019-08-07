@@ -26,10 +26,11 @@ const isFormFilled = (req, res, next) => {
 }
 const isSearchQuery = (req, res, next) => {
   const { location, placeName } = req.query
+  console.log(req.query)
 
   if (!location || !placeName) {
     req.flash('errorFormNotFilled', 'All fields are required')
-    return res.redirect(req.originalUrl)
+    return res.redirect('/places')
   }
   next()
 }

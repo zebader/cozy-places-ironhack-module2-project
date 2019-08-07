@@ -78,7 +78,11 @@ router.get('/search', isNotLoggedIn, isSearchQuery, async (req, res, next) => {
 })
 
 router.get('/', isNotLoggedIn, (req, res, next) => {
-  res.render('places/search')
+  const data = {
+    messages: req.flash('errorFormNotFilled')
+  }
+  const message = data.messages
+  res.render('places/search', { message })
 })
 
 module.exports = router
