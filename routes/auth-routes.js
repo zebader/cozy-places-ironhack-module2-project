@@ -14,7 +14,8 @@ router.get('/signup', isLoggedIn, (req, res, next) => {
   const data = {
     messages: req.flash('errorFormNotFilled')
   }
-  res.render('auth/signup', data)
+  const message = data.messages
+  res.render('auth/signup', { message })
 })
 
 router.post('/signup', isLoggedIn, isFormFilled, async (req, res, next) => {
@@ -43,27 +44,26 @@ router.post('/signup', isLoggedIn, isFormFilled, async (req, res, next) => {
 // Not using sign up for the moment
 
 router.get('/login', isLoggedIn, (req, res, next) => {
-  res.render('auth/login')
+  const data = {
+    messages: req.flash('errorFormNotFilled')
+  }
+  const message = data.messages
+  res.render('auth/login', { message })
 })
 
 router.post('/login', isLoggedIn, isFormFilled, async (req, res, next) => {
-  const salt = bcrypt.genSaltSync(saltRounds)
-  const JesushashedPassword = bcrypt.hashSync('Jesus', salt)
-
-  const USER_JESUS = {
-    username: 'Jesus',
-    password: JesushashedPassword
-  }
-
   const { username, password } = req.body
+  const salt = bcrypt.genSaltSync(saltRounds)
+  const hashedPassword = bcrypt.hashSync(password, salt)
+
+  const user = await User.findOne({ username })
   try {
-    // const user = await User.findOne({ username });
-    if (username !== USER_JESUS.username && password !== USER_JESUS.password) {
-      return res.render('login', { error: 'User dosent exits' })
+    if (username !== user.username && hashedPassword !== user.password) {
+      return res.render('auth/login', { error: 'User dosent exits' })
     }
-    if (bcrypt.compareSync(password, USER_JESUS.password)) {
-      req.session.currentUser = USER_JESUS
-      res.redirect('/private')
+    if (bcrypt.compareSync(password, user.password)) {
+      req.session.currentUser = user
+      res.redirect('/profile')
     } else {
       res.redirect('/auth/login')
     }

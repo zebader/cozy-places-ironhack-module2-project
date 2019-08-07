@@ -2,7 +2,7 @@
 <div class="div-add-place">
   <button class="button-add-place">
     <a href="/places" class="plus-button">
-      {{!-- + --}}
+   
       <p class="p-add">add a place</p>
     </a>
   </button>
@@ -10,7 +10,7 @@
 
 <header class="user-header">
   <img src="https://static.thenounproject.com/png/17241-200.png" alt="">
-  <h3>{{user.username}}</h3>
+  <h3>{{username}}</h3>
 
 </header>
 <h2>Your favorite places</h2>
@@ -19,7 +19,7 @@
 {{!-- {{{main}}} --}}
 <main class="private-screen-main">
 
-  {{#each user.favoPlace}}
+  {{#each favoPlace}}
 
 <div class="list-container">
         <div class="card-wrapper">
