@@ -77,6 +77,59 @@ router.get('/search', isNotLoggedIn, isSearchQuery, async (req, res, next) => {
   }
 })
 
+router.get('/:id', isNotLoggedIn, async (req, res, next) => {
+  const API_id = req.params.id
+  try {
+    const place = await axios.get(`https://api.foursquare.com/v2/venues/${API_id}`, {
+      params: {
+        client_id: process.env.CLIENT_ID,
+        client_secret: process.env.CLIENT_SECRET,
+        v: '20180323'
+      }
+    })
+    const data = {
+      data: place.data.response.venue
+    }
+
+    let urlPhoto = null
+    let tip = null
+
+    if (place.data.response.venue.photos.count !== 0) {
+      const photo = {
+        prefix: place.data.response.venue.photos.groups[1].items[0].prefix,
+        width: place.data.response.venue.photos.groups[1].items[0].width,
+        height: place.data.response.venue.photos.groups[1].items[0].height,
+        suffix: place.data.response.venue.photos.groups[1].items[0].suffix
+      }
+      urlPhoto = `${photo.prefix}${photo.width}x${photo.height}${photo.suffix}`
+    } else {
+      urlPhoto = './../images/barista.jpg'
+    }
+
+    if (place.data.response.venue.tips.count !== 0) {
+      tip = {
+        tip: place.data.response.venue.tips.groups[0].items[0].text
+      }
+    } else {
+      tip = 'No tips'
+    }
+    const description = {
+      description: place.data.response.venue.description
+    }
+
+    const dataAndImage = {
+      data,
+      urlPhoto,
+      tip,
+      description
+    }
+
+    res.render('places/place-profile', dataAndImage)
+  } catch (error) {
+    next(error)
+  }
+})
+
 router.get('/', isNotLoggedIn, (req, res, next) => {
   const data = {
     messages: req.flash('errorFormNotFilled')

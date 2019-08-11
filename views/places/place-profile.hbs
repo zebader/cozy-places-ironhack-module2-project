@@ -19,9 +19,11 @@
         <h3>{{data.data.location.city}}</h3>
         <h4>{{data.data.location.address}}</h4>
         <br>
-        
-        <p>{{description.description}}</p>
-        
+        {{#if description.description}}
+        <p class="description">{{description.description}}</p>
+        {{else}}
+        <p class="description">No description</p>
+        {{/if}}
       </article>
 
   </section>
@@ -50,12 +52,12 @@
       </form>
  
   </section>
-  <section>
+  <section class="place-profile-card">
       <article class="place-profile-text">
 
       <h4>User tip:</h4>
  
-      <p>{{tip.tip}}</p>
+      <p class="quote">{{tip.tip}}</p>
 
       </article>
   </section>
