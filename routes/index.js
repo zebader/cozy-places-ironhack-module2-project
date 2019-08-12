@@ -12,7 +12,7 @@ const { isLoggedIn } = require('../middlewares/authMiddelwares')
 router.use('/auth', authRouter)
 router.use('/places', searchPlaceRouter)
 router.use('/profile', userRouter)
-router.use('/', matchRouter)
+router.use('/create-match', matchRouter)
 router.use('/', matchDisplayRouter)
 
 /* GET home page. */

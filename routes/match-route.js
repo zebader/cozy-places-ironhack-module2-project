@@ -3,7 +3,7 @@ const router = express.Router()
 const axios = require('axios')
 const Relation = require('./../models/relation')
 
-router.post('/matchtest/relations', (req, res, next) => {
+router.post('/relations', (req, res, next) => {
   const { venuesIDarrayCity_RA, venuesIDarrayId_RA, venuesIDarrayCity_RB, venuesIDarrayId_RB } = req.body
 
   const placeAId = venuesIDarrayId_RA
@@ -35,7 +35,7 @@ router.post('/matchtest/relations', (req, res, next) => {
     .catch(error => { console.log(error) })
 })
 
-router.get('/matchtest/new', (req, res, next) => {
+router.get('/new', (req, res, next) => {
   console.log('REQ QUERY', req.query)
 
   const { id, name, address, city, imgUrl } = req.query
@@ -49,7 +49,7 @@ router.get('/matchtest/new', (req, res, next) => {
   res.render('apitest/matchtest', { finalVenues })
 })
 
-router.get('/matchtest/newB', (req, res, next) => {
+router.get('/newB', (req, res, next) => {
   const { id, name, address, city, imgUrl, venuesIDarrayId, venuesIDarrayCity, venuesIDarrayAddress, venuesIDarrayName, venuesIDarrayImg } = req.query
   const venuesIDarrayB = { id, name, location: address, city, img: imgUrl }
 
@@ -68,7 +68,7 @@ router.get('/matchtest/newB', (req, res, next) => {
   res.render('apitest/matchtest', { finalVenues })
 })
 
-router.get('/matchtest/search', (req, res, next) => {
+router.get('/search', (req, res, next) => {
   const { location, placeName, venuesIDarrayId, venuesIDarrayCity, venuesIDarrayAddress, venuesIDarrayName, venuesIDarrayImg } = req.query
   return axios.get('https://api.foursquare.com/v2/venues/search', {
     params: {
@@ -128,7 +128,7 @@ router.get('/matchtest/search', (req, res, next) => {
   })
 })
 
-router.get('/matchtest/searchB', (req, res, next) => {
+router.get('/searchB', (req, res, next) => {
   const { location, placeName, venuesIDarrayId, venuesIDarrayCity, venuesIDarrayAddress, venuesIDarrayName, venuesIDarrayImg } = req.query
   return axios.get('https://api.foursquare.com/v2/venues/search', {
     params: {
@@ -188,8 +188,8 @@ router.get('/matchtest/searchB', (req, res, next) => {
   })
 })
 
-router.get('/matchtest', (req, res, next) => {
-  res.render('apitest/matchtest')
+router.get('/', (req, res, next) => {
+  res.render('places/match')
 })
 
 module.exports = router
