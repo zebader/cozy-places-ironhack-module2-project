@@ -1,16 +1,26 @@
 <!-- views/apitest/placesList.hbs -->
+<div class="div-add-place">
+  <button class="button-add-place">
+    <a href="/places" class="plus-button">
+   
+      <p class="p-add">+</p>
+    </a>
+  </button>
+</div>
 <header class="user-header">
-  <img src={{img}} alt="">
+  <img src={{venuesIDarray.user.img}} alt="">
   <div>
     <p>Welcome,</p>
-    <h3>{{username}}</h3>
+    <h3>{{venuesIDarray.user.username}}</h3>
   </div>
 
 </header>
-<div class='private-screen-main'>
       <h2 >Look for your Cozy Place</h2>
       <hr class="hr-divider-user">
+<main class='private-screen-main'>
+      
       {{#each venuesIDarray}}
+      <div class="list-container">
       <div class="card-wrapper">
             <a href="/places/{{this.id}}">
             <button type="submit">
@@ -22,9 +32,9 @@
                         </div>
                         
                         <div class="card-info">
-                              <h4>{{this.name}}</h4>
-                              <p>{{this.location.address}}</p>
-                              <p>{{this.location.city}}</p>
+                              <h4 class="text-overflow">{{this.name}}</h4>
+                              <p class="text-overflow">{{this.location.address}}</p>
+                              <h5 class="text-overflow">{{this.location.city}}</h5>
                         </div>
                   </div>
             </button>
@@ -45,7 +55,15 @@
 
       </div>
 
+      </div>
+      {{else}}
+      <div class="list-not-found-message-container">
+
+      <img src="../../images/icon-notfound-search.svg"
+      <p>No results, search for other place</p>
+      
+      </div>
       {{/each}}
-</div>
+</main>
 
 {{> footer}}
