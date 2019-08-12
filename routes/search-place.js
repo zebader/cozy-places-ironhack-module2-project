@@ -79,14 +79,14 @@ router.get('/search', isNotLoggedIn, isSearchQuery, async (req, res, next) => {
         if (user.API_id === venue.id) {
           isButtonDisabled = true
           console.log(isButtonDisabled)
+          venue.isButton = isButtonDisabled
         } else {
           isButtonDisabled = false
         }
-        venue.isButton = isButtonDisabled
       })
     })
     venuesIDarray.user = user
-    console.log(venuesIDarray)
+
     res.render('places/placesList', { venuesIDarray })
   } catch (error) {
     next(error)
