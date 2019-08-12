@@ -512,6 +512,9 @@ footer {
   text-align: center;
   margin: 5%;
 }
+.card-wrapper button.add-place-button:disabled{
+  background: #e4e4e4;
+}
 
 .card-img-wrapper{
   height: 70px;

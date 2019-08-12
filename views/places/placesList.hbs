@@ -3,7 +3,6 @@
       <h2 class='places-title'>PLACES LIST</h2>
       {{#each venuesIDarray}}
       <div class="card-wrapper">
-
             <a href="/places/{{this.id}}">
             <button type="submit">
                   <div class='card'>
@@ -28,8 +27,11 @@
             <input type="hidden" value='{{this.name}}' name='name'>
             <input type="hidden" value='{{this.location.address}}' name='address'>
             <input type="hidden" value='{{this.location.city}}' name='city'>
-
-            <button type="submit" class="button add-place-button">ADD</button>
+            {{#if this.isButton}}
+            <button type="submit" class="button add-place-button" disabled>Added</button>
+            {{else}}
+            <button type="submit" class="button add-place-button">Add</button>
+            {{/if}}
       </form>
 
       </div>

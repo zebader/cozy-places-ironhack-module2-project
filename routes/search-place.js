@@ -71,6 +71,21 @@ router.get('/search', isNotLoggedIn, isSearchQuery, async (req, res, next) => {
         elem.imgUrl = urlPhoto
       })
     )
+    const user = await User.findById(req.session.currentUser._id).populate('favoPlace')
+
+    user.favoPlace.forEach((user) => {
+      venuesIDarray.forEach((venue) => {
+        let isButtonDisabled = null
+        if (user.API_id === venue.id) {
+          isButtonDisabled = true
+          console.log(isButtonDisabled)
+        } else {
+          isButtonDisabled = false
+        }
+        venue.isButton = isButtonDisabled
+      })
+    })
+
     res.render('places/placesList', { venuesIDarray })
   } catch (error) {
     next(error)
@@ -131,7 +146,6 @@ router.get('/:id', isNotLoggedIn, async (req, res, next) => {
       elem.API_id === API_id ? dataAndImage.button = true : null
     })
 
-    console.log(dataAndImage)
     res.render('places/place-profile', dataAndImage)
   } catch (error) {
     next(error)
