@@ -29,15 +29,18 @@
   </section>
   <section class="place-profile-buttons">
     
-      <form action="/apitest/new" method="POST">
+      <form action="/places/new" method="POST">
 
             <input type="hidden" value='{{urlPhoto}}' name='imgUrl'>
             <input type="hidden" value='{{data.data.id}}' name='id'>
             <input type="hidden" value='{{data.data.name}}' name='name'>
             <input type="hidden" value='{{data.data.location.address}}' name='address'>
             <input type="hidden" value='{{data.data.location.city}}' name='city'>
-
+            {{#if button}}
+            <button type="submit" class="button blue" disabled>Added</button>
+            {{else}}
             <button type="submit" class="button blue">Add</button>
+            {{/if}}
       </form>
 
             <form action="/matchtest/new" method="GET">
@@ -50,7 +53,8 @@
 
             <button id="match-places" class="button">Match</button>
       </form>
- 
+
+  
   </section>
   <section class="place-profile-card">
       <article class="place-profile-text">

@@ -117,13 +117,21 @@ router.get('/:id', isNotLoggedIn, async (req, res, next) => {
       description: place.data.response.venue.description
     }
 
+    const user = await User.findById(req.session.currentUser._id).populate('favoPlace')
+
     const dataAndImage = {
       data,
       urlPhoto,
       tip,
-      description
+      description,
+      button: false
     }
 
+    user.favoPlace.forEach((elem) => {
+      elem.API_id === API_id ? dataAndImage.button = true : null
+    })
+
+    console.log(dataAndImage)
     res.render('places/place-profile', dataAndImage)
   } catch (error) {
     next(error)
