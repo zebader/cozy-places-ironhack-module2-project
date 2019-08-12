@@ -85,7 +85,8 @@ router.get('/search', isNotLoggedIn, isSearchQuery, async (req, res, next) => {
         venue.isButton = isButtonDisabled
       })
     })
-
+    venuesIDarray.user = user
+    console.log(venuesIDarray)
     res.render('places/placesList', { venuesIDarray })
   } catch (error) {
     next(error)

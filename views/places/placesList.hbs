@@ -1,6 +1,15 @@
 <!-- views/apitest/placesList.hbs -->
-<div class='list-container'>
-      <h2 class='places-title'>PLACES LIST</h2>
+<header class="user-header">
+  <img src={{img}} alt="">
+  <div>
+    <p>Welcome,</p>
+    <h3>{{username}}</h3>
+  </div>
+
+</header>
+<div class='private-screen-main'>
+      <h2 >Look for your Cozy Place</h2>
+      <hr class="hr-divider-user">
       {{#each venuesIDarray}}
       <div class="card-wrapper">
             <a href="/places/{{this.id}}">
