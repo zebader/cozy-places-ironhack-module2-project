@@ -1,11 +1,28 @@
 <!-- views/apitest/matchList.hbs -->
-<div class='list-container'>
-      <h2 class='places-title'>Match LIST</h2>
+<div class="div-add-place">
+  <button class="button-add-place">
+    <a href="/places" class="plus-button">
+   
+      <p class="p-add">+</p>
+    </a>
+  </button>
+</div>
+<header class="user-header">
+  <img src={{finalVenues.user.img}} alt="">
+  <div>
+    <p>Welcome,</p>
+    <h3>{{finalVenues.user.username}}</h3>
+  </div>
+
+</header>
+      <h2 >Match list</h2>
+      <hr class="hr-divider-user">
+<main class='private-screen-main'>
       {{#if finalVenues.isSearchA}}
       {{#each finalVenues.venuesIDarrayA}}
             <div class="card-wrapper">
             
-            <a href="/place-profile/{{this.id}}">
+            <a href="/places/{{this.id}}">
             <button type="submit">
                   <div class='card'>
                         <div class='card-img-wrapper'>
@@ -24,7 +41,7 @@
             </a>
 
 
-            <form action="/matchtest/new" method="GET">
+            <form action="/create-match/new" method="GET">
                   <input type="hidden" value='{{this.id}}'name='id'>
                   <input type="hidden" value='{{this.imgUrl}}' name='imgUrl'>
                   <input type="hidden" value='{{this.name}}' name='name'>
@@ -48,7 +65,7 @@
       {{#each finalVenues.venuesIDarrayB}}
       <div class="card-wrapper">
 
-            <a href="/place-profile/{{this.id}}">
+            <a href="/places/{{this.id}}">
             <button type="submit">
                   <div class='card'>
                         <div class='card-img-wrapper'>
@@ -66,7 +83,7 @@
             </button>
             </a>
 
-      <form action="/matchtest/newB" method="GET">
+      <form action="/create-match/newB" method="GET">
             <input type="hidden" value='{{this.id}}' name='id'>
             <input type="hidden" value='{{this.imgUrl}}' name='imgUrl'>
             <input type="hidden" value='{{this.name}}' name='name'>
@@ -86,5 +103,5 @@
 
       {{/each}}
       {{/if}}
-</div>
+</main>
 {{> footer}}
