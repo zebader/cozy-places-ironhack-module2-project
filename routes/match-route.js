@@ -37,38 +37,49 @@ router.post('/relations', (req, res, next) => {
 })
 
 router.get('/new', (req, res, next) => {
-  const { id, name, address, city, imgUrl } = req.query
-  const location = address
-  const img = imgUrl
-  const venuesIDarrayA = { id, name, location, city, img }
-  const finalVenues = {
-    venuesIDarrayA
+  const { id, name, location, city, imgUrl, id_B, name_B, location_B, city_B, imgUrl_B } = req.query
+
+  const venuesIDarrayA = { id, name, location, city, imgUrl }
+  const venuesIDarrayB = { id_B, name_B, location_B, city_B, imgUrl_B }
+
+  let finalVenues = {}
+  if (venuesIDarrayB.id_B === '') {
+    finalVenues = {
+      venuesIDarrayA
+    }
+  } else {
+    finalVenues = {
+      venuesIDarrayA,
+      venuesIDarrayB
+    }
   }
 
   res.render('places/match', { finalVenues })
 })
 
 router.get('/newB', (req, res, next) => {
-  const { id, name, address, city, imgUrl, venuesIDarrayId, venuesIDarrayCity, venuesIDarrayAddress, venuesIDarrayName, venuesIDarrayImg } = req.query
-  const venuesIDarrayB = { id, name, location: address, city, img: imgUrl }
+  const { id_B, name_B, location_B, city_B, imgUrl_B, id, name, location, city, imgUrl } = req.query
 
-  const venuesIDarrayA = {
-    id: venuesIDarrayId,
-    city: venuesIDarrayCity,
-    location: venuesIDarrayAddress,
-    name: venuesIDarrayName,
-    img: venuesIDarrayImg
-  }
-  const finalVenues = {
-    venuesIDarrayB,
-    venuesIDarrayA
-  }
+  console.log(req.query)
+  const venuesIDarrayA = { id, name, location, city, imgUrl }
+  const venuesIDarrayB = { id_B, name_B, location_B, city_B, imgUrl_B }
 
+  let finalVenues = {}
+  if (venuesIDarrayA.id === '') {
+    finalVenues = {
+      venuesIDarrayB
+    }
+  } else {
+    finalVenues = {
+      venuesIDarrayA,
+      venuesIDarrayB
+    }
+  }
   res.render('places/match', { finalVenues })
 })
 
 router.get('/search', async (req, res, next) => {
-  const { location, placeName, venuesIDarrayId, venuesIDarrayCity, venuesIDarrayAddress, venuesIDarrayName, venuesIDarrayImg } = req.query
+  const { location, placeName, id_B, name_B, location_B, city_B, imgUrl_B } = req.query
   try {
     const venues = await axios.get('https://api.foursquare.com/v2/venues/search', {
       params: {
@@ -82,6 +93,7 @@ router.get('/search', async (req, res, next) => {
     })
 
     const venuesIDarrayA = venues.data.response.venues
+    const venuesIDarrayB = { id_B, name_B, location_B, city_B, imgUrl_B }
 
     await Promise.all(venuesIDarrayA.map(async (elem) => {
       const result = await axios.get(`https://api.foursquare.com/v2/venues/${elem.id}`, {
@@ -107,20 +119,24 @@ router.get('/search', async (req, res, next) => {
       }
       elem.imgUrl = urlPhoto
     }))
-    const venuesIDarrayB = {
-      id: venuesIDarrayId,
-      city: venuesIDarrayCity,
-      location: venuesIDarrayAddress,
-      name: venuesIDarrayName,
-      img: venuesIDarrayImg
-    }
+
     const user = await User.findById(req.session.currentUser._id).populate('favoPlace')
 
-    const finalVenues = {
-      venuesIDarrayA,
-      venuesIDarrayB,
-      user: user,
-      isSearchA: true
+    let finalVenues = {}
+    if (venuesIDarrayB.id_B === '') {
+      finalVenues = {
+        venuesIDarrayA,
+        user: user,
+        isSearchB: true
+      }
+    } else {
+      finalVenues = {
+        venuesIDarrayA,
+        venuesIDarrayB,
+        user: user,
+        isSearchB: true,
+        isSearchA: true
+      }
     }
 
     res.render('places/match-list', { finalVenues })
@@ -130,19 +146,21 @@ router.get('/search', async (req, res, next) => {
 })
 
 router.get('/searchB', async (req, res, next) => {
-  const { location, placeName, venuesIDarrayId, venuesIDarrayCity, venuesIDarrayAddress, venuesIDarrayName, venuesIDarrayImg } = req.query
+  const { location_B, placeName_B, id, name, location, city, imgUrl } = req.query
+
   try {
     const venues = await axios.get('https://api.foursquare.com/v2/venues/search', {
       params: {
         client_id: process.env.CLIENT_ID,
         client_secret: process.env.CLIENT_SECRET,
-        near: location,
-        query: placeName,
+        near: location_B,
+        query: placeName_B,
         v: '20180323',
         limit: 5
       }
     })
     const venuesIDarrayB = venues.data.response.venues
+    const venuesIDarrayA = { id, name, location, city, imgUrl }
 
     await Promise.all(venuesIDarrayB.map(async (elem) => {
       const result = await axios.get(`https://api.foursquare.com/v2/venues/${elem.id}`, {
@@ -168,21 +186,24 @@ router.get('/searchB', async (req, res, next) => {
       elem.imgUrl = urlPhoto
     }))
 
-    const venuesIDarrayA = {
-      id: venuesIDarrayId,
-      city: venuesIDarrayCity,
-      location: venuesIDarrayAddress,
-      name: venuesIDarrayName,
-      img: venuesIDarrayImg
-    }
     const user = await User.findById(req.session.currentUser._id).populate('favoPlace')
-    const finalVenues = {
-      venuesIDarrayB,
-      venuesIDarrayA,
-      user: user,
-      isSearchB: true
-    }
 
+    let finalVenues = {}
+    if (venuesIDarrayA.id === '') {
+      finalVenues = {
+        venuesIDarrayB,
+        user: user,
+        isSearchB: true
+      }
+    } else {
+      finalVenues = {
+        venuesIDarrayA,
+        venuesIDarrayB,
+        user: user,
+        isSearchB: true,
+        isSearchA: true
+      }
+    }
     res.render('places/match-list', { finalVenues })
   } catch (error) { next(error) }
 })

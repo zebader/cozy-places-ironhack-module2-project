@@ -15,7 +15,7 @@
   </div>
 
 </header>
-      <h2 >Match list</h2>
+      <h2>Match list</h2>
       <hr class="hr-divider-user">
 <main class='private-screen-main'>
       {{#if finalVenues.isSearchA}}
@@ -45,14 +45,14 @@
                   <input type="hidden" value='{{this.id}}'name='id'>
                   <input type="hidden" value='{{this.imgUrl}}' name='imgUrl'>
                   <input type="hidden" value='{{this.name}}' name='name'>
-                  <input type="hidden" value='{{this.location.address}}' name='address'>
+                  <input type="hidden" value='{{this.location.address}}' name='location'>
                   <input type="hidden" value='{{this.location.city}}' name='city'>
 
-                  <input type="hidden" value='{{../finalVenues.venuesIDarrayB.id}}' name='venuesIDarrayId'>
-                  <input type="hidden" value='{{../finalVenues.venuesIDarrayB.img}}' name='venuesIDarrayImg'>
-                  <input type="hidden" value='{{../finalVenues.venuesIDarrayB.venuesIDarray.name}}' name='venuesIDarrayName'>
-                  <input type="hidden" value='{{../finalVenues.venuesIDarrayB.venuesIDarray.location}}' name='venuesIDarrayAddress'>
-                  <input type="hidden" value='{{../finalVenues.venuesIDarrayB.venuesIDarray.city}}' name='venuesIDarrayCity'>
+                  <input type="hidden" value='{{../finalVenues.venuesIDarrayB.id_B}}' name='id_B'>
+                  <input type="hidden" value='{{../finalVenues.venuesIDarrayB.imgUrl_B}}' name='imgUrl_B'>
+                  <input type="hidden" value='{{../finalVenues.venuesIDarrayB.venuesIDarray.name_B}}' name='name_B'>
+                  <input type="hidden" value='{{../finalVenues.venuesIDarrayB.venuesIDarray.location_B}}' name='location_B'>
+                  <input type="hidden" value='{{../finalVenues.venuesIDarrayB.venuesIDarray.city_B}}' name='city_B'>
 
                   <button type="submit" class="button add-place-button" style="background-color:#f34970">MATCH</button>
             </form>
@@ -61,6 +61,8 @@
 
       {{/each}}
       {{/if}}
+
+
       {{#if finalVenues.isSearchB}}
       {{#each finalVenues.venuesIDarrayB}}
       <div class="card-wrapper">
@@ -84,17 +86,17 @@
             </a>
 
       <form action="/create-match/newB" method="GET">
-            <input type="hidden" value='{{this.id}}' name='id'>
-            <input type="hidden" value='{{this.imgUrl}}' name='imgUrl'>
-            <input type="hidden" value='{{this.name}}' name='name'>
-            <input type="hidden" value='{{this.location.address}}' name='address'>
-            <input type="hidden" value='{{this.location.city}}' name='city'>
+            <input type="hidden" value='{{this.id}}' name='id_B'>
+            <input type="hidden" value='{{this.imgUrl}}' name='imgUrl_B'>
+            <input type="hidden" value='{{this.name}}' name='name_B'>
+            <input type="hidden" value='{{this.location.address}}' name='location_B'>
+            <input type="hidden" value='{{this.location.city}}' name='city_B'>
 
-            <input type="hidden" value='{{../finalVenues.venuesIDarrayA.id}}' name='venuesIDarrayId'>
-            <input type="hidden" value='{{../finalVenues.venuesIDarrayA.img}}' name='venuesIDarrayImg'>
-            <input type="hidden" value='{{../finalVenues.venuesIDarrayA.name}}' name='venuesIDarrayName'>
-            <input type="hidden" value='{{../finalVenues.venuesIDarrayA.location}}' name='venuesIDarrayAddress'>
-            <input type="hidden" value='{{../finalVenues.venuesIDarrayA.city}}' name='venuesIDarrayCity'>
+            <input type="hidden" value='{{../finalVenues.venuesIDarrayA.id}}' name='id'>
+            <input type="hidden" value='{{../finalVenues.venuesIDarrayA.imgUrl}}' name='imgUrl'>
+            <input type="hidden" value='{{../finalVenues.venuesIDarrayA.name}}' name='name'>
+            <input type="hidden" value='{{../finalVenues.venuesIDarrayA.location}}' name='location'>
+            <input type="hidden" value='{{../finalVenues.venuesIDarrayA.city}}' name='city'>
 
             <button type="submit" class="button add-place-button" style="background-color:#f34970">MATCH</button>
       </form>
