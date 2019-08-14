@@ -3,6 +3,7 @@ const router = express.Router()
 const axios = require('axios')
 const Relation = require('./../models/relation')
 const User = require('../models/user')
+const { isLoggedIn, isNotLoggedIn, isFormFilled, isSearchQuery } = require('../middlewares/authMiddelwares')
 
 router.post('/relations', (req, res, next) => {
   const { venuesIDarrayCity_RA, venuesIDarrayId_RA, venuesIDarrayCity_RB, venuesIDarrayId_RB } = req.body
@@ -36,7 +37,7 @@ router.post('/relations', (req, res, next) => {
     .catch(error => { console.log(error) })
 })
 
-router.get('/new', (req, res, next) => {
+router.get('/new', isNotLoggedIn, (req, res, next) => {
   const { id, name, location, city, imgUrl, id_B, name_B, location_B, city_B, imgUrl_B } = req.query
 
   const venuesIDarrayA = { id, name, location, city, imgUrl }
@@ -57,7 +58,7 @@ router.get('/new', (req, res, next) => {
   res.render('places/match', { finalVenues })
 })
 
-router.get('/newB', (req, res, next) => {
+router.get('/newB', isNotLoggedIn, (req, res, next) => {
   const { id_B, name_B, location_B, city_B, imgUrl_B, id, name, location, city, imgUrl } = req.query
 
   console.log(req.query)
@@ -78,7 +79,7 @@ router.get('/newB', (req, res, next) => {
   res.render('places/match', { finalVenues })
 })
 
-router.get('/search', async (req, res, next) => {
+router.get('/search', isNotLoggedIn, async (req, res, next) => {
   const { location, placeName, id_B, name_B, location_B, city_B, imgUrl_B } = req.query
   try {
     const venues = await axios.get('https://api.foursquare.com/v2/venues/search', {
@@ -127,14 +128,13 @@ router.get('/search', async (req, res, next) => {
       finalVenues = {
         venuesIDarrayA,
         user: user,
-        isSearchB: true
+        isSearchA: true
       }
     } else {
       finalVenues = {
         venuesIDarrayA,
         venuesIDarrayB,
         user: user,
-        isSearchB: true,
         isSearchA: true
       }
     }
@@ -145,7 +145,7 @@ router.get('/search', async (req, res, next) => {
   }
 })
 
-router.get('/searchB', async (req, res, next) => {
+router.get('/searchB', isNotLoggedIn, async (req, res, next) => {
   const { location_B, placeName_B, id, name, location, city, imgUrl } = req.query
 
   try {
@@ -200,15 +200,15 @@ router.get('/searchB', async (req, res, next) => {
         venuesIDarrayA,
         venuesIDarrayB,
         user: user,
-        isSearchB: true,
-        isSearchA: true
+        isSearchB: true
       }
     }
+
     res.render('places/match-list', { finalVenues })
   } catch (error) { next(error) }
 })
 
-router.get('/', (req, res, next) => {
+router.get('/', isNotLoggedIn, (req, res, next) => {
   res.render('places/match')
 })
 
