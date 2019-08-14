@@ -5,36 +5,37 @@ const Relation = require('./../models/relation')
 const User = require('../models/user')
 const { isLoggedIn, isNotLoggedIn, isFormFilled, isSearchQuery } = require('../middlewares/authMiddelwares')
 
-router.post('/relations', (req, res, next) => {
+router.post('/relations', isNotLoggedIn, async (req, res, next) => {
   const { venuesIDarrayCity_RA, venuesIDarrayId_RA, venuesIDarrayCity_RB, venuesIDarrayId_RB } = req.body
 
   const placeAId = venuesIDarrayId_RA
   const cityA = venuesIDarrayCity_RA
   const placeBId = venuesIDarrayId_RB
   const cityB = venuesIDarrayCity_RB
-  const users = req.user._id
+  const users = req.session.currentUser._id
 
-  Relation.find({
-    $and: [
-      { placeAId: placeAId },
-      { placeBId: placeBId }
-    ]
-  })
-    .then(placeRelation => {
-      if (placeRelation.length === 0) {
-        const newRelation = new Relation({ placeAId, cityA, placeBId, cityB, users })
-        newRelation.save()
-          .then((relation) => res.redirect('/private'))
-          .catch((err) => console.log(err))
-      } else {
-        Relation.findByIdAndUpdate(placeRelation[0]._id, {
-          $push: { users: req.user._id }
-        }, { new: true })
-          .then((relation) => res.redirect('/private'))
-          .catch((err) => console.log(err))
-      }
+  try {
+    const placeRelation = await Relation.find({
+      $and: [
+        { placeAId: placeAId },
+        { placeBId: placeBId }
+      ]
     })
-    .catch(error => { console.log(error) })
+    console.log(placeRelation)
+
+    if (placeRelation.length === 0) {
+      const newRelation = await new Relation({ placeAId, cityA, placeBId, cityB, users })
+      await newRelation.save()
+      res.redirect('/profile')
+    } else {
+      await Relation.findByIdAndUpdate(placeRelation[0]._id, {
+        $push: { users }
+      }, { new: true })
+      res.redirect('/profile')
+    }
+  } catch (error) {
+    next(error)
+  }
 })
 
 router.get('/new', isNotLoggedIn, (req, res, next) => {
