@@ -87,7 +87,7 @@ router.get('/search', isNotLoggedIn, isSearchQuery, async (req, res, next) => {
     })
     venuesIDarray.user = user
     console.log(venuesIDarray.length)
-    res.render('places/placesList', { venuesIDarray })
+    res.render('places/places-list', { venuesIDarray })
   } catch (error) {
     next(error)
   }

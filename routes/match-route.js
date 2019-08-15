@@ -21,7 +21,6 @@ router.post('/relations', isNotLoggedIn, async (req, res, next) => {
         { placeBId: placeBId }
       ]
     })
-    console.log(placeRelation)
 
     if (placeRelation.length === 0) {
       const newRelation = await new Relation({ placeAId, cityA, placeBId, cityB, users })
