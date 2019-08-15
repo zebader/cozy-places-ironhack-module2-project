@@ -6,24 +6,26 @@ const User = require('../models/user')
 const { isLoggedIn, isNotLoggedIn, isFormFilled, isSearchQuery } = require('../middlewares/authMiddelwares')
 
 router.post('/relations', isNotLoggedIn, async (req, res, next) => {
-  const { venuesIDarrayCity_RA, venuesIDarrayId_RA, venuesIDarrayCity_RB, venuesIDarrayId_RB } = req.body
+  const { city_RA, id_RA, name_RA, location_RA, imgUrl_RA, city_RB, id_RB, name_RB, location_RB, imgUrl_RB } = req.body
+  const result = {
+    placeAId: id_RA,
+    nameA: name_RA,
+    imgAUrl: imgUrl_RA,
+    locationA: location_RA,
+    cityA: city_RA,
+    placeBId: id_RB,
+    nameB: name_RB,
+    imgBUrl: imgUrl_RB,
+    locationB: location_RB,
+    cityB: city_RB }
 
-  const placeAId = venuesIDarrayId_RA
-  const cityA = venuesIDarrayCity_RA
-  const placeBId = venuesIDarrayId_RB
-  const cityB = venuesIDarrayCity_RB
   const users = req.session.currentUser._id
 
   try {
-    const placeRelation = await Relation.find({
-      $and: [
-        { placeAId: placeAId },
-        { placeBId: placeBId }
-      ]
-    })
+    const placeRelation = await Relation.find({ $and: [{ placeAId: result.placeAId }, { placeBId: result.placeBId }] })
 
     if (placeRelation.length === 0) {
-      const newRelation = await new Relation({ placeAId, cityA, placeBId, cityB, users })
+      const newRelation = await new Relation(result)
       await newRelation.save()
       res.redirect('/profile')
     } else {
@@ -60,8 +62,6 @@ router.get('/new', isNotLoggedIn, (req, res, next) => {
 
 router.get('/newB', isNotLoggedIn, (req, res, next) => {
   const { id_B, name_B, location_B, city_B, imgUrl_B, id, name, location, city, imgUrl } = req.query
-
-  console.log(req.query)
   const venuesIDarrayA = { id, name, location, city, imgUrl }
   const venuesIDarrayB = { id_B, name_B, location_B, city_B, imgUrl_B }
 

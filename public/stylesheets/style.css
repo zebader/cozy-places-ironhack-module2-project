@@ -364,7 +364,7 @@ a.plus-button{
 
 }
 
-main.private-screen-main{
+main.private-screen-main {
   align-items: center;
   display: flex;
   padding: 0;
@@ -373,7 +373,13 @@ main.private-screen-main{
   margin: 0 auto;
   margin-bottom: 200px;
 }
-
+section.private-screen-main{
+  padding: 0;
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+  margin-bottom: 200px;
+}
 .list-container{
   width: 100%;
   margin-top: 15px;
@@ -484,13 +490,16 @@ footer {
   transition: all 300ms ease-in-out;
   width:100%;
 }
-.card-wrapper:hover{
+/* .card-wrapper:hover{
   transform: scale(1.1);
   box-shadow: 0px 10px 35px -40px rgba(0,0,0,1);
-}
-
+} */
 .card-wrapper a{
   width: 70%;
+}
+.card-wrapper a.match-link{
+  width: 100%;
+  margin:5px;
 }
 .card-wrapper form{
   width:30%;
@@ -510,7 +519,13 @@ footer {
   border:none;
   width: 100%;
   position: relative;
+  cursor:pointer;
+  left:0px;
+  transition: all 300ms ease-in-out;
 
+}
+.card-wrapper button:hover{
+ left:5px;
 }
 
 .card-wrapper button.add-place-button{
@@ -551,10 +566,9 @@ footer {
 .add-place-button:hover{
   transform:scale(1.1);
 }
-/* #button-card{
-  width: 100%;
-
-} */
+.flex-flow{
+  flex-flow: column;
+}
 
 .error-message{
   color:#f34970;

@@ -3,13 +3,14 @@ const router = express.Router()
 const Place = require('../models/place')
 const User = require('../models/user')
 const Relation = require('../models/relation')
+const { isLoggedIn, isNotLoggedIn, isFormFilled, isSearchQuery } = require('../middlewares/authMiddelwares')
 
 // helper
 function firstLetter (s) {
   return s.replace(/^.{1}/g, s[0].toUpperCase())
 }
 
-router.get('/search-by-city', async (req, res, next) => {
+router.get('/search-by-city', isNotLoggedIn, async (req, res, next) => {
   let { location } = req.query
   location = firstLetter(location)
   try {
@@ -49,7 +50,7 @@ router.get('/search-by-city', async (req, res, next) => {
   }
 })
 
-router.get('/', (req, res, next) => {
+router.get('/', isNotLoggedIn, (req, res, next) => {
   res.render('places/search-place')
 })
 
