@@ -3,22 +3,12 @@ const router = express.Router()
 const axios = require('axios')
 const Place = require('../models/place')
 const User = require('../models/user')
-const { isLoggedIn, isNotLoggedIn, isFormFilled, isSearchQuery } = require('../middlewares/authMiddelwares')
-
-// router.post('/delete/:id', isNotLoggedIn, async (req, res, next) => {
-//   const { id } = req.params
-//   const { favoPlace } = req.user
-//   try {
-//     await User.findOneAndUpdate({ _id: req.user.id }, { $pull: { favoPlace: { id: id } } }, { new: true })
-//     res.redirect('/private')
-//   } catch (error) {
-//     next(error)
-//   }
-// })
+const { isNotLoggedIn, isFormFilled, isSearchQuery } = require('../middlewares/authMiddelwares')
 
 router.post('/new', isNotLoggedIn, async (req, res, next) => {
   try {
     const { id, name, address, city, imgUrl } = req.body
+
     const { _id } = req.session.currentUser
     const location = address
     const img = imgUrl
@@ -86,7 +76,7 @@ router.get('/search', isNotLoggedIn, isSearchQuery, async (req, res, next) => {
       })
     })
     venuesIDarray.user = user
-    console.log(venuesIDarray.length)
+
     res.render('places/places-list', { venuesIDarray })
   } catch (error) {
     next(error)
@@ -152,13 +142,24 @@ router.get('/:id', isNotLoggedIn, async (req, res, next) => {
     next(error)
   }
 })
+router.post('/delete/:id', isNotLoggedIn, async (req, res, next) => {
+  const { id } = req.params
+  try {
+    await User.findByIdAndUpdate(req.session.currentUser._id, { $pull: { favoPlace: { API_id: id } } }, { new: true })
+    res.redirect('/profile')
+  } catch (error) {
+    next(error)
+  }
+})
 
 router.get('/', isNotLoggedIn, (req, res, next) => {
+  const user = req.session.currentUser
   const data = {
+    user,
     messages: req.flash('errorFormNotFilled')
   }
-  const message = data.messages
-  res.render('places/search', { message })
+
+  res.render('places/search', data)
 })
 
 module.exports = router

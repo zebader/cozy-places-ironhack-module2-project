@@ -9,7 +9,6 @@ router.get('/', isNotLoggedIn, async (req, res, next) => {
   const { _id } = req.session.currentUser
   try {
     const user = await User.findById(_id).populate('favoPlace')
-    console.log(user)
     res.render('auth/private', user)
   } catch (error) {
   }

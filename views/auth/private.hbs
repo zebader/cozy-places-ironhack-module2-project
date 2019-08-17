@@ -7,50 +7,52 @@
     </a>
   </button>
 </div>
-
 <header class="user-header">
-  <img src={{img}} alt="">
-  <div>
-    <p>Welcome,</p>
-    <h3>{{username}}</h3>
+  <button type="button" onclick="history.back(-1)" class="goback-button"></button>
+  <div class="user-header-wrapper">
+    <img src={{img}} alt="">
+    <div>
+      <p>Welcome,</p>
+      <h3>{{username}}</h3>
+    </div>
   </div>
-
+  <form action="/auth/logout" method="POST">
+    <button type="submit" class="logout-button"></button>
+  </form>
 </header>
 <h2>Your favorite places</h2>
 <hr class="hr-divider-user">
-
-{{!-- {{{main}}} --}}
 <main class="private-screen-main">
-
-  {{#each favoPlace}}
-
+{{#each favoPlace}}
 <div class="list-container">
-        <div class="card-wrapper">
+  <div class="card-wrapper">
+    <a href="/places/{{this.API_id}}">
 
-            <a href="/places/{{this.API_id}}">
-            <button type="submit">
-                  <div class='card'>
-                        <div class='card-img-wrapper'>
-                              <div class='card-img-wrapper-in'>
-                                    <img src={{this.img}}>
-                              </div>
-                        </div>
-                        <div class="card-info">
-                              <h4 class="text-overflow">{{this.name}}</h4>
-                              <p class="text-overflow">{{this.location}}</p>
-                              <h5 class="text-overflow">{{this.city}}</h5>
-                        </div>
-                  </div>
-            </button>
-        </a>
+      <button type="submit">
 
+        <div class='card'>
+          <div class='card-img-wrapper'>
+            <div class='card-img-wrapper-in'>
+              <img src={{this.img}}>
+            </div>
+          </div>
+          <div class="card-info">
+            <h4 class="text-overflow">{{this.name}}</h4>
+            <p class="text-overflow">{{this.location}}</p>
+            <h5 class="text-overflow">{{this.city}}</h5>
+          </div>
 
-      </div>
+          
+        </div>
+
+      </button>
+          <form action="/places/delete/{{this.API_id}}" method="POST" class="delete-form">
+            <button type="submit" class="delete-button"></button>
+          </form>
+    </a>
+  </div>
 </div>
-
-
   {{/each}}
-
 </main>
 
 {{> footer}}

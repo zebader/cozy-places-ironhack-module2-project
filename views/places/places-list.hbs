@@ -8,12 +8,17 @@
   </button>
 </div>
 <header class="user-header">
-  <img src={{venuesIDarray.user.img}} alt="">
-  <div>
-    <p>Welcome,</p>
-    <h3>{{venuesIDarray.user.username}}</h3>
+  <button type="button" onclick="history.back(-1)" class="goback-button"></button>
+  <div class="user-header-wrapper">
+    <img src={{venuesIDarray.user.img}}  alt="">
+    <div>
+      <p>Welcome,</p>
+      <h3>{{venuesIDarray.user.username}}</h3>
+    </div>
   </div>
-
+  <form action="/auth/logout" method="POST">
+    <button type="submit" class="logout-button"></button>
+  </form>
 </header>
       <h2 >Look for your Cozy Place</h2>
       <hr class="hr-divider-user">

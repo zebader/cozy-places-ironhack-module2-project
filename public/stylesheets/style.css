@@ -254,6 +254,11 @@ section.place-profile-similar{
   top: 0px;
   z-index: 999;
 }
+.user-header-wrapper{
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
 
 .user-header img{
   border-radius: 50%;
@@ -271,13 +276,20 @@ section.place-profile-similar{
 .hr-divider-user {
   border: 1px solid #f34970;
   margin: 45px auto;
-  width: 30%;
+  width: 200px;
 }
 
+.nav-buttons{
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  position: sticky;
+  max-width: 600px;
+  margin: 0 auto;
+}
 /*====User Places====*/
 
 .users-favorite-div {
-  /* background-color: #888888; */
   box-shadow: 1px 1px 4px #888888;
   border-radius: 5px; 
   display: flex;
@@ -288,7 +300,6 @@ section.place-profile-similar{
 }
 
 .place-img-user{
-  /* background: black url("https://www.imgworlds.com/wp-content/uploads/2015/12/ad-ib-dr-gourmet.jpg") no-repeat center; */
   border-radius: 5px; 
   box-shadow: 1px 1px 4px #888888;
   display: inline;
@@ -490,10 +501,6 @@ footer {
   transition: all 300ms ease-in-out;
   width:100%;
 }
-/* .card-wrapper:hover{
-  transform: scale(1.1);
-  box-shadow: 0px 10px 35px -40px rgba(0,0,0,1);
-} */
 .card-wrapper a{
   width: 70%;
 }
@@ -574,7 +581,39 @@ footer {
   color:#f34970;
   text-align:center;
 }
-
+.logout-button{
+  width: 35px;
+  height: 35px;
+  background: url('../images/logout.svg');
+  background-size: cover;
+  border:none;
+  cursor: pointer;
+}
+.goback-button{
+  width: 45px;
+  height: 40px;
+  background: url(../images/previous.svg) no-repeat;
+  background-size: contain;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+button.delete-button{
+  width: 45px;
+  height: 40px;
+  background: url(../images/trash.svg) no-repeat;
+  background-size: contain;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+form.delete-form{
+  position: absolute;
+  top: 50%;
+  left: 85%;
+  transform: translateY(-50%);
+  width: 5%;
+}
 .list-not-found-message-container{
   display: flex;
   flex-flow: column;
