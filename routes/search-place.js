@@ -82,7 +82,17 @@ router.get('/search', isNotLoggedIn, isSearchQuery, async (req, res, next) => {
     next(error)
   }
 })
+router.post('/delete/:id', isNotLoggedIn, async (req, res, next) => {
+  const { id } = req.params
+  try {
+    const place = await Place.findOne({ API_id: id })
+    await User.findByIdAndUpdate(req.session.currentUser._id, { $pull: { favoPlace: place._id } }, { new: true })
 
+    res.redirect('/profile')
+  } catch (error) {
+    next(error)
+  }
+})
 router.get('/:id', isNotLoggedIn, async (req, res, next) => {
   const API_id = req.params.id
   try {
@@ -138,15 +148,6 @@ router.get('/:id', isNotLoggedIn, async (req, res, next) => {
     })
 
     res.render('places/place-profile', dataAndImage)
-  } catch (error) {
-    next(error)
-  }
-})
-router.post('/delete/:id', isNotLoggedIn, async (req, res, next) => {
-  const { id } = req.params
-  try {
-    await User.findByIdAndUpdate(req.session.currentUser._id, { $pull: { favoPlace: { API_id: id } } }, { new: true })
-    res.redirect('/profile')
   } catch (error) {
     next(error)
   }
