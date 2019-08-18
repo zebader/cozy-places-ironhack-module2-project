@@ -1,8 +1,8 @@
-# CosyPlaces 
+# MVP - CosyPlaces 
 
 ## Description
 
-Compare your favorite places from other similars matched by users when you travel.
+Compare your favorite places from other similars matched by users when you travel. Using FourSquare API
 
 ## User Stories
 
@@ -15,7 +15,7 @@ Compare your favorite places from other similars matched by users when you trave
 - **Profile - Main page** - As a user I want a screen where I can check my places and personal information and add new favorite places. 
 - **Add favorite place** - As a user I want to add my favorite places to my profile
 - **Favorite places - List** - As a user I want to see the list of places I can add that match my query and add one.
-- **Search by location** - As a user I want to search for a location and see all the matches with my favorite places and if I don´t have matches, see similar places.
+- **Search by location** - As a user I want to search for a location and see all the matches with my favorite places .
 - **Add matches** - As a user I want to look for a place and add a match with my favorite places or a new other that I can search and compare.
 - **Place profile** - As a user I want to check the place profile and from there add it to my favorites, match it with other or search similar places to this place in other locations.
 
@@ -24,12 +24,25 @@ Compare your favorite places from other similars matched by users when you trave
 | Method | Route | Description|
 |------|-------|------------|
 | GET  | /     | Splash page route. If logged in takes to profile. If not redirects show splash and sign up button
-| GET  | /login | Login route. Renders login formulary view
-| POST | /login | Login route. Sends login formulary info to the server
-| GET | /signup | Signup route. Renders signup formulary view
-| POST | /signup | Signup route. Sends signup info to server and creates user in DB
-| GET | /profile/:userId | Profile route. Renders profile view
-| GET | /findplaces | Profile route. Sends add friends formaliry into DB
+| GET  | /auth/login | Login route. Renders login formulary view
+| POST | /auth/login | Login route. Sends login formulary info to the server
+| GET | /auth/signup | Signup route. Renders signup formulary view
+| POST | /auth/signup | Signup route. Sends signup info to server and creates user in DB
+| GET | /profile | Profile route. Renders profile view with a list of your favorite places
+| GET | /places | Render form for search your favorite place
+| GET | /places/search | Render the list for places from the previous search to Foursquare API
+| GET | /places/:id | Render the details of a place
+| POST | /places/delete/:id | Deletes a place form your profile
+| POST | /places/new | Add a plce to your favorites
+| GET | /create-match | Renders a two form to make the match posible
+| GET | /create-match/search | Renders the list of places form the first place
+| GET | /create-match/searchB | Renders the list of places form the second place
+| GET | /create-match/new | Add the first place, using  querys
+| GET | /create-match/newB | Add second place, using querys
+| POST | /create-match/relations | Creates the relations between the two places
+| GET | /display-match | Render a form to look after matches searching by city and your favorites
+| GET | /display-match/search-by-city | Display the result of the search and render the result
+
 <!-- .. -->
 
 ## Models
@@ -38,12 +51,15 @@ User model
 
 ```javascript
 {
-  userId: String
-  username: String
-  email: String
-  password: String
-  timeStamp: Date
-  myPlaces: [String]
+  username: String,
+  password: String,
+  img: { type: String, default: '../images/man.svg' },
+  favoPlace: [{ type: Schema.Types.ObjectId, ref: 'Place' }]
+}, {
+  timestamps: {
+    createdAt: 'created_at',
+    updatedAt: 'updated_at'
+  }
 }
 
 ```
@@ -51,24 +67,45 @@ User model
 Places model
 
 ```javascript
-
-id: String
+ 
+{
+  API_id: String,
+  location: String,
+  city: String,
+  name: String,
+  img: String,
+  tips: String,
+  user: [{ type: Schema.Types.ObjectId, ref: 'User' }]
+}
 
 ```
 
 * Relations
 
 ```javascript
-[ {
- id_A:String,
-id_B: String,
-users:[] } ]
+{
+  placeAId: String,
+  nameA: String,
+  imgAUrl: String,
+  locationA: String,
+  cityA: String,
+  placeBId: String,
+  nameB: String,
+  imgBUrl: String,
+  locationB: String,
+  cityB: String,
+  users: [{ type: Schema.Types.ObjectId, ref: 'User' }]
+}
 ```
 
 
 ## Backlog
 
-..
+- Edit user profile
+- Upload pictures with cloudinary
+- See other user profile and what user made a relation
+- Refactor to scss
+- Add similar places to place profile or recomendations
 
 ## Links
 
@@ -76,12 +113,6 @@ users:[] } ]
 
 The url to your repository and to your deployed project
 
-[Repository Link](http://github.com)
+[Repository Link](https://github.com/zebader/cozy-places-ironhack-module2-project)
 
 [Deploy Link](http://heroku.com)
-
-### Slides
-
-The url to your presentation slides
-
-[Slides Link](http://slides.com)
