@@ -106,6 +106,7 @@ Places model
 - See other user profile and what user made a relation
 - Refactor to scss
 - Add similar places to place profile or recomendations
+- Improve validations
 
 ## Links
 
@@ -115,4 +116,4 @@ The url to your repository and to your deployed project
 
 [Repository Link](https://github.com/zebader/cozy-places-ironhack-module2-project)
 
-[Deploy Link](http://heroku.com)
+[Deploy Link](https://cozy-places-v2.herokuapp.com/)
