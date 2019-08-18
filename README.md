@@ -1,4 +1,4 @@
-# MVP - CosyPlaces 
+# MVP - CozyPlaces 
 
 ## Description
 
