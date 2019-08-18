@@ -1,48 +1,46 @@
-<!-- views/apitest/matchList.hbs -->
-<div class="div-add-place">
-  <button class="button-add-place">
-    <a href="/places" class="plus-button">
-   
-      <p class="p-add">+</p>
-    </a>
-  </button>
-</div>
 <header class="user-header">
-  <img src={{finalVenues.user.img}} alt="">
-  <div>
-    <p>Welcome,</p>
-    <h3>{{finalVenues.user.username}}</h3>
-  </div>
+      <button type="button" onclick="history.back(-1)" class="goback-button"></button>
+      <div class="user-header-wrapper">
+            <h1 class="floating dark">Cozy Places</h1>
 
+            <img src={{finalVenues.user.img}} alt="">
+            <div>
+                  <p>Welcome,</p>
+                  <h3>{{finalVenues.user.username}}</h3>
+            </div>
+      </div>
+      <form action="/auth/logout" method="POST">
+            <button type="submit" class="logout-button"></button>
+      </form>
 </header>
-      <h2>Match list</h2>
-      <hr class="hr-divider-user">
+<h2>Match list</h2>
+<hr class="hr-divider-user">
 <main class='private-screen-main'>
       {{#if finalVenues.isSearchA}}
       {{#each finalVenues.venuesIDarrayA}}
-            <div class="card-wrapper">
-            
+      <div class="card-wrapper">
+
             <a href="/places/{{this.id}}">
-            <button type="submit">
-                  <div class='card'>
-                        <div class='card-img-wrapper'>
-                              <div class='card-img-wrapper-in'>
-                                    <img src={{this.imgUrl}}>
+                  <button type="submit">
+                        <div class='card'>
+                              <div class='card-img-wrapper'>
+                                    <div class='card-img-wrapper-in'>
+                                          <img src={{this.imgUrl}}>
+                                    </div>
+                              </div>
+
+                              <div class="card-info">
+                                    <h4 class="text-overflow">{{this.name}}</h4>
+                                    <p class="text-overflow">{{this.location.address}}</p>
+                                    <h5 class="text-overflow">{{this.location.city}}</h5>
                               </div>
                         </div>
-                        
-                        <div class="card-info">
-                              <h4 class="text-overflow">{{this.name}}</h4>
-                              <p class="text-overflow">{{this.location.address}}</p>
-                              <h5 class="text-overflow">{{this.location.city}}</h5>
-                        </div>
-                  </div>
-            </button>
+                  </button>
             </a>
 
 
             <form action="/create-match/new" method="GET">
-                  <input type="hidden" value='{{this.id}}'name='id'>
+                  <input type="hidden" value='{{this.id}}' name='id'>
                   <input type="hidden" value='{{this.imgUrl}}' name='imgUrl'>
                   <input type="hidden" value='{{this.name}}' name='name'>
                   <input type="hidden" value='{{this.location.address}}' name='location'>
@@ -57,7 +55,7 @@
                   <button type="submit" class="button add-place-button" style="background-color:#f34970">MATCH</button>
             </form>
 
-            </div>
+      </div>
 
       {{/each}}
       {{/if}}
@@ -68,38 +66,38 @@
       <div class="card-wrapper">
 
             <a href="/places/{{this.id}}">
-            <button type="submit">
-                  <div class='card'>
-                        <div class='card-img-wrapper'>
-                              <div class='card-img-wrapper-in'>
-                                    <img src={{this.imgUrl}}>
+                  <button type="submit">
+                        <div class='card'>
+                              <div class='card-img-wrapper'>
+                                    <div class='card-img-wrapper-in'>
+                                          <img src={{this.imgUrl}}>
+                                    </div>
+                              </div>
+
+                              <div class="card-info">
+                                    <h4 class="text-overflow">{{this.name}}</h4>
+                                    <p class="text-overflow">{{this.location.address}}</p>
+                                    <h5 class="text-overflow">{{this.location.city}}</h5>
                               </div>
                         </div>
-                        
-                        <div class="card-info">
-                              <h4 class="text-overflow">{{this.name}}</h4>
-                              <p class="text-overflow">{{this.location.address}}</p>
-                              <h5 class="text-overflow">{{this.location.city}}</h5>
-                        </div>
-                  </div>
-            </button>
+                  </button>
             </a>
 
-      <form action="/create-match/newB" method="GET">
-            <input type="hidden" value='{{this.id}}' name='id_B'>
-            <input type="hidden" value='{{this.imgUrl}}' name='imgUrl_B'>
-            <input type="hidden" value='{{this.name}}' name='name_B'>
-            <input type="hidden" value='{{this.location.address}}' name='location_B'>
-            <input type="hidden" value='{{this.location.city}}' name='city_B'>
+            <form action="/create-match/newB" method="GET">
+                  <input type="hidden" value='{{this.id}}' name='id_B'>
+                  <input type="hidden" value='{{this.imgUrl}}' name='imgUrl_B'>
+                  <input type="hidden" value='{{this.name}}' name='name_B'>
+                  <input type="hidden" value='{{this.location.address}}' name='location_B'>
+                  <input type="hidden" value='{{this.location.city}}' name='city_B'>
 
-            <input type="hidden" value='{{../finalVenues.venuesIDarrayA.id}}' name='id'>
-            <input type="hidden" value='{{../finalVenues.venuesIDarrayA.imgUrl}}' name='imgUrl'>
-            <input type="hidden" value='{{../finalVenues.venuesIDarrayA.name}}' name='name'>
-            <input type="hidden" value='{{../finalVenues.venuesIDarrayA.location}}' name='location'>
-            <input type="hidden" value='{{../finalVenues.venuesIDarrayA.city}}' name='city'>
+                  <input type="hidden" value='{{../finalVenues.venuesIDarrayA.id}}' name='id'>
+                  <input type="hidden" value='{{../finalVenues.venuesIDarrayA.imgUrl}}' name='imgUrl'>
+                  <input type="hidden" value='{{../finalVenues.venuesIDarrayA.name}}' name='name'>
+                  <input type="hidden" value='{{../finalVenues.venuesIDarrayA.location}}' name='location'>
+                  <input type="hidden" value='{{../finalVenues.venuesIDarrayA.city}}' name='city'>
 
-            <button type="submit" class="button add-place-button" style="background-color:#f34970">MATCH</button>
-      </form>
+                  <button type="submit" class="button add-place-button" style="background-color:#f34970">MATCH</button>
+            </form>
 
       </div>
 

@@ -3,7 +3,7 @@ const router = express.Router()
 const Place = require('../models/place')
 const User = require('../models/user')
 const Relation = require('../models/relation')
-const { isLoggedIn, isNotLoggedIn, isFormFilled, isSearchQuery } = require('../middlewares/authMiddelwares')
+const { isNotLoggedIn } = require('../middlewares/authMiddelwares')
 
 // helper
 function firstLetter (s) {
@@ -17,7 +17,8 @@ router.get('/search-by-city', isNotLoggedIn, async (req, res, next) => {
     const allMatches = await Relation.find({ $or: [{ cityA: location }, { cityB: location }] })
 
     if (allMatches.length === 0) {
-      res.render('places/search-place', { errorMessage: "Coudn't find any match!" })
+      const user = await User.findById(req.session.currentUser._id).populate('favoPlace')
+      res.render('places/search-place', { errorMessage: "Coudn't find any match!", user })
       return
     }
 
@@ -34,7 +35,8 @@ router.get('/search-by-city', isNotLoggedIn, async (req, res, next) => {
       return idsArray
     }))
     if (idsArray.length === 0) {
-      res.render('places/search-place', { errorMessage: "Coudn't find any match!" })
+      const user = await User.findById(req.session.currentUser._id).populate('favoPlace')
+      res.render('places/search-place', { errorMessage: "Coudn't find any match with your favorites!", user })
     } else {
       const result = []
       await Promise.all(
@@ -43,15 +45,19 @@ router.get('/search-by-city', isNotLoggedIn, async (req, res, next) => {
           result.push(...getMatches)
         })
       )
-      res.render('places/search-place', { result })
+      const user = await User.findById(req.session.currentUser._id).populate('favoPlace')
+      res.render('places/search-place', { result, user: user })
     }
   } catch (error) {
     next(error)
   }
 })
 
-router.get('/', isNotLoggedIn, (req, res, next) => {
-  res.render('places/search-place')
+router.get('/', isNotLoggedIn, async (req, res, next) => {
+  try {
+    const user = await User.findById(req.session.currentUser._id).populate('favoPlace')
+    res.render('places/search-place', { user })
+  } catch (err) { next(err) }
 })
 
 module.exports = router

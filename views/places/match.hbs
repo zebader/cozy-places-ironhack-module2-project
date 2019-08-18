@@ -1,128 +1,138 @@
+<header class="user-header">
+      <button type="button" onclick="history.back(-1)" class="goback-button"></button>
+      <div class="user-header-wrapper">
+            <h1 class="floating dark">Cozy Places</h1>
+
+            <img src={{user.img}} alt="">
+            <div>
+                  <p>Welcome,</p>
+                  <h3>{{user.username}}</h3>
+            </div>
+      </div>
+      <form action="/auth/logout" method="POST">
+            <button type="submit" class="logout-button"></button>
+      </form>
+</header>
 <main class='private-screen-main'>
-   <section class="signup-title">
-     <h1 class="dark">Create a match</h1>
-   </section>
+      <section class="signup-title">
+            <h1 class="dark">Create a match</h1>
+      </section>
 
-<section class="signup-form">
-{{#if finalVenues.venuesIDarrayA}}
-<h3>My place</h3>
-             <div class="card-wrapper">
+      <section class="signup-form">
+            {{#if finalVenues.venuesIDarrayA}}
+            <h3>My place</h3>
+            <div class="card-wrapper">
 
-            <button type="submit">
-                  <div class='card'>
-                        <div class='card-img-wrapper'>
-                              <div class='card-img-wrapper-in'>
-                                    <img src={{finalVenues.venuesIDarrayA.imgUrl}}>
+                  <button type="submit">
+                        <div class='card'>
+                              <div class='card-img-wrapper'>
+                                    <div class='card-img-wrapper-in'>
+                                          <img src={{finalVenues.venuesIDarrayA.imgUrl}}>
+                                    </div>
+                              </div>
+
+                              <div class="card-info">
+                                    <h4 class="text-overflow">{{finalVenues.venuesIDarrayA.name}}</h4>
+                                    <p class="text-overflow">{{finalVenues.venuesIDarrayA.location}}</p>
+                                    <h5 class="text-overflow">{{finalVenues.venuesIDarrayA.city}}</h5>
                               </div>
                         </div>
-                        
-                        <div class="card-info">
-                              <h4 class="text-overflow">{{finalVenues.venuesIDarrayA.name}}</h4>
-                              <p class="text-overflow">{{finalVenues.venuesIDarrayA.location}}</p>
-                              <h5 class="text-overflow">{{finalVenues.venuesIDarrayA.city}}</h5>
-                        </div>
-                  </div>
-            </button>
+                  </button>
 
-                </div>  
-{{else}}
-<div class="">
-  <h3>My place</h3>
-</div>
+            </div>
+            {{else}}
+            <div class="">
+                  <h3>My place</h3>
+            </div>
 
-    <form action="/create-match/search" method="GET" id="form-container">
-      <label for="location">Location</label>
-      <input id="location" type="text" name="location" placeholder="Where is it?">
-      <br><br>
-      <label for="placeName">Place name</label>
-      <input id="placeName" type="text" name="placeName" placeholder="What its name?">
+            <form action="/create-match/search" method="GET" id="form-container">
+                  <label for="location">Location</label>
+                  <input id="location" type="text" name="location" placeholder="Where is it?">
+                  <br><br>
+                  <label for="placeName">Place name</label>
+                  <input id="placeName" type="text" name="placeName" placeholder="What its name?">
 
-      <input type="hidden" value='{{finalVenues.venuesIDarrayB.id_B}}' name='id_B'>
-      <input type="hidden" value='{{finalVenues.venuesIDarrayB.imgUrl_B}}' name='imgUrl_B'>
-      <input type="hidden" value='{{finalVenues.venuesIDarrayB.name_B}}' name='name_B'>
-      <input type="hidden" value='{{finalVenues.venuesIDarrayB.location_B}}' name='location_B'>
-      <input type="hidden" value='{{finalVenues.venuesIDarrayB.city_B}}' name='city_B'>
+                  <input type="hidden" value='{{finalVenues.venuesIDarrayB.id_B}}' name='id_B'>
+                  <input type="hidden" value='{{finalVenues.venuesIDarrayB.imgUrl_B}}' name='imgUrl_B'>
+                  <input type="hidden" value='{{finalVenues.venuesIDarrayB.name_B}}' name='name_B'>
+                  <input type="hidden" value='{{finalVenues.venuesIDarrayB.location_B}}' name='location_B'>
+                  <input type="hidden" value='{{finalVenues.venuesIDarrayB.city_B}}' name='city_B'>
 
-      <button type="submit" value="singup" class="button">Search Place</button>
-    </form>
-{{/if}}
+                  <button type="submit" value="singup" class="button">Search Place</button>
+            </form>
+            {{/if}}
 
-</section>
-<section class="signup-form">
-{{#if finalVenues.venuesIDarrayB}}
-<h3>Match new place</h3>
-             <div class="card-wrapper">
+      </section>
+      <section class="signup-form">
+            {{#if finalVenues.venuesIDarrayB}}
+            <h3>Match new place</h3>
+            <div class="card-wrapper">
 
-            <button type="submit">
-                  <div class='card'>
-                        <div class='card-img-wrapper'>
-                              <div class='card-img-wrapper-in'>
-                                    <img src={{finalVenues.venuesIDarrayB.imgUrl_B}}>
+                  <button type="submit">
+                        <div class='card'>
+                              <div class='card-img-wrapper'>
+                                    <div class='card-img-wrapper-in'>
+                                          <img src={{finalVenues.venuesIDarrayB.imgUrl_B}}>
+                                    </div>
+                              </div>
+
+                              <div class="card-info">
+                                    <h4 class="text-overflow">{{finalVenues.venuesIDarrayB.name_B}}</h4>
+                                    <p class="text-overflow">{{finalVenues.venuesIDarrayB.location_B}}</p>
+                                    <h5 class="text-overflow">{{finalVenues.venuesIDarrayB.city_B}}</h5>
                               </div>
                         </div>
-                        
-                        <div class="card-info">
-                              <h4 class="text-overflow">{{finalVenues.venuesIDarrayB.name_B}}</h4>
-                              <p class="text-overflow">{{finalVenues.venuesIDarrayB.location_B}}</p>
-                              <h5 class="text-overflow">{{finalVenues.venuesIDarrayB.city_B}}</h5>
-                        </div>
-                  </div>
-            </button>
-                </div>  
-{{else}}
-<h3>Match new place</h3>
-    <form action="/create-match/searchB" method="GET" id="form-container">
-      <label for="location_B">Location</label>
-      <input id="location" type="text" name="location_B" placeholder="Where is it?">
-      <br><br>
-      <label for="placeName_B">Place name</label>
-      <input id="placeName" type="text" name="placeName_B" placeholder="What its name?">
-            <input type="hidden" value='{{finalVenues.venuesIDarrayA.id}}' name='id'>
-            <input type="hidden" value='{{finalVenues.venuesIDarrayA.imgUrl}}' name='imgUrl'>
-            <input type="hidden" value='{{finalVenues.venuesIDarrayA.name}}' name='name'>
-            <input type="hidden" value='{{finalVenues.venuesIDarrayA.location}}' name='location'>
-            <input type="hidden" value='{{finalVenues.venuesIDarrayA.city}}' name='city'>
+                  </button>
+            </div>
+            {{else}}
+            <h3>Match new place</h3>
+            <form action="/create-match/searchB" method="GET" id="form-container">
+                  <label for="location_B">Location</label>
+                  <input id="location" type="text" name="location_B" placeholder="Where is it?">
+                  <br><br>
+                  <label for="placeName_B">Place name</label>
+                  <input id="placeName" type="text" name="placeName_B" placeholder="What its name?">
+                  <input type="hidden" value='{{finalVenues.venuesIDarrayA.id}}' name='id'>
+                  <input type="hidden" value='{{finalVenues.venuesIDarrayA.imgUrl}}' name='imgUrl'>
+                  <input type="hidden" value='{{finalVenues.venuesIDarrayA.name}}' name='name'>
+                  <input type="hidden" value='{{finalVenues.venuesIDarrayA.location}}' name='location'>
+                  <input type="hidden" value='{{finalVenues.venuesIDarrayA.city}}' name='city'>
 
-      <button type="submit" value="singup" class="button">Search Place</button>
-    </form>
-{{/if}}
+                  <button type="submit" value="singup" class="button">Search Place</button>
+            </form>
+            {{/if}}
 
-<form action="/create-match/relations" method="POST">
-    <button class=" button matched-match-button" disabled>CREATE MATCH</button>
-          <br>
-      <input type="hidden" value='{{finalVenues.venuesIDarrayA.id}}' name='id_RA'>
-      <input type="hidden" value='{{finalVenues.venuesIDarrayA.imgUrl}}' name='imgUrl_RA'>
-      <input type="hidden" value='{{finalVenues.venuesIDarrayA.name}}' name='name_RA'>
-      <input type="hidden" value='{{finalVenues.venuesIDarrayA.location}}' name='location_RA'>
-      <input type="hidden" value='{{finalVenues.venuesIDarrayA.city}}' name='city_RA'>
-          <br>
-      <input type="hidden" value='{{finalVenues.venuesIDarrayB.id_B}}' name='id_RB'>
-      <input type="hidden" value='{{finalVenues.venuesIDarrayB.imgUrl_B}}' name='imgUrl_RB'>
-      <input type="hidden" value='{{finalVenues.venuesIDarrayB.name_B}}' name='name_RB'>
-      <input type="hidden" value='{{finalVenues.venuesIDarrayB.location_B}}' name='location_RB'>
-      <input type="hidden" value='{{finalVenues.venuesIDarrayB.city_B}}' name='city_RB'>
+            <form action="/create-match/relations" method="POST">
+                  <button class=" button matched-match-button" disabled>CREATE MATCH</button>
+                  <br>
+                  <input type="hidden" value='{{finalVenues.venuesIDarrayA.id}}' name='id_RA'>
+                  <input type="hidden" value='{{finalVenues.venuesIDarrayA.imgUrl}}' name='imgUrl_RA'>
+                  <input type="hidden" value='{{finalVenues.venuesIDarrayA.name}}' name='name_RA'>
+                  <input type="hidden" value='{{finalVenues.venuesIDarrayA.location}}' name='location_RA'>
+                  <input type="hidden" value='{{finalVenues.venuesIDarrayA.city}}' name='city_RA'>
+                  <br>
+                  <input type="hidden" value='{{finalVenues.venuesIDarrayB.id_B}}' name='id_RB'>
+                  <input type="hidden" value='{{finalVenues.venuesIDarrayB.imgUrl_B}}' name='imgUrl_RB'>
+                  <input type="hidden" value='{{finalVenues.venuesIDarrayB.name_B}}' name='name_RB'>
+                  <input type="hidden" value='{{finalVenues.venuesIDarrayB.location_B}}' name='location_RB'>
+                  <input type="hidden" value='{{finalVenues.venuesIDarrayB.city_B}}' name='city_RB'>
 
-</form>
-</section>
+            </form>
+      </section>
 
-<script>
+      <script>
 
-  const buttonMatched = document.querySelector('.matched-match-button');
-  buttonMatched.disabled = true;
-  const divCard = document.querySelectorAll('.card-wrapper');
-  console.log(divCard.length);
+            const buttonMatched = document.querySelector('.matched-match-button');
+            buttonMatched.disabled = true;
+            const divCard = document.querySelectorAll('.card-wrapper');
+            console.log(divCard.length);
 
-  if(divCard.length === 2){
-      buttonMatched.disabled = false;
-  }
+            if (divCard.length === 2) {
+                  buttonMatched.disabled = false;
+            }
 
-</script>
+      </script>
 
 </main>
 
 {{> footer}}
-
-
-
-
-

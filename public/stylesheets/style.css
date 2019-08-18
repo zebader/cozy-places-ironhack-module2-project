@@ -156,7 +156,7 @@ section.signup-form input[type="text"]:focus, section.signup-form input[type="pa
 /*===============PLACE PROFILE====================*/
 main.place-profile-main{
   background: white;
-  padding: 10% 0px;
+  padding: 50px 0px;
   margin-bottom: 150px;
 }
 section.place-profile-title{
@@ -257,7 +257,11 @@ section.place-profile-similar{
 .user-header-wrapper{
   display: flex;
   justify-content: center;
+  align-items: center;
   width: 100%;
+}
+.user-header-wrapper h1.dark{
+  font-size:1.4em;
 }
 
 .user-header img{
@@ -491,7 +495,6 @@ footer {
   border-radius: 10px;
   background: white;
   color:rgba(50,0,62,1);
-  margin: 2% 4%;
   border:1px solid #f5f5f5;
   padding: 5% 3%;
   align-items: center;

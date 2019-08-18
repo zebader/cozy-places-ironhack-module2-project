@@ -3,7 +3,7 @@ const router = express.Router()
 const axios = require('axios')
 const Relation = require('./../models/relation')
 const User = require('../models/user')
-const { isLoggedIn, isNotLoggedIn, isFormFilled, isSearchQuery } = require('../middlewares/authMiddelwares')
+const { isNotLoggedIn } = require('../middlewares/authMiddelwares')
 
 router.post('/relations', isNotLoggedIn, async (req, res, next) => {
   const { city_RA, id_RA, name_RA, location_RA, imgUrl_RA, city_RB, id_RB, name_RB, location_RB, imgUrl_RB } = req.body
@@ -17,7 +17,8 @@ router.post('/relations', isNotLoggedIn, async (req, res, next) => {
     nameB: name_RB,
     imgBUrl: imgUrl_RB,
     locationB: location_RB,
-    cityB: city_RB }
+    cityB: city_RB
+  }
 
   const users = req.session.currentUser._id
 
@@ -39,7 +40,7 @@ router.post('/relations', isNotLoggedIn, async (req, res, next) => {
   }
 })
 
-router.get('/new', isNotLoggedIn, (req, res, next) => {
+router.get('/new', isNotLoggedIn, async (req, res, next) => {
   const { id, name, location, city, imgUrl, id_B, name_B, location_B, city_B, imgUrl_B } = req.query
 
   const venuesIDarrayA = { id, name, location, city, imgUrl }
@@ -56,11 +57,12 @@ router.get('/new', isNotLoggedIn, (req, res, next) => {
       venuesIDarrayB
     }
   }
+  const user = await User.findById(req.session.currentUser._id).populate('favoPlace')
 
-  res.render('places/match', { finalVenues })
+  res.render('places/match', { finalVenues, user })
 })
 
-router.get('/newB', isNotLoggedIn, (req, res, next) => {
+router.get('/newB', isNotLoggedIn, async (req, res, next) => {
   const { id_B, name_B, location_B, city_B, imgUrl_B, id, name, location, city, imgUrl } = req.query
   const venuesIDarrayA = { id, name, location, city, imgUrl }
   const venuesIDarrayB = { id_B, name_B, location_B, city_B, imgUrl_B }
@@ -76,7 +78,9 @@ router.get('/newB', isNotLoggedIn, (req, res, next) => {
       venuesIDarrayB
     }
   }
-  res.render('places/match', { finalVenues })
+  const user = await User.findById(req.session.currentUser._id).populate('favoPlace')
+
+  res.render('places/match', { finalVenues, user })
 })
 
 router.get('/search', isNotLoggedIn, async (req, res, next) => {
@@ -208,8 +212,11 @@ router.get('/searchB', isNotLoggedIn, async (req, res, next) => {
   } catch (error) { next(error) }
 })
 
-router.get('/', isNotLoggedIn, (req, res, next) => {
-  res.render('places/match')
+router.get('/', isNotLoggedIn, async (req, res, next) => {
+  try {
+    const user = await User.findById(req.session.currentUser._id).populate('favoPlace')
+    res.render('places/match', { user })
+  } catch (err) { next(err) }
 })
 
 module.exports = router

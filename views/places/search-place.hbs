@@ -1,70 +1,83 @@
-<main>
-   <section class="signup-title">
-     <h1 class="dark">Search by city</h1>
-   </section>
+<header class="user-header">
+      <button type="button" onclick="history.back(-1)" class="goback-button"></button>
+      <div class="user-header-wrapper">
+            <h1 class="floating dark">Cozy Places</h1>
 
-<section class="signup-form">
-    <form action="/display-match/search-by-city" method="GET" id="form-container">
-      <label for="location">Location</label>
-      <input id="location" type="text" name="location" placeholder="Where is it?">
-
-      {{#if errorMessage}}
-        <p class="error-message">{{ errorMessage }}</p>
-      {{/if}}
-      <br><br>
-
-      <button type="submit" value="singup" class="button">Search a City</button>
-    </form>
-</section>
-<section class='private-screen-main'>
-{{#if result }}
-      <h2>Congratulations! {{result.length}} results</h2>
-      <hr class="hr-divider-user">
-{{#each result}}
-
-      <div class="card-wrapper flex-flow">
-            <a class="match-link" href="/places/{{this.placeAId}}">
-            <button type="submit">
-                  <div class='card'>
-                        <div class='card-img-wrapper'>
-                              <div class='card-img-wrapper-in'>
-                                    <img src={{this.imgAUrl}}>
-                              </div>
-                        </div>
-                        
-                        <div class="card-info">
-                              <h4 class="text-overflow">{{this.nameA}}</h4>
-                              <p class="text-overflow">{{this.locationA}}</p>
-                              <h5 class="text-overflow">{{this.cityA}}</h5>
-                        </div>
-                  </div>
-            </button>
-            </a>
-            <a class="match-link" href="/places/{{this.placeBId}}">
-            <button type="submit">
-
-
-                  <div class='card'>
-                        <div class='card-img-wrapper'>
-                              <div class='card-img-wrapper-in'>
-                                    <img src={{this.imgBUrl}}>
-                              </div>
-                        </div>
-                        
-                        <div class="card-info">
-                              <h4 class="text-overflow">{{this.nameB}}</h4>
-                              <p class="text-overflow">{{this.locationB}}</p>
-                              <h5 class="text-overflow">{{this.cityB}}</h5>
-                        </div>
-                  </div>
-            </button>
-            </a>
+            <img src={{user.img}} alt="">
+            <div>
+                  <p>Welcome,</p>
+                  <h3>{{user.username}}</h3>
+            </div>
       </div>
-{{/each }}
+      <form action="/auth/logout" method="POST">
+            <button type="submit" class="logout-button"></button>
+      </form>
+</header>
+<main>
+      <section class="signup-title">
+            <h1 class="dark">Search by city</h1>
+      </section>
 
-{{/if}}
+      <section class="signup-form">
+            <form action="/display-match/search-by-city" method="GET" id="form-container">
+                  <label for="location">Location</label>
+                  <input id="location" type="text" name="location" placeholder="Where is it?">
 
-</section>
+                  {{#if errorMessage}}
+                  <p class="error-message">{{ errorMessage }}</p>
+                  {{/if}}
+                  <br><br>
+
+                  <button type="submit" value="singup" class="button">Search a City</button>
+            </form>
+      </section>
+      <section class='private-screen-main'>
+            {{#if result }}
+            <h2>Congratulations! {{result.length}} results</h2>
+            <hr class="hr-divider-user">
+            {{#each result}}
+            <div class="card-wrapper flex-flow">
+                  <a class="match-link" href="/places/{{this.placeAId}}">
+                        <button type="submit">
+                              <div class='card'>
+                                    <div class='card-img-wrapper'>
+                                          <div class='card-img-wrapper-in'>
+                                                <img src={{this.imgAUrl}}>
+                                          </div>
+                                    </div>
+                                    <div class="card-info">
+                                          <h4 class="text-overflow">{{this.nameA}}</h4>
+                                          <p class="text-overflow">{{this.locationA}}</p>
+                                          <h5 class="text-overflow">{{this.cityA}}</h5>
+                                    </div>
+                              </div>
+                        </button>
+                  </a>
+                  <a class="match-link" href="/places/{{this.placeBId}}">
+                        <button type="submit">
+
+
+                              <div class='card'>
+                                    <div class='card-img-wrapper'>
+                                          <div class='card-img-wrapper-in'>
+                                                <img src={{this.imgBUrl}}>
+                                          </div>
+                                    </div>
+
+                                    <div class="card-info">
+                                          <h4 class="text-overflow">{{this.nameB}}</h4>
+                                          <p class="text-overflow">{{this.locationB}}</p>
+                                          <h5 class="text-overflow">{{this.cityB}}</h5>
+                                    </div>
+                              </div>
+                        </button>
+                  </a>
+            </div>
+            {{/each }}
+
+            {{/if}}
+
+      </section>
 </main>
 
 {{> footer}}

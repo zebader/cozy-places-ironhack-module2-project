@@ -1,6 +1,8 @@
 <header class="user-header">
   <button type="button" onclick="history.back(-1)" class="goback-button"></button>
   <div class="user-header-wrapper">
+    <h1 class="floating dark">Cozy Places</h1>
+
     <img src={{user.img}} alt="">
     <div>
       <p>Welcome,</p>
@@ -19,15 +21,11 @@
     <form action="/places/search" method="GET" id="form-container">
       <label for="location">Location</label>
       <input id="location" type="text" name="location" placeholder="Where is it?">
-     
       <label for="placeName">Place name</label>
       <input id="placeName" type="text" name="placeName" placeholder="What its name?">
-
       {{#if messages}}
         <div class="error-message">{{ messages }}</div>
       {{/if}}
-      <br><br>
-
       <button type="submit" value="singup" class="button">Search Place</button>
     </form>
 </section>

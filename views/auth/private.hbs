@@ -10,6 +10,7 @@
 <header class="user-header">
   <button type="button" onclick="history.back(-1)" class="goback-button"></button>
   <div class="user-header-wrapper">
+    <h1 class="floating dark">Cozy Places</h1>
     <img src={{img}} alt="">
     <div>
       <p>Welcome,</p>
@@ -27,9 +28,7 @@
 <div class="list-container">
   <div class="card-wrapper">
     <a href="/places/{{this.API_id}}">
-
       <button type="submit">
-
         <div class='card'>
           <div class='card-img-wrapper'>
             <div class='card-img-wrapper-in'>
@@ -41,14 +40,11 @@
             <p class="text-overflow">{{this.location}}</p>
             <h5 class="text-overflow">{{this.city}}</h5>
           </div>
-
-          
         </div>
-
       </button>
-          <form action="/places/delete/{{this.API_id}}" method="POST" class="delete-form">
-            <button type="submit" class="delete-button"></button>
-          </form>
+        <form action="/places/delete/{{this.API_id}}" method="POST" class="delete-form">
+          <button type="submit" class="delete-button"></button>
+        </form>
     </a>
   </div>
 </div>

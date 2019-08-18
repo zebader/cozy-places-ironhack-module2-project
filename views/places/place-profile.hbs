@@ -1,82 +1,68 @@
-<!-- views/apitest/place-profile.hbs -->
+<header class="user-header">
+  <button type="button" onclick="history.back(-1)" class="goback-button"></button>
+  <div class="user-header-wrapper">
+    <h1 class="floating dark">Cozy Places</h1>
 
+    <img src={{user.img}} alt="">
+    <div>
+      <p>Welcome,</p>
+      <h3>{{user.username}}</h3>
+    </div>
+  </div>
+  <form action="/auth/logout" method="POST">
+    <button type="submit" class="logout-button"></button>
+  </form>
+</header>
 <main class="place-profile-main">
   <section class="place-profile-title">
-
     <h1>{{data.data.name}}</h1>
-
   </section>
-  <section class="place-profile-card">
-
-      
-      <article class="place-profile-card-img">
-        
-        <img src={{urlPhoto}} alt="{{data.name}}">
-      </article>
-    
-
-      <article class="place-profile-text">
-        <h3>{{data.data.location.city}}</h3>
-        <h4>{{data.data.location.address}}</h4>
-        <br>
-        {{#if description.description}}
+  <section class="place-profile-card">  
+    <article class="place-profile-card-img">
+      <img src={{urlPhoto}} alt="{{data.name}}">
+    </article>
+    <article class="place-profile-text">
+      <h3>{{data.data.location.city}}</h3>
+      <h4>{{data.data.location.address}}</h4>
+      {{#if description.description}}
         <p class="description">{{description.description}}</p>
-        {{else}}
+      {{else}}
         <p class="description">No description</p>
-        {{/if}}
-      </article>
-
+      {{/if}}
+    </article>
   </section>
-  <section class="place-profile-buttons">
-    
-      <form action="/places/new" method="POST">
-
-            <input type="hidden" value='{{urlPhoto}}' name='imgUrl'>
-            <input type="hidden" value='{{data.data.id}}' name='id'>
-            <input type="hidden" value='{{data.data.name}}' name='name'>
-            <input type="hidden" value='{{data.data.location.address}}' name='address'>
-            <input type="hidden" value='{{data.data.location.city}}' name='city'>
-            {{#if button}}
-            <button type="submit" class="button blue" disabled>Added</button>
-            {{else}}
-            <button type="submit" class="button blue">Add</button>
-            {{/if}}
+  <section class="place-profile-buttons">  
+    <form action="/places/new" method="POST">
+      <input type="hidden" value='{{urlPhoto}}' name='imgUrl'>
+      <input type="hidden" value='{{data.data.id}}' name='id'>
+      <input type="hidden" value='{{data.data.name}}' name='name'>
+      <input type="hidden" value='{{data.data.location.address}}' name='address'>
+      <input type="hidden" value='{{data.data.location.city}}' name='city'>
+      {{#if button}}
+        <button type="submit" class="button blue" disabled>Added</button>
+      {{else}}
+        <button type="submit" class="button blue">Add</button>
+      {{/if}}
       </form>
-
-            <form action="/matchtest/new" method="GET">
-
-            <input type="hidden" value='{{urlPhoto}}' name='imgUrl'>
-            <input type="hidden" value='{{data.data.id}}' name='id'>
-            <input type="hidden" value='{{data.data.name}}' name='name'>
-            <input type="hidden" value='{{data.data.location.address}}' name='address'>
-            <input type="hidden" value='{{data.data.location.city}}' name='city'>
-
-            <button id="match-places" class="button">Match</button>
+      <form action="/create-match/new" method="GET">
+        <input type="hidden" value='{{urlPhoto}}' name='imgUrl'>
+        <input type="hidden" value='{{data.data.id}}' name='id'>
+        <input type="hidden" value='{{data.data.name}}' name='name'>
+        <input type="hidden" value='{{data.data.location.address}}' name='address'>
+        <input type="hidden" value='{{data.data.location.city}}' name='city'>
+        <button id="match-places" class="button">Match</button>
       </form>
-
-  
   </section>
   <section class="place-profile-card">
-      <article class="place-profile-text">
-
+    <article class="place-profile-text">
       <h4>User tip:</h4>
- 
+      {{#if tip.tip}}
       <p class="quote">{{tip.tip}}</p>
-
-      </article>
+      {{else}}
+      <p class="quote">No tips!</p>
+      {{/if}}
+    </article>
   </section>
-
-{{!--   <section class="place-profile-similar">
-    <h3>Similar Cozyplaces</h3>
-    {{#if similar.similar}}
-        {{#each similar.similar}}
-          <p>{{this.name}}</p>
-        {{/each}}
-    {{/if}} 
-    <p>There are not similar places</p>
-
-  </section> --}}
-
 </main>
 
 {{> footer}}

@@ -3,7 +3,7 @@ const router = express.Router()
 const axios = require('axios')
 const Place = require('../models/place')
 const User = require('../models/user')
-const { isNotLoggedIn, isFormFilled, isSearchQuery } = require('../middlewares/authMiddelwares')
+const { isNotLoggedIn, isSearchQuery } = require('../middlewares/authMiddelwares')
 
 router.post('/new', isNotLoggedIn, async (req, res, next) => {
   try {
@@ -136,6 +136,7 @@ router.get('/:id', isNotLoggedIn, async (req, res, next) => {
     const user = await User.findById(req.session.currentUser._id).populate('favoPlace')
 
     const dataAndImage = {
+      user,
       data,
       urlPhoto,
       tip,
